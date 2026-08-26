@@ -36,3 +36,9 @@
 - [x] Extraire l’inventaire des images, maps PBR et paramètres de matériaux présents dans les GLB.
 - [x] Identifier les matériaux qui peuvent être améliorés directement dans Three.js.
 - [x] Appliquer des améliorations PBR non destructives lorsque les maps existantes le permettent.
+
+## Matériaux distinctifs
+
+- [x] Restaurer la couleur bleue et les cartes de détail des plans techniques du téléphone et du drone.
+- [x] Définir le corps de l’identité visuelle comme un verre translucide.
+- [x] Conserver le logo vert comme élément interne, opaque et lisible.

@@ -98,10 +98,55 @@ function setShadow(root: THREE.Object3D) {
 
 type MaterialProfile = "floor" | "table" | "lamp" | "phone" | "photo" | "identity" | "drone";
 
+function restoreBlueprintMaterial(material: THREE.MeshStandardMaterial, anisotropy: number) {
+  material.map && (material.map.colorSpace = THREE.SRGBColorSpace);
+  material.map && (material.map.anisotropy = anisotropy);
+  material.normalMap && (material.normalMap.anisotropy = anisotropy);
+  material.color.set("#c8e7ff");
+  material.emissive.set("#0b4e87");
+  material.emissiveIntensity = 0.22;
+  material.metalness = 0;
+  material.roughness = 0.88;
+  material.normalScale.setScalar(0.18);
+  material.needsUpdate = true;
+}
+
 function improveImportedMaterials(root: THREE.Object3D, profile: MaterialProfile, anisotropy: number) {
   root.traverse((child) => {
     if (!(child instanceof THREE.Mesh)) return;
     const materials = Array.isArray(child.material) ? child.material : [child.material];
+    if (profile === "identity") {
+      const restoredMaterials = materials.map((material) => {
+        if (material.name === "Logo" && material instanceof THREE.MeshStandardMaterial) {
+          material.map && (material.map.colorSpace = THREE.SRGBColorSpace);
+          material.map && (material.map.anisotropy = anisotropy);
+          material.color.set("#75bd91");
+          material.emissive.set("#2b7a56");
+          material.emissiveIntensity = 0.48;
+          material.metalness = 0;
+          material.roughness = 0.38;
+          material.needsUpdate = true;
+          return material;
+        }
+        const glass = new THREE.MeshPhysicalMaterial({
+          name: material.name,
+        });
+        glass.color.set("#b9c9b4");
+        glass.metalness = 0;
+        glass.roughness = 0.16;
+        glass.transmission = 0.86;
+        glass.thickness = 0.18;
+        glass.ior = 1.45;
+        glass.opacity = 0.76;
+        glass.transparent = true;
+        glass.depthWrite = false;
+        glass.side = THREE.DoubleSide;
+        glass.needsUpdate = true;
+        return glass;
+      });
+      child.material = Array.isArray(child.material) ? restoredMaterials : restoredMaterials[0];
+      return;
+    }
     materials.forEach((material) => {
       if (!(material instanceof THREE.MeshStandardMaterial)) return;
       [material.map, material.normalMap, material.roughnessMap, material.metalnessMap, material.aoMap].forEach((texture) => {
@@ -121,16 +166,16 @@ function improveImportedMaterials(root: THREE.Object3D, profile: MaterialProfile
         material.metalness = material.name.includes("Ceramic") ? 0.08 : 0.48;
         material.roughness = material.name.includes("Ceramic") ? 0.56 : 0.34;
       } else if (profile === "phone") {
-        material.roughness = Math.min(material.roughness, 0.42);
-        material.normalScale.setScalar(0.35);
+        if (material.name.includes("Blueprint")) restoreBlueprintMaterial(material, anisotropy);
+        else {
+          material.roughness = Math.min(material.roughness, 0.42);
+          material.normalScale.setScalar(0.35);
+        }
       } else if (profile === "photo") {
         material.roughness = Math.min(material.roughness, 0.5);
         material.normalScale.setScalar(0.45);
-      } else if (profile === "identity") {
-        material.roughness = 0.68;
       } else if (profile === "drone") {
-        material.roughness = 0.78;
-        material.normalScale.setScalar(0.32);
+        restoreBlueprintMaterial(material, anisotropy);
       }
       material.needsUpdate = true;
     });
