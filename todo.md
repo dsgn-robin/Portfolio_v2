@@ -18,3 +18,9 @@
 - [x] Augmenter l’exposition et la lumière générale sans écraser les détails du bois.
 - [x] Renforcer la clé chaude et le remplissage afin que les projets restent lisibles hors du faisceau de la lampe.
 - [x] Vérifier que le faisceau de lampe conserve une hiérarchie locale sans brûler le plateau.
+
+## Recalage renforcé de composition
+
+- [x] Reprendre l’angle, le zoom et l’offset vertical de la caméra contre la référence Blender.
+- [x] Augmenter franchement la luminance globale du plateau et du sol.
+- [x] Conserver des ombres lisibles tout en évitant une lumière localement surexposée.

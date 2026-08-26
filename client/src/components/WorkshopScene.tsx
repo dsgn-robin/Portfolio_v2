@@ -478,17 +478,17 @@ export default function WorkshopScene() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.12;
+    renderer.toneMappingExposure = 1.34;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.setAttribute("aria-label", "Atelier 3D interactif de Robin Courte");
     renderer.domElement.style.touchAction = "none";
     viewport.appendChild(renderer.domElement);
 
     const camera = new THREE.OrthographicCamera(-5, 5, 5, -5, 0.1, 80);
-    const cameraTarget = new THREE.Vector3(3.25, 0.48, -1.0);
+    const cameraTarget = new THREE.Vector3(3.08, 0.48, -1.0);
     camera.up.set(-1, 0, 0);
-    camera.position.set(3.25, 8.6, -1.0);
-    camera.zoom = 1;
+    camera.position.set(3.08, 9.4, 0.16);
+    camera.zoom = 1.18;
     camera.lookAt(cameraTarget);
     camera.updateProjectionMatrix();
 
@@ -564,9 +564,9 @@ export default function WorkshopScene() {
     });
 
     // Rig de référence : une ambiance minérale, une clé très douce et le cône chaud de la lampe.
-    const ambient = new THREE.HemisphereLight("#c5bdad", "#4a3629", 0.7);
+    const ambient = new THREE.HemisphereLight("#d6cbb9", "#604638", 1.1);
     scene.add(ambient);
-    const keyLight = new THREE.DirectionalLight("#fff0d8", 2.1);
+    const keyLight = new THREE.DirectionalLight("#fff0d8", 3.1);
     keyLight.position.set(0.6, 6.8, 2.8);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(2048, 2048);
@@ -583,13 +583,13 @@ export default function WorkshopScene() {
     scene.add(keyLight.target);
     keyLight.target.position.set(3.2, 0.7, -1.0);
 
-    const fillLight = new THREE.DirectionalLight("#b8c9cd", 0.52);
+    const fillLight = new THREE.DirectionalLight("#c6d4d5", 0.78);
     fillLight.position.set(6.5, 3.1, 1.3);
     scene.add(fillLight);
     scene.add(fillLight.target);
     fillLight.target.position.set(3.25, 0.7, -1.0);
 
-    const lampSpot = new THREE.SpotLight("#ffd0a0", 32, 2.55, THREE.MathUtils.degToRad(32), 0.84, 2);
+    const lampSpot = new THREE.SpotLight("#ffd0a0", 28, 2.55, THREE.MathUtils.degToRad(32), 0.84, 2);
     lampSpot.position.set(2.93, 1.69, -1.9);
     lampSpot.castShadow = true;
     lampSpot.shadow.mapSize.set(1024, 1024);
