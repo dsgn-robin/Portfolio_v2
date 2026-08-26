@@ -54,3 +54,9 @@
 - [x] Ajouter la rotation de l’objet survolé à la molette.
 - [x] Préserver le clic, le glisser-déposer et le comportement de scroll hors objet.
 - [x] Vérifier la rotation sur les quatre modèles interactifs.
+
+## Éclairage des blueprints réels
+
+- [x] Élargir le cône de la lampe afin de couvrir les deux plans techniques sur l’établi.
+- [x] Rééquilibrer l’intensité et la pénombre sans modifier les textures GLB de blueprint.
+- [x] Vérifier la lisibilité du bleu et des tracés sous la lumière élargie.

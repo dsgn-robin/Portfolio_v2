@@ -589,17 +589,17 @@ export default function WorkshopScene() {
     scene.add(fillLight.target);
     fillLight.target.position.set(3.38, 0.26, -1.0);
 
-    const lampSpot = new THREE.SpotLight("#ffd0a0", 36, 2.55, THREE.MathUtils.degToRad(32), 0.84, 2);
+    const lampSpot = new THREE.SpotLight("#ffd0a0", 52, 4.1, THREE.MathUtils.degToRad(55), 0.94, 2);
     lampSpot.position.set(2.93, 1.69, -1.9);
     lampSpot.castShadow = true;
     lampSpot.shadow.mapSize.set(1024, 1024);
     lampSpot.shadow.bias = -0.00004;
     lampSpot.shadow.normalBias = 0.012;
     lampSpot.shadow.camera.near = 0.08;
-    lampSpot.shadow.camera.far = 2.7;
-    lampSpot.shadow.radius = 4;
+    lampSpot.shadow.camera.far = 4.2;
+    lampSpot.shadow.radius = 5;
     scene.add(lampSpot, lampSpot.target);
-    lampSpot.target.position.set(3.12, TABLE.projectY, -1.37);
+    lampSpot.target.position.set(3.25, TABLE.projectY, -1.05);
 
     const loader = new GLTFLoader();
     const selectableMeshes: THREE.Mesh[] = [];
