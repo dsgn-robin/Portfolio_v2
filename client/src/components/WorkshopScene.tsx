@@ -551,7 +551,7 @@ export default function WorkshopScene() {
       wrapper.name = spec.key;
       wrapper.position.set(...spec.position);
       wrapper.rotation.y = projectRotations[spec.key];
-      wrapper.userData = { project: spec, baseY: spec.position[1], drag: false };
+      wrapper.userData = { project: spec, baseY: spec.position[1], rotationTargetY: wrapper.rotation.y, drag: false };
       const contact = shadowDisc(spec.key === "drone" ? 1.7 : 1.16, spec.key === "drone" ? 0.88 : 0.68, spec.key === "drone" ? 0.19 : 0.27);
       contact.position.y = TABLE.projectY + 0.005;
       wrapper.add(contact);
@@ -751,10 +751,22 @@ export default function WorkshopScene() {
       }
     }
 
+    function onWheel(event: WheelEvent) {
+      if (!hovered || active) return;
+      event.preventDefault();
+      const direction = Math.sign(event.deltaY);
+      if (!direction) return;
+      const currentTarget = hovered.userData.rotationTargetY as number;
+      hovered.userData.rotationTargetY = currentTarget + direction * 0.18;
+      const project = hovered.userData.project as ProjectSpec;
+      setTooltip({ title: project.title, eyebrow: "Rotation", x: event.clientX, y: event.clientY });
+    }
+
     renderer.domElement.addEventListener("pointermove", onPointerMove);
     renderer.domElement.addEventListener("pointerdown", onPointerDown);
     renderer.domElement.addEventListener("pointerup", onPointerUp);
     renderer.domElement.addEventListener("pointerleave", onPointerLeave);
+    renderer.domElement.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("resize", resize);
     resize();
 
@@ -767,6 +779,7 @@ export default function WorkshopScene() {
       projectWrappers.forEach((project) => {
         const targetY = (project.userData.baseY as number) + (project === hovered || project === active ? 0.11 : 0);
         project.position.y = THREE.MathUtils.damp(project.position.y, targetY, 15, delta);
+        project.rotation.y = THREE.MathUtils.damp(project.rotation.y, project.userData.rotationTargetY as number, 14, delta);
       });
       renderer.render(scene, camera);
     }
@@ -779,6 +792,7 @@ export default function WorkshopScene() {
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
       renderer.domElement.removeEventListener("pointerup", onPointerUp);
       renderer.domElement.removeEventListener("pointerleave", onPointerLeave);
+      renderer.domElement.removeEventListener("wheel", onWheel);
       scene.traverse((object) => {
         if (object instanceof THREE.Mesh) {
           object.geometry.dispose();
@@ -812,7 +826,7 @@ export default function WorkshopScene() {
       </header>
       <aside className="workshop__instruction" aria-hidden="true">
         <span className="workshop__instruction-dot" />
-        <p>Glisser les prototypes · cliquer pour ouvrir</p>
+        <p>Glisser les prototypes · molette pour tourner · cliquer pour ouvrir</p>
       </aside>
       <div className="workshop__legend" aria-hidden="true">
         <span>Atelier numérique</span>

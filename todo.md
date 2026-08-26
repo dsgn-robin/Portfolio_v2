@@ -48,3 +48,9 @@
 - [x] Extraire les vraies images et définitions de matériaux embarquées dans les GLB originaux.
 - [x] Retirer les profils PBR artificiels ajoutés côté Three.js.
 - [x] Recharger les matériaux, extensions glTF et textures d’origine sans les remplacer.
+
+## Rotation des prototypes
+
+- [x] Ajouter la rotation de l’objet survolé à la molette.
+- [x] Préserver le clic, le glisser-déposer et le comportement de scroll hors objet.
+- [x] Vérifier la rotation sur les quatre modèles interactifs.
