@@ -66,3 +66,9 @@
 - [x] Analyser exclusivement les 20 premières secondes de la vidéo fournie.
 - [x] Réduire l’ombre portée de la lampe sur le plateau sans réduire la lisibilité des blueprints.
 - [x] Ajuster le comportement lumineux des blueprints lorsqu’ils tournent.
+
+## Stabilité lumineuse des blueprints
+
+- [x] Analyser la vidéo fournie afin d’identifier la face ou le matériau qui passe au noir à la rotation.
+- [x] Corriger l’éclairage général sans remplacer les textures GLB d’origine.
+- [x] Vérifier une luminosité stable des blueprints sur 360 degrés de rotation.

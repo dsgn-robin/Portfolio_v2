@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 const ASSETS = {
   wood: "/manus-storage/aged-workbench-wood_09a1b4f7.png",
@@ -484,6 +485,11 @@ export default function WorkshopScene() {
     renderer.domElement.style.touchAction = "none";
     viewport.appendChild(renderer.domElement);
 
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    const environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environment = environment;
+    pmremGenerator.dispose();
+
     const camera = new THREE.OrthographicCamera(-5, 5, 5, -5, 0.1, 80);
     const cameraTarget = new THREE.Vector3(3.22, 0.42, -1.0);
     camera.up.set(0, 1, 0);
@@ -564,7 +570,7 @@ export default function WorkshopScene() {
     });
 
     // Rig de référence : une ambiance minérale, une clé très douce et le cône chaud de la lampe.
-    const ambient = new THREE.HemisphereLight("#d8cfbd", "#634838", 1.02);
+    const ambient = new THREE.HemisphereLight("#e5edf0", "#75695f", 1.46);
     scene.add(ambient);
     const keyLight = new THREE.DirectionalLight("#fff0da", 3.4);
     keyLight.position.set(-1.6, 8.5, 4.3);
@@ -583,16 +589,21 @@ export default function WorkshopScene() {
     scene.add(keyLight.target);
     keyLight.target.position.set(3.15, 0.34, -1.0);
 
-    const fillLight = new THREE.DirectionalLight("#f1dfc8", 1.12);
+    const fillLight = new THREE.DirectionalLight("#f1dfc8", 1.34);
     fillLight.position.set(8.2, 4.9, -1.65);
     scene.add(fillLight);
     scene.add(fillLight.target);
     fillLight.target.position.set(3.38, 0.26, -1.0);
 
-    const blueprintFill = new THREE.DirectionalLight("#d8e8f3", 0.62);
+    const blueprintFill = new THREE.DirectionalLight("#d8e8f3", 0.88);
     blueprintFill.position.set(2.7, 6.4, -0.8);
     scene.add(blueprintFill, blueprintFill.target);
     blueprintFill.target.position.set(3.25, TABLE.projectY, -1.05);
+
+    const rotationFill = new THREE.DirectionalLight("#c9ddeb", 0.74);
+    rotationFill.position.set(-3.5, 5.7, -3.2);
+    scene.add(rotationFill, rotationFill.target);
+    rotationFill.target.position.set(3.25, TABLE.projectY, -1.05);
 
     const lampSpot = new THREE.SpotLight("#ffd0a0", 40, 4.4, THREE.MathUtils.degToRad(60), 0.98, 2);
     lampSpot.position.set(2.95, 2.35, -1.75);
@@ -800,6 +811,7 @@ export default function WorkshopScene() {
         }
       });
       renderer.dispose();
+      environment.dispose();
       viewport.replaceChildren();
     };
   }, []);
