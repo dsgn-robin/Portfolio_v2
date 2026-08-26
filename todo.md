@@ -12,3 +12,9 @@
 - [x] Recomposer une lumière générale diffuse, une clé douce et un faisceau de lampe cohérent avec les ombres de référence.
 - [x] Construire une liste de meshes sélectionnables ne comprenant ni wrappers, ni plans, ni géométrie invisible.
 - [x] Vérifier les zones de survol, clic et glisser-déposer sur les quatre modèles réels.
+
+## Rééquilibrage de luminance
+
+- [x] Augmenter l’exposition et la lumière générale sans écraser les détails du bois.
+- [x] Renforcer la clé chaude et le remplissage afin que les projets restent lisibles hors du faisceau de la lampe.
+- [x] Vérifier que le faisceau de lampe conserve une hiérarchie locale sans brûler le plateau.

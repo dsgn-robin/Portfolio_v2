@@ -478,7 +478,7 @@ export default function WorkshopScene() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.86;
+    renderer.toneMappingExposure = 1.12;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.setAttribute("aria-label", "Atelier 3D interactif de Robin Courte");
     renderer.domElement.style.touchAction = "none";
@@ -564,9 +564,9 @@ export default function WorkshopScene() {
     });
 
     // Rig de référence : une ambiance minérale, une clé très douce et le cône chaud de la lampe.
-    const ambient = new THREE.HemisphereLight("#9b9689", "#241b15", 0.38);
+    const ambient = new THREE.HemisphereLight("#c5bdad", "#4a3629", 0.7);
     scene.add(ambient);
-    const keyLight = new THREE.DirectionalLight("#fff1dc", 1.05);
+    const keyLight = new THREE.DirectionalLight("#fff0d8", 2.1);
     keyLight.position.set(0.6, 6.8, 2.8);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(2048, 2048);
@@ -583,13 +583,13 @@ export default function WorkshopScene() {
     scene.add(keyLight.target);
     keyLight.target.position.set(3.2, 0.7, -1.0);
 
-    const fillLight = new THREE.DirectionalLight("#a8b4b6", 0.18);
+    const fillLight = new THREE.DirectionalLight("#b8c9cd", 0.52);
     fillLight.position.set(6.5, 3.1, 1.3);
     scene.add(fillLight);
     scene.add(fillLight.target);
     fillLight.target.position.set(3.25, 0.7, -1.0);
 
-    const lampSpot = new THREE.SpotLight("#f5c690", 14, 2.35, THREE.MathUtils.degToRad(29), 0.88, 2);
+    const lampSpot = new THREE.SpotLight("#ffd0a0", 32, 2.55, THREE.MathUtils.degToRad(32), 0.84, 2);
     lampSpot.position.set(2.93, 1.69, -1.9);
     lampSpot.castShadow = true;
     lampSpot.shadow.mapSize.set(1024, 1024);
