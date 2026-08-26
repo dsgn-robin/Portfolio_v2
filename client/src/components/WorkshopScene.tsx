@@ -96,92 +96,6 @@ function setShadow(root: THREE.Object3D) {
   });
 }
 
-type MaterialProfile = "floor" | "table" | "lamp" | "phone" | "photo" | "identity" | "drone";
-
-function restoreBlueprintMaterial(material: THREE.MeshStandardMaterial, anisotropy: number) {
-  material.map && (material.map.colorSpace = THREE.SRGBColorSpace);
-  material.map && (material.map.anisotropy = anisotropy);
-  material.normalMap && (material.normalMap.anisotropy = anisotropy);
-  material.color.set("#c8e7ff");
-  material.emissive.set("#0b4e87");
-  material.emissiveIntensity = 0.22;
-  material.metalness = 0;
-  material.roughness = 0.88;
-  material.normalScale.setScalar(0.18);
-  material.needsUpdate = true;
-}
-
-function improveImportedMaterials(root: THREE.Object3D, profile: MaterialProfile, anisotropy: number) {
-  root.traverse((child) => {
-    if (!(child instanceof THREE.Mesh)) return;
-    const materials = Array.isArray(child.material) ? child.material : [child.material];
-    if (profile === "identity") {
-      const restoredMaterials = materials.map((material) => {
-        if (material.name === "Logo" && material instanceof THREE.MeshStandardMaterial) {
-          material.map && (material.map.colorSpace = THREE.SRGBColorSpace);
-          material.map && (material.map.anisotropy = anisotropy);
-          material.color.set("#75bd91");
-          material.emissive.set("#2b7a56");
-          material.emissiveIntensity = 0.48;
-          material.metalness = 0;
-          material.roughness = 0.38;
-          material.needsUpdate = true;
-          return material;
-        }
-        const glass = new THREE.MeshPhysicalMaterial({
-          name: material.name,
-        });
-        glass.color.set("#b9c9b4");
-        glass.metalness = 0;
-        glass.roughness = 0.16;
-        glass.transmission = 0.86;
-        glass.thickness = 0.18;
-        glass.ior = 1.45;
-        glass.opacity = 0.76;
-        glass.transparent = true;
-        glass.depthWrite = false;
-        glass.side = THREE.DoubleSide;
-        glass.needsUpdate = true;
-        return glass;
-      });
-      child.material = Array.isArray(child.material) ? restoredMaterials : restoredMaterials[0];
-      return;
-    }
-    materials.forEach((material) => {
-      if (!(material instanceof THREE.MeshStandardMaterial)) return;
-      [material.map, material.normalMap, material.roughnessMap, material.metalnessMap, material.aoMap].forEach((texture) => {
-        if (!texture) return;
-        texture.anisotropy = anisotropy;
-        texture.needsUpdate = true;
-      });
-      if (profile === "table") {
-        material.roughness = 0.84;
-        material.normalScale.setScalar(0.45);
-        material.aoMapIntensity = 1.3;
-      } else if (profile === "floor") {
-        material.roughness = 0.93;
-        material.normalScale.setScalar(0.32);
-      } else if (profile === "lamp") {
-        material.color.lerp(new THREE.Color("#1e1c19"), 0.16);
-        material.metalness = material.name.includes("Ceramic") ? 0.08 : 0.48;
-        material.roughness = material.name.includes("Ceramic") ? 0.56 : 0.34;
-      } else if (profile === "phone") {
-        if (material.name.includes("Blueprint")) restoreBlueprintMaterial(material, anisotropy);
-        else {
-          material.roughness = Math.min(material.roughness, 0.42);
-          material.normalScale.setScalar(0.35);
-        }
-      } else if (profile === "photo") {
-        material.roughness = Math.min(material.roughness, 0.5);
-        material.normalScale.setScalar(0.45);
-      } else if (profile === "drone") {
-        restoreBlueprintMaterial(material, anisotropy);
-      }
-      material.needsUpdate = true;
-    });
-  });
-}
-
 function cylinderBetween(
   start: THREE.Vector3,
   end: THREE.Vector3,
@@ -689,17 +603,15 @@ export default function WorkshopScene() {
 
     const loader = new GLTFLoader();
     const selectableMeshes: THREE.Mesh[] = [];
-    const textureAnisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     const loadJobs = [
-      loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, "le sol", { onLoaded: (model) => improveImportedMaterials(model, "floor", textureAnisotropy) }),
-      loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, "l’établi", { onLoaded: (model) => improveImportedMaterials(model, "table", textureAnisotropy) }),
-      loadOptionalGLB(loader, GLB_PATHS.lamp, lampHost, lampFallback, "la lampe", { onLoaded: (model) => improveImportedMaterials(model, "lamp", textureAnisotropy) }),
+      loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, "le sol"),
+      loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, "l’établi"),
+      loadOptionalGLB(loader, GLB_PATHS.lamp, lampHost, lampFallback, "la lampe"),
       ...PROJECTS.map((spec, index) => {
       const fallback = projectFallbacks[spec.key];
         return loadOptionalGLB(loader, GLB_PATHS[spec.key], projectWrappers[index], fallback, spec.title, {
           normalizeAsProject: true,
           onLoaded: (model) => {
-            improveImportedMaterials(model, spec.key, textureAnisotropy);
             const contactShadow = projectWrappers[index].userData.contactShadow as THREE.Object3D;
             contactShadow.visible = false;
             if (spec.key === "phone") leftPlan.visible = false;

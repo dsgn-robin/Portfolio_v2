@@ -42,3 +42,9 @@
 - [x] Restaurer la couleur bleue et les cartes de détail des plans techniques du téléphone et du drone.
 - [x] Définir le corps de l’identité visuelle comme un verre translucide.
 - [x] Conserver le logo vert comme élément interne, opaque et lisible.
+
+## Restitution fidèle des GLB
+
+- [x] Extraire les vraies images et définitions de matériaux embarquées dans les GLB originaux.
+- [x] Retirer les profils PBR artificiels ajoutés côté Three.js.
+- [x] Recharger les matériaux, extensions glTF et textures d’origine sans les remplacer.
