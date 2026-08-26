@@ -589,15 +589,14 @@ export default function WorkshopScene() {
     scene.add(fillLight.target);
     fillLight.target.position.set(3.38, 0.26, -1.0);
 
-    const lampSpot = new THREE.SpotLight("#ffd0a0", 52, 4.1, THREE.MathUtils.degToRad(55), 0.94, 2);
-    lampSpot.position.set(2.93, 1.69, -1.9);
-    lampSpot.castShadow = true;
-    lampSpot.shadow.mapSize.set(1024, 1024);
-    lampSpot.shadow.bias = -0.00004;
-    lampSpot.shadow.normalBias = 0.012;
-    lampSpot.shadow.camera.near = 0.08;
-    lampSpot.shadow.camera.far = 4.2;
-    lampSpot.shadow.radius = 5;
+    const blueprintFill = new THREE.DirectionalLight("#d8e8f3", 0.62);
+    blueprintFill.position.set(2.7, 6.4, -0.8);
+    scene.add(blueprintFill, blueprintFill.target);
+    blueprintFill.target.position.set(3.25, TABLE.projectY, -1.05);
+
+    const lampSpot = new THREE.SpotLight("#ffd0a0", 40, 4.4, THREE.MathUtils.degToRad(60), 0.98, 2);
+    lampSpot.position.set(2.95, 2.35, -1.75);
+    lampSpot.castShadow = false;
     scene.add(lampSpot, lampSpot.target);
     lampSpot.target.position.set(3.25, TABLE.projectY, -1.05);
 

@@ -60,3 +60,9 @@
 - [x] Élargir le cône de la lampe afin de couvrir les deux plans techniques sur l’établi.
 - [x] Rééquilibrer l’intensité et la pénombre sans modifier les textures GLB de blueprint.
 - [x] Vérifier la lisibilité du bleu et des tracés sous la lumière élargie.
+
+## Lampe et blueprints rotatifs
+
+- [x] Analyser exclusivement les 20 premières secondes de la vidéo fournie.
+- [x] Réduire l’ombre portée de la lampe sur le plateau sans réduire la lisibilité des blueprints.
+- [x] Ajuster le comportement lumineux des blueprints lorsqu’ils tournent.
