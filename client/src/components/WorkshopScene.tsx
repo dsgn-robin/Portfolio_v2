@@ -479,7 +479,7 @@ export default function WorkshopScene() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.34;
+    renderer.toneMappingExposure = 1.05;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.setAttribute("aria-label", "Atelier 3D interactif de Robin Courte");
     renderer.domElement.style.touchAction = "none";
@@ -488,6 +488,7 @@ export default function WorkshopScene() {
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     const environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environment = environment;
+    scene.environmentIntensity = 0.32;
     pmremGenerator.dispose();
 
     const camera = new THREE.OrthographicCamera(-5, 5, 5, -5, 0.1, 80);
@@ -570,9 +571,9 @@ export default function WorkshopScene() {
     });
 
     // Rig de référence : une ambiance minérale, une clé très douce et le cône chaud de la lampe.
-    const ambient = new THREE.HemisphereLight("#e5edf0", "#75695f", 1.46);
+    const ambient = new THREE.HemisphereLight("#d8e1e4", "#675b52", 0.82);
     scene.add(ambient);
-    const keyLight = new THREE.DirectionalLight("#fff0da", 3.4);
+    const keyLight = new THREE.DirectionalLight("#fff0da", 2.15);
     keyLight.position.set(-1.6, 8.5, 4.3);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(2048, 2048);
@@ -589,23 +590,23 @@ export default function WorkshopScene() {
     scene.add(keyLight.target);
     keyLight.target.position.set(3.15, 0.34, -1.0);
 
-    const fillLight = new THREE.DirectionalLight("#f1dfc8", 1.34);
+    const fillLight = new THREE.DirectionalLight("#f1dfc8", 0.56);
     fillLight.position.set(8.2, 4.9, -1.65);
     scene.add(fillLight);
     scene.add(fillLight.target);
     fillLight.target.position.set(3.38, 0.26, -1.0);
 
-    const blueprintFill = new THREE.DirectionalLight("#d8e8f3", 0.88);
+    const blueprintFill = new THREE.DirectionalLight("#d8e8f3", 0.38);
     blueprintFill.position.set(2.7, 6.4, -0.8);
     scene.add(blueprintFill, blueprintFill.target);
     blueprintFill.target.position.set(3.25, TABLE.projectY, -1.05);
 
-    const rotationFill = new THREE.DirectionalLight("#c9ddeb", 0.74);
+    const rotationFill = new THREE.DirectionalLight("#c9ddeb", 0.3);
     rotationFill.position.set(-3.5, 5.7, -3.2);
     scene.add(rotationFill, rotationFill.target);
     rotationFill.target.position.set(3.25, TABLE.projectY, -1.05);
 
-    const lampSpot = new THREE.SpotLight("#ffd0a0", 40, 4.4, THREE.MathUtils.degToRad(60), 0.98, 2);
+    const lampSpot = new THREE.SpotLight("#ffd0a0", 28, 4.4, THREE.MathUtils.degToRad(60), 0.98, 2);
     lampSpot.position.set(2.95, 2.35, -1.75);
     lampSpot.castShadow = false;
     scene.add(lampSpot, lampSpot.target);
@@ -762,14 +763,15 @@ export default function WorkshopScene() {
     }
 
     function onWheel(event: WheelEvent) {
-      if (!hovered || active) return;
+      const rotatingProject = active ?? hovered;
+      if (!rotatingProject) return;
       event.preventDefault();
       const direction = Math.sign(event.deltaY);
       if (!direction) return;
-      const currentTarget = hovered.userData.rotationTargetY as number;
-      hovered.userData.rotationTargetY = currentTarget + direction * 0.18;
-      const project = hovered.userData.project as ProjectSpec;
-      setTooltip({ title: project.title, eyebrow: "Rotation", x: event.clientX, y: event.clientY });
+      const currentTarget = rotatingProject.userData.rotationTargetY as number;
+      rotatingProject.userData.rotationTargetY = currentTarget + direction * 0.18;
+      const project = rotatingProject.userData.project as ProjectSpec;
+      setTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
     }
 
     renderer.domElement.addEventListener("pointermove", onPointerMove);

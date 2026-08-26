@@ -72,3 +72,15 @@
 - [x] Analyser la vidéo fournie afin d’identifier la face ou le matériau qui passe au noir à la rotation.
 - [x] Corriger l’éclairage général sans remplacer les textures GLB d’origine.
 - [x] Vérifier une luminosité stable des blueprints sur 360 degrés de rotation.
+
+## Réduction de surexposition
+
+- [ ] Réduire l’environnement PBR et les remplissages responsables du voile lumineux.
+- [ ] Préserver une lumière minimale sur les blueprints pendant leur rotation.
+- [ ] Vérifier le contraste des matières bois, béton, verre et plans techniques.
+
+## Manipulation combinée
+
+- [x] Autoriser la molette sur l’objet activement déplacé.
+- [x] Préserver simultanément le déplacement, la rotation et la capture du pointeur.
+- [x] Vérifier le clic simple et l’ouverture de lien après manipulation combinée.
