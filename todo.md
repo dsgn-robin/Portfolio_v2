@@ -30,3 +30,9 @@
 - [x] Incliner la caméra orthographique vers la face avant de l’établi pour faire apparaître le chant et les pieds.
 - [x] Recaler le zoom et le cadrage sans perdre les objets des projets.
 - [x] Réorienter les lumières pour révéler les volumes du plateau et des pieds visibles.
+
+## Audit des textures GLB
+
+- [x] Extraire l’inventaire des images, maps PBR et paramètres de matériaux présents dans les GLB.
+- [x] Identifier les matériaux qui peuvent être améliorés directement dans Three.js.
+- [x] Appliquer des améliorations PBR non destructives lorsque les maps existantes le permettent.

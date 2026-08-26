@@ -88,12 +88,31 @@ function inspect(filePath) {
   const size = bounds.getSize(new THREE.Vector3());
   const center = bounds.getCenter(new THREE.Vector3());
   const materials = (gltf.materials ?? []).map((material) => material.name || "sans nom");
+  const images = (gltf.images ?? []).map((image, index) => ({
+    index,
+    mimeType: image.mimeType ?? "externe",
+    bytes: image.bufferView === undefined ? null : gltf.bufferViews?.[image.bufferView]?.byteLength ?? null,
+    name: image.name ?? "sans nom",
+  }));
+  const materialMaps = (gltf.materials ?? []).map((material, index) => ({
+    index,
+    name: material.name || "sans nom",
+    baseColor: material.pbrMetallicRoughness?.baseColorTexture?.index ?? null,
+    metallicRoughness: material.pbrMetallicRoughness?.metallicRoughnessTexture?.index ?? null,
+    normal: material.normalTexture?.index ?? null,
+    occlusion: material.occlusionTexture?.index ?? null,
+    emissive: material.emissiveTexture?.index ?? null,
+    roughnessFactor: material.pbrMetallicRoughness?.roughnessFactor ?? 1,
+    metallicFactor: material.pbrMetallicRoughness?.metallicFactor ?? 1,
+  }));
   return {
     file: path.basename(filePath),
     meshCount: gltf.meshes?.length ?? 0,
     nodeCount: nodes.length,
     materialCount: materials.length,
     materials: materials.slice(0, 12),
+    images,
+    materialMaps,
     extensions: gltf.extensionsUsed ?? [],
     bounds: {
       min: bounds.min.toArray().map((value) => Number(value.toFixed(4))),

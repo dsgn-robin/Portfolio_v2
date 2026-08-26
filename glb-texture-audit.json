@@ -1,0 +1,729 @@
+[
+  {
+    "file": "drone.glb",
+    "meshCount": 8,
+    "nodeCount": 8,
+    "materialCount": 1,
+    "materials": [
+      "Blueprint-drone"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 3629776,
+        "name": "Blueprint-drone"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Blueprint-drone",
+        "baseColor": 1,
+        "metallicRoughness": null,
+        "normal": 0,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.8999999761581421,
+        "metallicFactor": 0
+      }
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        3.2103,
+        0.9999,
+        -1.9034
+      ],
+      "max": [
+        3.6893,
+        1.0636,
+        -1.2093
+      ],
+      "size": [
+        0.479,
+        0.0637,
+        0.6941
+      ],
+      "center": [
+        3.4498,
+        1.0318,
+        -1.5563
+      ]
+    }
+  },
+  {
+    "file": "etabli.glb",
+    "meshCount": 1,
+    "nodeCount": 1,
+    "materialCount": 1,
+    "materials": [
+      "Scene_-_Root"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 7127895,
+        "name": "Image_2"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "bytes": 4140451,
+        "name": "Image_1"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "bytes": 5117804,
+        "name": "Image_0"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Scene_-_Root",
+        "baseColor": 2,
+        "metallicRoughness": 1,
+        "normal": 0,
+        "occlusion": 1,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      }
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.6898,
+        -0.0033,
+        -2.0956
+      ],
+      "max": [
+        3.8094,
+        1.0003,
+        0.0956
+      ],
+      "size": [
+        1.1196,
+        1.0036,
+        2.1911
+      ],
+      "center": [
+        3.2496,
+        0.4985,
+        -1
+      ]
+    }
+  },
+  {
+    "file": "floor.glb",
+    "meshCount": 1,
+    "nodeCount": 1,
+    "materialCount": 1,
+    "materials": [
+      "Material.001"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 93975539,
+        "name": "Concrete042A_4K-PNG_NormalGL"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "bytes": 22546487,
+        "name": "Concrete042A_4K-PNG_Color"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "bytes": 20122026,
+        "name": "Concrete042A_4K-PNG_Metalness-Concrete042A_4K-PNG_Roughness"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Material.001",
+        "baseColor": 1,
+        "metallicRoughness": 2,
+        "normal": 0,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      }
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        -1.2335,
+        0,
+        -5.6418
+      ],
+      "max": [
+        8.1083,
+        0,
+        3.7
+      ],
+      "size": [
+        9.3418,
+        0,
+        9.3418
+      ],
+      "center": [
+        3.4374,
+        0,
+        -0.9709
+      ]
+    }
+  },
+  {
+    "file": "identite.glb",
+    "meshCount": 2,
+    "nodeCount": 2,
+    "materialCount": 2,
+    "materials": [
+      "Logo",
+      "Material"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 4169,
+        "name": "Logo"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Logo",
+        "baseColor": 0,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 1,
+        "name": "Material",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      }
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.8972,
+        1.0051,
+        -1.443
+      ],
+      "max": [
+        3.156,
+        1.0465,
+        -1.1842
+      ],
+      "size": [
+        0.2588,
+        0.0414,
+        0.2588
+      ],
+      "center": [
+        3.0266,
+        1.0258,
+        -1.3136
+      ]
+    }
+  },
+  {
+    "file": "lamp.glb",
+    "meshCount": 30,
+    "nodeCount": 70,
+    "materialCount": 7,
+    "materials": [
+      "01_-_Default",
+      "04_-_Default",
+      "03_-_Default",
+      "Material_13",
+      "05_-_Default",
+      "Ceramic",
+      "02_-_Default"
+    ],
+    "images": [],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "01_-_Default",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.534870445728302,
+        "metallicFactor": 1
+      },
+      {
+        "index": 1,
+        "name": "04_-_Default",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.46779724955558777,
+        "metallicFactor": 0
+      },
+      {
+        "index": 2,
+        "name": "03_-_Default",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.24434848129749298,
+        "metallicFactor": 1
+      },
+      {
+        "index": 3,
+        "name": "Material_13",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.8929713368415833,
+        "metallicFactor": 0
+      },
+      {
+        "index": 4,
+        "name": "05_-_Default",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.8929713368415833,
+        "metallicFactor": 0
+      },
+      {
+        "index": 5,
+        "name": "Ceramic",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.1995045691728592,
+        "metallicFactor": 0
+      },
+      {
+        "index": 6,
+        "name": "02_-_Default",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.46779724955558777,
+        "metallicFactor": 1
+      }
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.684,
+        1.0017,
+        -2.0011
+      ],
+      "max": [
+        3.2794,
+        1.8402,
+        -1.4439
+      ],
+      "size": [
+        0.5955,
+        0.8385,
+        0.5572
+      ],
+      "center": [
+        2.9817,
+        1.4209,
+        -1.7225
+      ]
+    }
+  },
+  {
+    "file": "phone.glb",
+    "meshCount": 16,
+    "nodeCount": 16,
+    "materialCount": 11,
+    "materials": [
+      "Blueprint-drone.001",
+      "Blue-2",
+      "Matériau.040",
+      "Matériau.039",
+      "Matériau.029",
+      "Group 1.002",
+      "Matériau.033",
+      "Matériau.034",
+      "Matériau.032",
+      "Matériau.031",
+      "Matériau.042"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 3418728,
+        "name": "Blueprint-Phone"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "bytes": 952,
+        "name": "Logo 1"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Blueprint-drone.001",
+        "baseColor": 1,
+        "metallicRoughness": null,
+        "normal": 0,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.8999999761581421,
+        "metallicFactor": 0
+      },
+      {
+        "index": 1,
+        "name": "Blue-2",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.30000001192092896,
+        "metallicFactor": 0.3370000123977661
+      },
+      {
+        "index": 2,
+        "name": "Matériau.040",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 3,
+        "name": "Matériau.039",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 4,
+        "name": "Matériau.029",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.44999998807907104,
+        "metallicFactor": 0
+      },
+      {
+        "index": 5,
+        "name": "Group 1.002",
+        "baseColor": 2,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 6,
+        "name": "Matériau.033",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 7,
+        "name": "Matériau.034",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.029999999329447746,
+        "metallicFactor": 0
+      },
+      {
+        "index": 8,
+        "name": "Matériau.032",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 9,
+        "name": "Matériau.031",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.029999999329447746,
+        "metallicFactor": 0
+      },
+      {
+        "index": 10,
+        "name": "Matériau.042",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      }
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_anisotropy",
+      "KHR_materials_ior"
+    ],
+    "bounds": {
+      "min": [
+        2.7152,
+        1.0002,
+        -0.7028
+      ],
+      "max": [
+        3.438,
+        1.02,
+        -0.0027
+      ],
+      "size": [
+        0.7228,
+        0.0198,
+        0.7001
+      ],
+      "center": [
+        3.0766,
+        1.0101,
+        -0.3527
+      ]
+    }
+  },
+  {
+    "file": "photo.glb",
+    "meshCount": 7,
+    "nodeCount": 15,
+    "materialCount": 7,
+    "materials": [
+      "Cilindro_material",
+      "lambert1",
+      "lambert3",
+      "lambert4",
+      "Camara_material",
+      "ruleta_2",
+      "ruleta"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 11251273,
+        "name": "Image_5"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "bytes": 180147,
+        "name": "Image_3"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "bytes": 9014449,
+        "name": "Image_4"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "bytes": 12607622,
+        "name": "Image_2"
+      },
+      {
+        "index": 4,
+        "mimeType": "image/png",
+        "bytes": 1229762,
+        "name": "Image_0"
+      },
+      {
+        "index": 5,
+        "mimeType": "image/png",
+        "bytes": 9181287,
+        "name": "Image_1"
+      },
+      {
+        "index": 6,
+        "mimeType": "image/png",
+        "bytes": 296639,
+        "name": "Image_8"
+      },
+      {
+        "index": 7,
+        "mimeType": "image/png",
+        "bytes": 20555,
+        "name": "Image_6"
+      },
+      {
+        "index": 8,
+        "mimeType": "image/png",
+        "bytes": 97768,
+        "name": "Image_7"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Cilindro_material",
+        "baseColor": 1,
+        "metallicRoughness": 2,
+        "normal": 0,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      },
+      {
+        "index": 1,
+        "name": "lambert1",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.396921306848526,
+        "metallicFactor": 0.950217068195343
+      },
+      {
+        "index": 2,
+        "name": "lambert3",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.07467212527990341,
+        "metallicFactor": 1
+      },
+      {
+        "index": 3,
+        "name": "lambert4",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.23883679509162903,
+        "metallicFactor": 1
+      },
+      {
+        "index": 4,
+        "name": "Camara_material",
+        "baseColor": 4,
+        "metallicRoughness": 5,
+        "normal": 3,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      },
+      {
+        "index": 5,
+        "name": "ruleta_2",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.3300394117832184,
+        "metallicFactor": 0.9988584518432617
+      },
+      {
+        "index": 6,
+        "name": "ruleta",
+        "baseColor": 7,
+        "metallicRoughness": 8,
+        "normal": 6,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 0
+      }
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission"
+    ],
+    "bounds": {
+      "min": [
+        3.4823,
+        1.0025,
+        -0.5819
+      ],
+      "max": [
+        3.7197,
+        1.168,
+        -0.3235
+      ],
+      "size": [
+        0.2374,
+        0.1654,
+        0.2584
+      ],
+      "center": [
+        3.601,
+        1.0852,
+        -0.4527
+      ]
+    }
+  }
+]

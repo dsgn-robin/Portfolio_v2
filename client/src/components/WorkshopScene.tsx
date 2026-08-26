@@ -96,6 +96,47 @@ function setShadow(root: THREE.Object3D) {
   });
 }
 
+type MaterialProfile = "floor" | "table" | "lamp" | "phone" | "photo" | "identity" | "drone";
+
+function improveImportedMaterials(root: THREE.Object3D, profile: MaterialProfile, anisotropy: number) {
+  root.traverse((child) => {
+    if (!(child instanceof THREE.Mesh)) return;
+    const materials = Array.isArray(child.material) ? child.material : [child.material];
+    materials.forEach((material) => {
+      if (!(material instanceof THREE.MeshStandardMaterial)) return;
+      [material.map, material.normalMap, material.roughnessMap, material.metalnessMap, material.aoMap].forEach((texture) => {
+        if (!texture) return;
+        texture.anisotropy = anisotropy;
+        texture.needsUpdate = true;
+      });
+      if (profile === "table") {
+        material.roughness = 0.84;
+        material.normalScale.setScalar(0.45);
+        material.aoMapIntensity = 1.3;
+      } else if (profile === "floor") {
+        material.roughness = 0.93;
+        material.normalScale.setScalar(0.32);
+      } else if (profile === "lamp") {
+        material.color.lerp(new THREE.Color("#1e1c19"), 0.16);
+        material.metalness = material.name.includes("Ceramic") ? 0.08 : 0.48;
+        material.roughness = material.name.includes("Ceramic") ? 0.56 : 0.34;
+      } else if (profile === "phone") {
+        material.roughness = Math.min(material.roughness, 0.42);
+        material.normalScale.setScalar(0.35);
+      } else if (profile === "photo") {
+        material.roughness = Math.min(material.roughness, 0.5);
+        material.normalScale.setScalar(0.45);
+      } else if (profile === "identity") {
+        material.roughness = 0.68;
+      } else if (profile === "drone") {
+        material.roughness = 0.78;
+        material.normalScale.setScalar(0.32);
+      }
+      material.needsUpdate = true;
+    });
+  });
+}
+
 function cylinderBetween(
   start: THREE.Vector3,
   end: THREE.Vector3,
@@ -603,15 +644,17 @@ export default function WorkshopScene() {
 
     const loader = new GLTFLoader();
     const selectableMeshes: THREE.Mesh[] = [];
+    const textureAnisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     const loadJobs = [
-      loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, "le sol"),
-      loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, "l’établi"),
-      loadOptionalGLB(loader, GLB_PATHS.lamp, lampHost, lampFallback, "la lampe"),
+      loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, "le sol", { onLoaded: (model) => improveImportedMaterials(model, "floor", textureAnisotropy) }),
+      loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, "l’établi", { onLoaded: (model) => improveImportedMaterials(model, "table", textureAnisotropy) }),
+      loadOptionalGLB(loader, GLB_PATHS.lamp, lampHost, lampFallback, "la lampe", { onLoaded: (model) => improveImportedMaterials(model, "lamp", textureAnisotropy) }),
       ...PROJECTS.map((spec, index) => {
       const fallback = projectFallbacks[spec.key];
         return loadOptionalGLB(loader, GLB_PATHS[spec.key], projectWrappers[index], fallback, spec.title, {
           normalizeAsProject: true,
           onLoaded: (model) => {
+            improveImportedMaterials(model, spec.key, textureAnisotropy);
             const contactShadow = projectWrappers[index].userData.contactShadow as THREE.Object3D;
             contactShadow.visible = false;
             if (spec.key === "phone") leftPlan.visible = false;
