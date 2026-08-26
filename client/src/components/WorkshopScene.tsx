@@ -478,7 +478,7 @@ export default function WorkshopScene() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.9;
+    renderer.toneMappingExposure = 0.86;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.setAttribute("aria-label", "Atelier 3D interactif de Robin Courte");
     renderer.domElement.style.touchAction = "none";
@@ -563,40 +563,46 @@ export default function WorkshopScene() {
       scene.add(wrapper);
     });
 
-    const ambient = new THREE.HemisphereLight("#b8b5a9", "#30251e", 0.88);
+    // Rig de référence : une ambiance minérale, une clé très douce et le cône chaud de la lampe.
+    const ambient = new THREE.HemisphereLight("#9b9689", "#241b15", 0.38);
     scene.add(ambient);
-    const keyLight = new THREE.DirectionalLight("#ffe0b4", 1.55);
-    keyLight.position.set(-5.5, 10.8, 4.2);
+    const keyLight = new THREE.DirectionalLight("#fff1dc", 1.05);
+    keyLight.position.set(0.6, 6.8, 2.8);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(2048, 2048);
-    keyLight.shadow.camera.left = -8;
-    keyLight.shadow.camera.right = 8;
-    keyLight.shadow.camera.top = 8;
-    keyLight.shadow.camera.bottom = -8;
-    keyLight.shadow.bias = -0.00018;
-    keyLight.shadow.normalBias = 0.018;
+    keyLight.shadow.camera.left = -1.8;
+    keyLight.shadow.camera.right = 1.8;
+    keyLight.shadow.camera.top = 1.8;
+    keyLight.shadow.camera.bottom = -1.8;
+    keyLight.shadow.camera.near = 0.2;
+    keyLight.shadow.camera.far = 11;
+    keyLight.shadow.bias = -0.00006;
+    keyLight.shadow.normalBias = 0.014;
+    keyLight.shadow.radius = 3;
     scene.add(keyLight);
     scene.add(keyLight.target);
-    keyLight.target.position.set(-0.55, 0.2, 0.15);
+    keyLight.target.position.set(3.2, 0.7, -1.0);
 
-    const fillLight = new THREE.DirectionalLight("#9db8c4", 0.42);
-    fillLight.position.set(-6.5, 5.2, -7.5);
+    const fillLight = new THREE.DirectionalLight("#a8b4b6", 0.18);
+    fillLight.position.set(6.5, 3.1, 1.3);
     scene.add(fillLight);
     scene.add(fillLight.target);
-    fillLight.target.position.set(0, 0.5, 0);
+    fillLight.target.position.set(3.25, 0.7, -1.0);
 
-    const lampSpot = new THREE.SpotLight("#ffc087", 32, 3.4, THREE.MathUtils.degToRad(34), 0.8, 2);
-    lampSpot.position.set(2.71, 1.58, -1.9);
+    const lampSpot = new THREE.SpotLight("#f5c690", 14, 2.35, THREE.MathUtils.degToRad(29), 0.88, 2);
+    lampSpot.position.set(2.93, 1.69, -1.9);
     lampSpot.castShadow = true;
     lampSpot.shadow.mapSize.set(1024, 1024);
-    lampSpot.shadow.bias = -0.00012;
+    lampSpot.shadow.bias = -0.00004;
+    lampSpot.shadow.normalBias = 0.012;
+    lampSpot.shadow.camera.near = 0.08;
+    lampSpot.shadow.camera.far = 2.7;
+    lampSpot.shadow.radius = 4;
     scene.add(lampSpot, lampSpot.target);
-    lampSpot.target.position.set(3.12, TABLE.projectY, -1.05);
-    const lampGlow = new THREE.PointLight("#ffba79", 1.1, 1.5, 2);
-    lampGlow.position.set(2.71, 1.55, -1.88);
-    scene.add(lampGlow);
+    lampSpot.target.position.set(3.12, TABLE.projectY, -1.37);
 
     const loader = new GLTFLoader();
+    const selectableMeshes: THREE.Mesh[] = [];
     const loadJobs = [
       loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, "le sol"),
       loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, "l’établi"),
@@ -605,11 +611,17 @@ export default function WorkshopScene() {
       const fallback = projectFallbacks[spec.key];
         return loadOptionalGLB(loader, GLB_PATHS[spec.key], projectWrappers[index], fallback, spec.title, {
           normalizeAsProject: true,
-          onLoaded: () => {
+          onLoaded: (model) => {
             const contactShadow = projectWrappers[index].userData.contactShadow as THREE.Object3D;
             contactShadow.visible = false;
             if (spec.key === "phone") leftPlan.visible = false;
             if (spec.key === "drone") rightPlan.visible = false;
+            model.traverse((child) => {
+              if (child instanceof THREE.Mesh && child.visible) {
+                child.userData.projectWrapper = projectWrappers[index];
+                selectableMeshes.push(child);
+              }
+            });
           },
         });
       }),
@@ -650,6 +662,8 @@ export default function WorkshopScene() {
     function getProjectFromObject(object: THREE.Object3D | null) {
       let current: THREE.Object3D | null = object;
       while (current) {
+        const projectWrapper = current.userData.projectWrapper as THREE.Group | undefined;
+        if (projectWrapper) return projectWrapper;
         if (current.userData.project) return current as THREE.Group;
         current = current.parent;
       }
@@ -658,7 +672,7 @@ export default function WorkshopScene() {
 
     function pickProject(event: PointerEvent) {
       setPointer(event);
-      const hits = raycaster.intersectObjects(projectWrappers, true);
+      const hits = raycaster.intersectObjects(selectableMeshes.filter((mesh) => mesh.visible), false);
       return hits.length ? getProjectFromObject(hits[0].object) : null;
     }
 
