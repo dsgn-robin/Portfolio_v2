@@ -485,10 +485,10 @@ export default function WorkshopScene() {
     viewport.appendChild(renderer.domElement);
 
     const camera = new THREE.OrthographicCamera(-5, 5, 5, -5, 0.1, 80);
-    const cameraTarget = new THREE.Vector3(3.08, 0.48, -1.0);
-    camera.up.set(-1, 0, 0);
-    camera.position.set(3.08, 9.4, 0.16);
-    camera.zoom = 1.18;
+    const cameraTarget = new THREE.Vector3(3.22, 0.42, -1.0);
+    camera.up.set(0, 1, 0);
+    camera.position.set(6.7, 9.2, -1.0);
+    camera.zoom = 1.12;
     camera.lookAt(cameraTarget);
     camera.updateProjectionMatrix();
 
@@ -564,10 +564,10 @@ export default function WorkshopScene() {
     });
 
     // Rig de référence : une ambiance minérale, une clé très douce et le cône chaud de la lampe.
-    const ambient = new THREE.HemisphereLight("#d6cbb9", "#604638", 1.1);
+    const ambient = new THREE.HemisphereLight("#d8cfbd", "#634838", 1.02);
     scene.add(ambient);
-    const keyLight = new THREE.DirectionalLight("#fff0d8", 3.1);
-    keyLight.position.set(0.6, 6.8, 2.8);
+    const keyLight = new THREE.DirectionalLight("#fff0da", 3.4);
+    keyLight.position.set(-1.6, 8.5, 4.3);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(2048, 2048);
     keyLight.shadow.camera.left = -1.8;
@@ -581,15 +581,15 @@ export default function WorkshopScene() {
     keyLight.shadow.radius = 3;
     scene.add(keyLight);
     scene.add(keyLight.target);
-    keyLight.target.position.set(3.2, 0.7, -1.0);
+    keyLight.target.position.set(3.15, 0.34, -1.0);
 
-    const fillLight = new THREE.DirectionalLight("#c6d4d5", 0.78);
-    fillLight.position.set(6.5, 3.1, 1.3);
+    const fillLight = new THREE.DirectionalLight("#f1dfc8", 1.12);
+    fillLight.position.set(8.2, 4.9, -1.65);
     scene.add(fillLight);
     scene.add(fillLight.target);
-    fillLight.target.position.set(3.25, 0.7, -1.0);
+    fillLight.target.position.set(3.38, 0.26, -1.0);
 
-    const lampSpot = new THREE.SpotLight("#ffd0a0", 28, 2.55, THREE.MathUtils.degToRad(32), 0.84, 2);
+    const lampSpot = new THREE.SpotLight("#ffd0a0", 36, 2.55, THREE.MathUtils.degToRad(32), 0.84, 2);
     lampSpot.position.set(2.93, 1.69, -1.9);
     lampSpot.castShadow = true;
     lampSpot.shadow.mapSize.set(1024, 1024);

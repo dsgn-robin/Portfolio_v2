@@ -24,3 +24,9 @@
 - [x] Reprendre l’angle, le zoom et l’offset vertical de la caméra contre la référence Blender.
 - [x] Augmenter franchement la luminance globale du plateau et du sol.
 - [x] Conserver des ombres lisibles tout en évitant une lumière localement surexposée.
+
+## Vue orthographique inclinée
+
+- [x] Incliner la caméra orthographique vers la face avant de l’établi pour faire apparaître le chant et les pieds.
+- [x] Recaler le zoom et le cadrage sans perdre les objets des projets.
+- [x] Réorienter les lumières pour révéler les volumes du plateau et des pieds visibles.
