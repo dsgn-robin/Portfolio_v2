@@ -14,13 +14,13 @@ const ASSETS = {
 };
 
 const GLB_PATHS = {
-  floor: "/models/floor.glb",
-  table: "/models/etabli.glb",
-  lamp: "/models/lamp.glb",
-  phone: "/models/phone.glb",
-  photo: "/models/photo.glb",
-  identity: "/models/identite.glb",
-  drone: "/models/drone.glb",
+  floor: "/manus-storage/floor_f200454f.glb",
+  table: "/manus-storage/etabli_c00d06ce.glb",
+  lamp: "/manus-storage/lamp_b12c8ce7.glb",
+  phone: "/manus-storage/phone_0fd05b3c.glb",
+  photo: "/manus-storage/photo_2b003e1a.glb",
+  identity: "/manus-storage/identite_17dcad1d.glb",
+  drone: "/manus-storage/drone_fbc0d7ed.glb",
 } as const;
 
 type ProjectKey = "phone" | "photo" | "identity" | "drone";
@@ -41,7 +41,7 @@ const PROJECTS: ProjectSpec[] = [
     eyebrow: "Objet · 01",
     url: "https://robincourte.com/Projet/Essentialphone/Essentialphone.html",
     fallbackSize: 1.35,
-    position: [-2.42, 1.25, -0.72],
+    position: [3.0766, 1.0002, -0.3527],
   },
   {
     key: "photo",
@@ -49,7 +49,7 @@ const PROJECTS: ProjectSpec[] = [
     eyebrow: "Image · 02",
     url: "https://robincourte.com/Projet/Photo/pphoto.html",
     fallbackSize: 1.25,
-    position: [-2.15, 1.22, 1.08],
+    position: [3.601, 1.0025, -0.4527],
   },
   {
     key: "identity",
@@ -57,7 +57,7 @@ const PROJECTS: ProjectSpec[] = [
     eyebrow: "Système · 03",
     url: "https://robincourte.com/Projet/Identité/identité.html",
     fallbackSize: 1.2,
-    position: [1.28, 1.21, -0.83],
+    position: [3.0266, 1.0051, -1.3136],
   },
   {
     key: "drone",
@@ -65,19 +65,19 @@ const PROJECTS: ProjectSpec[] = [
     eyebrow: "Mobilité · 04",
     url: "https://robincourte.com/Projet/Drone/drone.html",
     fallbackSize: 1.8,
-    position: [2.38, 1.24, 0.68],
+    position: [3.4498, 0.9999, -1.5563],
   },
 ];
 
 const TABLE = {
-  width: 8.55,
-  depth: 4.58,
-  topY: 1.05,
-  projectY: 1.2,
-  minX: -3.78,
-  maxX: 3.78,
-  minZ: -1.73,
-  maxZ: 1.73,
+  width: 1.1196,
+  depth: 2.1911,
+  topY: 1.0003,
+  projectY: 1.012,
+  minX: 2.74,
+  maxX: 3.75,
+  minZ: -2.03,
+  maxZ: 0.03,
 };
 
 function setShadow(root: THREE.Object3D) {
@@ -402,13 +402,18 @@ function makeWorkbench(wood: THREE.Texture) {
   return group;
 }
 
+type GLBLoadOptions = {
+  normalizeAsProject?: boolean;
+  onLoaded?: (model: THREE.Group) => void;
+};
+
 async function loadOptionalGLB(
   loader: GLTFLoader,
   path: string,
   host: THREE.Object3D,
   fallback: THREE.Object3D,
-  targetSize: number,
   name: string,
+  options: GLBLoadOptions = {},
 ) {
   try {
     const response = await fetch(path, { method: "HEAD", cache: "no-store" });
@@ -416,36 +421,40 @@ async function loadOptionalGLB(
     if (!response.ok || contentType.includes("text/html")) {
       fallback.visible = true;
       console.info(`[Atelier 3D] ${name} reste en version procédurale : ${path} n’est pas encore disponible.`);
-      return;
+      return false;
     }
   } catch (error) {
     fallback.visible = true;
     console.info(`[Atelier 3D] ${name} reste en version procédurale : la disponibilité de ${path} n’a pas pu être vérifiée.`, error);
-    return;
+    return false;
   }
-  loader.load(
-    path,
-    (gltf) => {
-      const model = gltf.scene;
-      const bounds = new THREE.Box3().setFromObject(model);
-      const size = bounds.getSize(new THREE.Vector3());
-      const longestAxis = Math.max(size.x, size.y, size.z) || 1;
-      model.scale.multiplyScalar(targetSize / longestAxis);
-      const scaledBounds = new THREE.Box3().setFromObject(model);
-      const scaledCenter = scaledBounds.getCenter(new THREE.Vector3());
-      model.position.sub(scaledCenter);
-      model.position.y -= scaledBounds.min.y;
-      fallback.visible = false;
-      setShadow(model);
-      host.add(model);
-      console.info(`[Atelier 3D] ${name} chargé depuis ${path}.`);
-    },
-    undefined,
-    (error) => {
-      fallback.visible = true;
-      console.error(`[Atelier 3D] Impossible de charger ${name} (${path}). Le modèle procédural de repli reste affiché.`, error);
-    },
-  );
+  return new Promise<boolean>((resolve) => {
+    loader.load(
+      path,
+      (gltf) => {
+        const model = gltf.scene;
+        if (options.normalizeAsProject) {
+          const bounds = new THREE.Box3().setFromObject(model);
+          const center = bounds.getCenter(new THREE.Vector3());
+          model.position.sub(center);
+          const centeredBounds = new THREE.Box3().setFromObject(model);
+          model.position.y -= centeredBounds.min.y;
+        }
+        fallback.visible = false;
+        setShadow(model);
+        host.add(model);
+        options.onLoaded?.(model);
+        console.info(`[Atelier 3D] ${name} chargé depuis ${path}.`);
+        resolve(true);
+      },
+      undefined,
+      (error) => {
+        fallback.visible = true;
+        console.error(`[Atelier 3D] Impossible de charger ${name} (${path}). Le modèle procédural de repli reste affiché.`, error);
+        resolve(false);
+      },
+    );
+  });
 }
 
 export default function WorkshopScene() {
@@ -457,6 +466,7 @@ export default function WorkshopScene() {
     const mount = mountRef.current;
     if (!mount) return undefined;
     const viewport: HTMLDivElement = mount;
+    setReady(false);
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#6d685e");
@@ -468,16 +478,16 @@ export default function WorkshopScene() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.04;
+    renderer.toneMappingExposure = 0.9;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.domElement.setAttribute("aria-label", "Atelier 3D interactif de Robin Courte");
     renderer.domElement.style.touchAction = "none";
     viewport.appendChild(renderer.domElement);
 
     const camera = new THREE.OrthographicCamera(-5, 5, 5, -5, 0.1, 80);
-    const cameraTarget = new THREE.Vector3(0, 0.34, 0);
-    const cameraDirection = new THREE.Vector3(0, 13.5, 3.2).normalize();
-    camera.position.copy(cameraTarget).addScaledVector(cameraDirection, 16.6);
+    const cameraTarget = new THREE.Vector3(3.25, 0.48, -1.0);
+    camera.up.set(-1, 0, 0);
+    camera.position.set(3.25, 8.6, -1.0);
     camera.zoom = 1;
     camera.lookAt(cameraTarget);
     camera.updateProjectionMatrix();
@@ -519,13 +529,12 @@ export default function WorkshopScene() {
     scene.add(tableHost);
 
     const lampHost = new THREE.Group();
-    lampHost.position.set(2.98, 1.18, -1.17);
     const lampFallback = makeLamp();
     lampHost.add(lampFallback);
     scene.add(lampHost);
 
-    const leftPlan = makeBlueprint(plansTexture, 2.9, 2.08, new THREE.Vector3(-2.54, TABLE.projectY - 0.025, -0.68), 0.42);
-    const rightPlan = makeBlueprint(plansTexture, 3.0, 1.72, new THREE.Vector3(2.22, TABLE.projectY - 0.024, 0.66), -0.18);
+    const leftPlan = makeBlueprint(plansTexture, 0.77, 0.75, new THREE.Vector3(3.08, TABLE.projectY - 0.025, -0.35), 0.42);
+    const rightPlan = makeBlueprint(plansTexture, 0.62, 0.88, new THREE.Vector3(3.45, TABLE.projectY - 0.024, -1.56), -0.18);
     scene.add(leftPlan, rightPlan);
 
     const projectWrappers: THREE.Group[] = [];
@@ -535,7 +544,7 @@ export default function WorkshopScene() {
       identity: makeIdentity(),
       drone: makeDrone(),
     };
-    const projectRotations: Record<ProjectKey, number> = { phone: -0.24, photo: 0.4, identity: 0.08, drone: -0.18 };
+    const projectRotations: Record<ProjectKey, number> = { phone: 0, photo: 0, identity: 0, drone: 0 };
 
     PROJECTS.forEach((spec) => {
       const wrapper = new THREE.Group();
@@ -546,6 +555,7 @@ export default function WorkshopScene() {
       const contact = shadowDisc(spec.key === "drone" ? 1.7 : 1.16, spec.key === "drone" ? 0.88 : 0.68, spec.key === "drone" ? 0.19 : 0.27);
       contact.position.y = TABLE.projectY + 0.005;
       wrapper.add(contact);
+      wrapper.userData.contactShadow = contact;
       const fallback = projectFallbacks[spec.key];
       fallback.position.y = TABLE.projectY - spec.position[1] + 0.02;
       wrapper.add(fallback);
@@ -553,9 +563,9 @@ export default function WorkshopScene() {
       scene.add(wrapper);
     });
 
-    const ambient = new THREE.HemisphereLight("#b8b5a9", "#30251e", 1.45);
+    const ambient = new THREE.HemisphereLight("#b8b5a9", "#30251e", 0.88);
     scene.add(ambient);
-    const keyLight = new THREE.DirectionalLight("#ffe0b4", 2.35);
+    const keyLight = new THREE.DirectionalLight("#ffe0b4", 1.55);
     keyLight.position.set(-5.5, 10.8, 4.2);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.set(2048, 2048);
@@ -569,31 +579,42 @@ export default function WorkshopScene() {
     scene.add(keyLight.target);
     keyLight.target.position.set(-0.55, 0.2, 0.15);
 
-    const fillLight = new THREE.DirectionalLight("#9db8c4", 0.86);
+    const fillLight = new THREE.DirectionalLight("#9db8c4", 0.42);
     fillLight.position.set(-6.5, 5.2, -7.5);
     scene.add(fillLight);
     scene.add(fillLight.target);
     fillLight.target.position.set(0, 0.5, 0);
 
-    const lampSpot = new THREE.SpotLight("#ffc087", 105, 11, THREE.MathUtils.degToRad(34), 0.8, 2);
-    lampSpot.position.set(1.98, 4.15, -1.05);
+    const lampSpot = new THREE.SpotLight("#ffc087", 32, 3.4, THREE.MathUtils.degToRad(34), 0.8, 2);
+    lampSpot.position.set(2.71, 1.58, -1.9);
     lampSpot.castShadow = true;
     lampSpot.shadow.mapSize.set(1024, 1024);
     lampSpot.shadow.bias = -0.00012;
     scene.add(lampSpot, lampSpot.target);
-    lampSpot.target.position.set(0.92, TABLE.projectY, -0.2);
-    const lampGlow = new THREE.PointLight("#ffba79", 3.8, 3.1, 2);
-    lampGlow.position.set(1.94, 2.53, -0.99);
+    lampSpot.target.position.set(3.12, TABLE.projectY, -1.05);
+    const lampGlow = new THREE.PointLight("#ffba79", 1.1, 1.5, 2);
+    lampGlow.position.set(2.71, 1.55, -1.88);
     scene.add(lampGlow);
 
     const loader = new GLTFLoader();
-    loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, 30, "le sol");
-    loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, 8.7, "l’établi");
-    loadOptionalGLB(loader, GLB_PATHS.lamp, lampHost, lampFallback, 3.0, "la lampe");
-    PROJECTS.forEach((spec, index) => {
+    const loadJobs = [
+      loadOptionalGLB(loader, GLB_PATHS.floor, scene, floor, "le sol"),
+      loadOptionalGLB(loader, GLB_PATHS.table, tableHost, tableFallback, "l’établi"),
+      loadOptionalGLB(loader, GLB_PATHS.lamp, lampHost, lampFallback, "la lampe"),
+      ...PROJECTS.map((spec, index) => {
       const fallback = projectFallbacks[spec.key];
-      loadOptionalGLB(loader, GLB_PATHS[spec.key], projectWrappers[index], fallback, spec.fallbackSize, spec.title);
-    });
+        return loadOptionalGLB(loader, GLB_PATHS[spec.key], projectWrappers[index], fallback, spec.title, {
+          normalizeAsProject: true,
+          onLoaded: () => {
+            const contactShadow = projectWrappers[index].userData.contactShadow as THREE.Object3D;
+            contactShadow.visible = false;
+            if (spec.key === "phone") leftPlan.visible = false;
+            if (spec.key === "drone") rightPlan.visible = false;
+          },
+        });
+      }),
+    ];
+    void Promise.all(loadJobs).finally(() => setReady(true));
 
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
@@ -610,7 +631,7 @@ export default function WorkshopScene() {
       const width = viewport.clientWidth;
       const height = viewport.clientHeight;
       const aspect = width / height;
-      const vertical = aspect < 0.75 ? 10.6 / aspect : 7.3;
+      const vertical = aspect < 0.75 ? 3.3 / aspect : 1.9;
       camera.left = (-vertical * aspect) / 2;
       camera.right = (vertical * aspect) / 2;
       camera.top = vertical / 2;
@@ -723,7 +744,6 @@ export default function WorkshopScene() {
     window.addEventListener("resize", resize);
     resize();
 
-    const readyTimer = window.setTimeout(() => setReady(true), 620);
     let frame = 0;
     function animate() {
       frame = window.requestAnimationFrame(animate);
@@ -739,7 +759,6 @@ export default function WorkshopScene() {
     animate();
 
     return () => {
-      window.clearTimeout(readyTimer);
       window.cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
       renderer.domElement.removeEventListener("pointermove", onPointerMove);

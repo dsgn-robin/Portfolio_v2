@@ -1,0 +1,258 @@
+[
+  {
+    "file": "drone.glb",
+    "meshCount": 8,
+    "nodeCount": 8,
+    "materialCount": 1,
+    "materials": [
+      "Blueprint-drone"
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        3.2103,
+        0.9999,
+        -1.9034
+      ],
+      "max": [
+        3.6893,
+        1.0636,
+        -1.2093
+      ],
+      "size": [
+        0.479,
+        0.0637,
+        0.6941
+      ],
+      "center": [
+        3.4498,
+        1.0318,
+        -1.5563
+      ]
+    }
+  },
+  {
+    "file": "etabli.glb",
+    "meshCount": 1,
+    "nodeCount": 1,
+    "materialCount": 1,
+    "materials": [
+      "Scene_-_Root"
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.6898,
+        -0.0033,
+        -2.0956
+      ],
+      "max": [
+        3.8094,
+        1.0003,
+        0.0956
+      ],
+      "size": [
+        1.1196,
+        1.0036,
+        2.1911
+      ],
+      "center": [
+        3.2496,
+        0.4985,
+        -1
+      ]
+    }
+  },
+  {
+    "file": "floor.glb",
+    "meshCount": 1,
+    "nodeCount": 1,
+    "materialCount": 1,
+    "materials": [
+      "Material.001"
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        -1.2335,
+        0,
+        -5.6418
+      ],
+      "max": [
+        8.1083,
+        0,
+        3.7
+      ],
+      "size": [
+        9.3418,
+        0,
+        9.3418
+      ],
+      "center": [
+        3.4374,
+        0,
+        -0.9709
+      ]
+    }
+  },
+  {
+    "file": "identite.glb",
+    "meshCount": 2,
+    "nodeCount": 2,
+    "materialCount": 2,
+    "materials": [
+      "Logo",
+      "Material"
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.8972,
+        1.0051,
+        -1.443
+      ],
+      "max": [
+        3.156,
+        1.0465,
+        -1.1842
+      ],
+      "size": [
+        0.2588,
+        0.0414,
+        0.2588
+      ],
+      "center": [
+        3.0266,
+        1.0258,
+        -1.3136
+      ]
+    }
+  },
+  {
+    "file": "lamp.glb",
+    "meshCount": 30,
+    "nodeCount": 70,
+    "materialCount": 7,
+    "materials": [
+      "01_-_Default",
+      "04_-_Default",
+      "03_-_Default",
+      "Material_13",
+      "05_-_Default",
+      "Ceramic",
+      "02_-_Default"
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.684,
+        1.0017,
+        -2.0011
+      ],
+      "max": [
+        3.2794,
+        1.8402,
+        -1.4439
+      ],
+      "size": [
+        0.5955,
+        0.8385,
+        0.5572
+      ],
+      "center": [
+        2.9817,
+        1.4209,
+        -1.7225
+      ]
+    }
+  },
+  {
+    "file": "phone.glb",
+    "meshCount": 16,
+    "nodeCount": 16,
+    "materialCount": 11,
+    "materials": [
+      "Blueprint-drone.001",
+      "Blue-2",
+      "Matériau.040",
+      "Matériau.039",
+      "Matériau.029",
+      "Group 1.002",
+      "Matériau.033",
+      "Matériau.034",
+      "Matériau.032",
+      "Matériau.031",
+      "Matériau.042"
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_anisotropy",
+      "KHR_materials_ior"
+    ],
+    "bounds": {
+      "min": [
+        2.7152,
+        1.0002,
+        -0.7028
+      ],
+      "max": [
+        3.438,
+        1.02,
+        -0.0027
+      ],
+      "size": [
+        0.7228,
+        0.0198,
+        0.7001
+      ],
+      "center": [
+        3.0766,
+        1.0101,
+        -0.3527
+      ]
+    }
+  },
+  {
+    "file": "photo.glb",
+    "meshCount": 7,
+    "nodeCount": 15,
+    "materialCount": 7,
+    "materials": [
+      "Cilindro_material",
+      "lambert1",
+      "lambert3",
+      "lambert4",
+      "Camara_material",
+      "ruleta_2",
+      "ruleta"
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission"
+    ],
+    "bounds": {
+      "min": [
+        3.4823,
+        1.0025,
+        -0.5819
+      ],
+      "max": [
+        3.7197,
+        1.168,
+        -0.3235
+      ],
+      "size": [
+        0.2374,
+        0.1654,
+        0.2584
+      ],
+      "center": [
+        3.601,
+        1.0852,
+        -0.4527
+      ]
+    }
+  }
+]
