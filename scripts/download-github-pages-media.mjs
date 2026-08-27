@@ -33,7 +33,7 @@ const assets = [
   ["essential-phone.glb", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/UlJzjKyUwwEBwsne.glb"],
   ["projet-photo.glb", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/oVFYXzpluwWlCWmK.glb"],
   ["identite-visuelle.glb", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/JLortpdObdplTIHx.glb"],
-  ["projet-drone.glb", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/KofCyoBZSoEOTYyc.glb"],
+  ["projet-drone.glb", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/DqSmbYBdhVLZcAmu.glb"],
   ["speedx-film.mp4", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/stpBuoyiYCfWmKed.mp4"],
   ["speedx-fr.vtt", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/hJcwwXwQLOkcJyTD.vtt"],
 ];

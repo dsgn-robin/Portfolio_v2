@@ -254,3 +254,9 @@
 - [x] Simplifier la fenêtre Partager en supprimant le texte décoratif en conflit avec la croix.
 - [x] Créer un nouveau format d’index d’accueil plus clair, compact et graphique.
 - [x] Vérifier le dossier Drone, la fenêtre de partage et l’index sur desktop et mobile.
+
+## Nouveau modèle Drone
+
+- [x] Inspecter le GLB Drone fourni et publier le média nécessaire.
+- [x] Remplacer le modèle Drone de l’accueil sans modifier ses matériaux originaux.
+- [x] Vérifier l’échelle, l’orientation et les interactions du nouveau modèle sur desktop et mobile.
