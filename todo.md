@@ -275,3 +275,9 @@
 - [x] Localiser, publier et intégrer le test vertical du Drone comme septième archive.
 - [x] Configurer le test Drone en lecture automatique et en boucle, avec audio coupé sans possibilité de réactivation.
 - [x] Vérifier les quatre dossiers, puis enregistrer la version révisée.
+
+### Ajustement de densité Drone et contextes
+
+- [x] Réduire sélectivement les documents du dossier Drone pour renforcer leur composition.
+- [x] Diminuer l’échelle des textes de contexte dans les dossiers projet.
+- [x] Vérifier les nouveaux équilibres sur desktop et mobile, puis enregistrer la version.
