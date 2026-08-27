@@ -164,8 +164,7 @@ export default function EssentialPhoneViewer() {
     <section className="phone-viewer" id="prototype" aria-labelledby="phone-viewer-title">
       <div className="phone-viewer__intro">
         <div className="project-section-label"><span>04</span><i /> Modèle 3D</div>
-        <h2 id="phone-viewer-title">Retourner<br />l’objet.</h2>
-        <p>Ce modèle est le GLB bleu fourni pour Essential Phone. Faites-le tourner, zoomez et observez ses volumes sous une lumière d’atelier neutre.</p>
+        <h2 id="phone-viewer-title">Observer<br />l’objet.</h2>
         <div className="phone-viewer__instructions" aria-label="Instructions de manipulation">
           <span><MousePointer2 size={15} /> Glisser pour tourner</span>
           <span><ZoomIn size={15} /> Molette pour zoomer</span>

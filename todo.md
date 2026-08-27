@@ -260,3 +260,18 @@
 - [x] Inspecter le GLB Drone fourni et publier le média nécessaire.
 - [x] Remplacer le modèle Drone de l’accueil sans modifier ses matériaux originaux.
 - [x] Vérifier l’échelle, l’orientation et les interactions du nouveau modèle sur desktop et mobile.
+
+## Consignes du fichier texte fourni
+
+- [x] Lire et qualifier les consignes du fichier texte transmis.
+- [x] Appliquer les modifications pertinentes au portfolio sans altérer les médias et modèles validés.
+- [x] Vérifier le rendu, la compilation et enregistrer une version testée.
+
+### Révision éditoriale des dossiers
+
+- [x] Actualiser dates, contexte, intention, processus et bilan des quatre projets.
+- [x] Retirer les lettres A, B et C des documents ainsi que les textes d’archive et de visionneuse signalés.
+- [x] Renommer et réordonner les documents Essential Phone, Photo, Identité et Drone selon la liste fournie.
+- [x] Localiser, publier et intégrer le test vertical du Drone comme septième archive.
+- [x] Configurer le test Drone en lecture automatique et en boucle, avec audio coupé sans possibilité de réactivation.
+- [x] Vérifier les quatre dossiers, puis enregistrer la version révisée.

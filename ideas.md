@@ -87,6 +87,10 @@ Le mot-symbole « ROBIN COURTE » s’écrit en capitales géométriques, avec u
 - Les repères relationnels sont posés sur les bords horizontaux de la scène, hors du carré central des projets ; ils servent de contrepoids et non de cinquième et sixième projets principaux.
 - Chaque support porte une silhouette de papier différente — dalle, disque, arche, losange, gradin ou signal ovale — afin que la collection reste lisible par sa géométrie autant que par sa couleur.
 - La page À propos révèle le parcours par un registre activable : une date sélectionnée ouvre un contexte précis. Contact reste une pièce de correspondance avec le formulaire Formspree intégré directement dans le dossier.
+- Chaque dossier reprend le système d’affiche commun mais possède une règle de composition dominante : grille et appareil pour Essential Phone, cibles lumineuses pour Photo, grille constructive et fragments de marque pour Identité, diagonales de schéma et signaux d’essai pour Drone.
+- Le monogramme R / RC est déployé au format de navigation et de repère de section ; il reste construit, compact et lisible sans devenir une icône générique.
+- Les champs d’archives doivent paraître classés dans un atelier imprimé : graduations, règles de repérage, registres et lignes techniques soutiennent les pièces sans recouvrir les documents réels.
+- Les textes éditoriaux fournis par Robin demeurent la source de vérité ; les conventions génériques de portfolio sont donc remplacées graphiquement par des repères de dossier, sans réécrire le contenu validé.
 
 ---
 

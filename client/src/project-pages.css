@@ -76,6 +76,8 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-rail__monogram i:first-child { top: 0.31rem; left: 0.44rem; width: 1.18rem; height: 0.92rem; border: 0.24rem solid var(--atelier-orange); border-left: 0; border-radius: 0 1rem 1rem 0; }
 .project-rail__monogram i:nth-child(2) { bottom: 0.43rem; left: 0.68rem; width: 1.22rem; height: 0.24rem; background: var(--atelier-orange); transform: rotate(42deg); transform-origin: left center; }
 .project-rail__monogram b { position: absolute; top: 0.29rem; bottom: 0.3rem; left: 0.33rem; width: 0.24rem; background: var(--ink); }
+.project-rail__home::after { display: block; margin-top: 0.15rem; color: var(--quiet-ink); content: "RC"; font-family: "Archivo Black", sans-serif; font-size: 0.46rem; letter-spacing: 0.08em; line-height: 1; }
+.project-rail__home:hover::after { color: var(--paper); }
 
 .project-rail__label { margin: 0; padding: 1.5rem 0.35rem; color: var(--quiet-ink); font-size: 0.5rem; font-weight: 700; letter-spacing: 0.09em; line-height: 1.65; text-align: center; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
 .project-rail__legal { display: block; padding: 1rem 0.5rem 1.15rem; border-top: 1px solid var(--line); color: var(--quiet-ink); font-size: 0.48rem; font-weight: 700; letter-spacing: 0.08em; line-height: 1.35; text-align: center; text-transform: uppercase; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1); }
@@ -176,6 +178,7 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-closing { padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 7vw, 7.75rem); }
 
 .project-section-label { display: flex; align-items: center; gap: 0.7rem; width: fit-content; color: var(--quiet-ink); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
+.project-section-label::before { display: grid; width: 1.42rem; height: 1.42rem; place-items: center; border: 1px solid currentColor; color: var(--ink); content: "RC"; font-family: "Archivo Black", sans-serif; font-size: 0.44rem; letter-spacing: -0.06em; line-height: 1; }
 .project-section-label span { color: var(--project-accent-dark); }
 .project-section-label i { display: block; width: 2.5rem; height: 1px; background: currentColor; }
 .project-section-label::after { display: block; width: 1.8rem; height: 0.28rem; background: repeating-linear-gradient(90deg, currentColor 0 0.12rem, transparent 0.12rem 0.32rem); content: ""; opacity: 0.66; }
@@ -203,8 +206,10 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-archive::before { position: absolute; z-index: 0; top: 0; left: 0; width: min(52vw, 48rem); height: 100%; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 7%, transparent) 0 1px, transparent 1px 2.25rem); content: ""; pointer-events: none; }
 .project-archive::after { position: absolute; right: -10rem; bottom: -13rem; width: 30rem; height: 30rem; border: 1.8rem solid color-mix(in srgb, var(--ink) 24%, transparent); border-radius: 50%; content: ""; }
 .project-archive__heading { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(11rem, 0.55fr) minmax(18rem, 0.9fr); gap: clamp(2rem, 7vw, 9rem); margin-bottom: clamp(2.8rem, 6vw, 6rem); }
+.project-archive__heading::after { align-self: end; justify-self: end; padding: 0.32rem 0.45rem; border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent); color: var(--quiet-ink); content: "RC / PIÈCES CLASSÉES"; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.09em; line-height: 1; white-space: nowrap; }
 .project-archive__heading p { max-width: 32rem; margin: -0.4rem 0 0; font-size: 1rem; font-weight: 500; line-height: 1.55; }
 .project-documents { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.28fr 0.9fr; align-items: start; gap: clamp(1rem, 2.2vw, 2rem); }
+.project-documents::before { position: absolute; z-index: -1; top: 1.25rem; right: -0.35rem; left: -0.35rem; height: 1.5rem; border-top: 1px dashed color-mix(in srgb, var(--ink) 42%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink) 17%, transparent); content: ""; }
 
 .project-document, .project-gallery__item, .project-comparison__images button { transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1); }
 .project-document { position: relative; display: grid; width: 100%; min-height: 0; grid-template-rows: auto 1fr auto; gap: 1rem; padding: 1rem; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.5rem 0.5rem 0 var(--ink); color: inherit; cursor: zoom-in; text-align: left; }
@@ -227,6 +232,32 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-document footer { position: relative; z-index: 1; min-height: 2.65rem; }
 .project-document footer strong { display: block; margin-bottom: 0.25rem; font-family: "Archivo Black", sans-serif; font-size: 0.98rem; letter-spacing: -0.03em; text-transform: uppercase; }
 .project-document footer p { margin: 0; font-size: 0.66rem; font-weight: 500; line-height: 1.35; }
+
+/* Chaque archive porte un système de repérage propre, sans masquer les documents réels. */
+.project-page--phone .project-archive { background-color: color-mix(in srgb, var(--project-accent-soft) 75%, var(--paper)); }
+.project-page--phone .project-archive::before { width: 100%; background-image: linear-gradient(color-mix(in srgb, var(--project-accent-dark) 15%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--project-accent-dark) 15%, transparent) 1px, transparent 1px), linear-gradient(90deg, transparent calc(50% - 1px), color-mix(in srgb, var(--project-accent-dark) 22%, transparent) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)); background-size: 1.9rem 1.9rem, 1.9rem 1.9rem, 100% 100%; }
+.project-page--phone .project-archive::after { right: 9%; bottom: -9rem; width: 18rem; height: 18rem; border-width: 1px; border-radius: 0; transform: rotate(45deg); }
+.project-page--phone .project-step__glyph { width: 7rem; height: 11rem; border-width: 1.4rem; border-radius: 1.2rem; transform: rotate(22deg); }
+.project-page--phone .project-step:nth-child(2) .project-step__glyph { width: 9rem; height: 4rem; border-width: 0 0 1.4rem 1.4rem; border-radius: 0; transform: rotate(-25deg); }
+
+.project-page--photo .project-archive { background-color: color-mix(in srgb, var(--project-accent-soft) 79%, var(--paper)); }
+.project-page--photo .project-archive::before { width: 100%; background-image: radial-gradient(circle at 10% 14%, transparent 0 3rem, color-mix(in srgb, var(--project-accent-dark) 20%, transparent) 3.08rem 3.18rem, transparent 3.26rem), radial-gradient(circle at 88% 46%, transparent 0 7rem, color-mix(in srgb, var(--project-accent-dark) 16%, transparent) 7.08rem 7.18rem, transparent 7.26rem), repeating-linear-gradient(0deg, transparent 0 2.2rem, color-mix(in srgb, var(--ink) 7%, transparent) 2.2rem 2.26rem); }
+.project-page--photo .project-archive::after { right: 6%; bottom: -8rem; width: 21rem; height: 21rem; border-width: 1px; box-shadow: 0 0 0 2rem color-mix(in srgb, var(--project-accent) 8%, transparent); }
+.project-page--photo .project-step__glyph { border-width: 1.35rem; }
+.project-page--photo .project-step:nth-child(2) .project-step__glyph { width: 9rem; height: 9rem; border-radius: 50%; border-width: 1px; box-shadow: 0 0 0 1.35rem var(--project-accent), 0 0 0 2.1rem color-mix(in srgb, var(--project-accent) 38%, transparent); transform: none; }
+
+.project-page--identity .project-archive { background-color: color-mix(in srgb, var(--project-accent-soft) 72%, var(--paper)); }
+.project-page--identity .project-archive::before { width: 100%; background-image: linear-gradient(color-mix(in srgb, var(--project-accent-dark) 17%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--project-accent-dark) 17%, transparent) 1px, transparent 1px), linear-gradient(45deg, transparent 49.7%, color-mix(in srgb, var(--project-accent-dark) 11%, transparent) 49.8% 50.2%, transparent 50.3%); background-size: 2.45rem 2.45rem, 2.45rem 2.45rem, 4.9rem 4.9rem; }
+.project-page--identity .project-archive::after { right: -5rem; bottom: -6rem; width: 24rem; height: 24rem; border-radius: 0; border-width: 1.2rem; transform: rotate(45deg); }
+.project-page--identity .project-step__glyph { border-radius: 0; transform: rotate(45deg); }
+.project-page--identity .project-step:nth-child(2) .project-step__glyph { width: 9rem; height: 9rem; border-radius: 50%; border-width: 1.35rem; transform: none; }
+
+.project-page--drone .project-archive { background-color: color-mix(in srgb, var(--project-accent-soft) 74%, var(--paper)); }
+.project-page--drone .project-archive::before { width: 100%; background-image: repeating-linear-gradient(-32deg, transparent 0 2.35rem, color-mix(in srgb, var(--project-accent-dark) 15%, transparent) 2.35rem 2.43rem), repeating-linear-gradient(90deg, transparent 0 4.4rem, color-mix(in srgb, var(--ink) 8%, transparent) 4.4rem 4.47rem); }
+.project-page--drone .project-archive::after { right: -6rem; bottom: -8rem; width: 26rem; height: 13rem; border-width: 1.35rem 0 0 1.35rem; border-radius: 0; transform: rotate(-31deg); }
+.project-page--drone .project-documents::before { border-top-style: solid; border-bottom-style: dashed; transform: skewX(-32deg); transform-origin: left center; }
+.project-page--drone .project-step__glyph { width: 12rem; height: 4.6rem; border-width: 0 0 1.6rem 1.6rem; border-radius: 0; transform: rotate(-36deg); }
+.project-page--drone .project-step:nth-child(3) .project-step__glyph { width: 8rem; height: 8rem; border-width: 1.5rem; border-radius: 0; transform: rotate(45deg); }
 
 .project-gallery { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.2vw, 2rem); margin-top: clamp(3rem, 8vw, 8rem); }
 .project-gallery--1 { grid-template-columns: minmax(0, 0.64fr); margin-left: auto; }
@@ -324,6 +355,16 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
 .project-video__frame video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #101010; }
 .project-video__caption { position: absolute; z-index: 2; right: 7%; bottom: 3.8rem; left: 7%; margin: 0; color: var(--paper); font-size: clamp(0.74rem, 1.05vw, 1rem); font-weight: 700; letter-spacing: 0.03em; line-height: 1.3; text-align: center; text-shadow: 0 2px 8px rgb(0 0 0 / 85%); white-space: pre-line; pointer-events: none; }
 .project-video__frame figcaption { padding: 0.75rem 0.95rem; border-top: 2px solid var(--ink); background: var(--paper); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* Archive vidéo verticale : une fiche de test autonome, silencieuse et continue. */
+.project-archive-video { width: min(100%, 22rem); margin: clamp(2.5rem, 5vw, 5rem) 0 0 clamp(0rem, 10vw, 11rem); overflow: hidden; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.72rem 0.72rem 0 var(--project-accent); }
+.project-archive-video__head { display: flex; justify-content: space-between; gap: 1rem; padding: 0.62rem 0.72rem; border-bottom: 1px solid var(--ink); color: var(--quiet-ink); font-size: 0.54rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.project-archive-video__visual { position: relative; border-bottom: 1px solid var(--ink); background: var(--ink); }
+.project-archive-video__visual::after { position: absolute; right: 0.65rem; bottom: 0.65rem; padding: 0.3rem 0.42rem; border: 1px solid rgb(242 233 216 / 50%); background: rgb(23 22 18 / 78%); color: var(--paper); content: "TEST EN COURS"; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.09em; pointer-events: none; }
+.project-archive-video__visual video { display: block; width: 100%; aspect-ratio: 9 / 16; background: #101010; object-fit: cover; }
+.project-archive-video footer { padding: 0.75rem 0.8rem 0.85rem; }
+.project-archive-video footer strong { display: block; font-family: "Archivo Black", sans-serif; font-size: 1.15rem; letter-spacing: -0.04em; line-height: 1; text-transform: uppercase; }
+.project-archive-video footer p { margin: 0.4rem 0 0; color: var(--quiet-ink); font-size: 0.74rem; font-weight: 500; line-height: 1.35; }
 
 .phone-viewer__reset { position: absolute; z-index: 3; top: 1.5rem; right: 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.65rem; border: 1px solid var(--paper); background: rgba(18, 20, 25, 0.62); color: var(--paper); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .phone-viewer__reset:hover { background: var(--paper); color: var(--ink); }
@@ -536,6 +577,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .project-document--wide, .project-document--square { margin-top: 0; }
   .project-document { min-height: 0; }
   .project-gallery, .project-gallery--1, .project-comparisons { grid-template-columns: 1fr; margin-left: 0; }
+  .project-archive-video { width: min(100%, 22rem); margin-left: 0; }
   .project-gallery .project-document:nth-child(2n) { margin-top: 0; }
   .project-comparisons__grid { grid-column: auto; grid-template-columns: 1fr; }
   .project-comparisons { gap: 2rem; }

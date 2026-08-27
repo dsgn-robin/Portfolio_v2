@@ -27,6 +27,7 @@ type Project = {
   documents: { label: string; type: string; note: string; image: string; alt: string; shape: "tall" | "wide" | "square"; ratio?: string }[];
   gallery?: { image: string; alt: string; label: string }[];
   comparisons?: { subject: string; treatment: string; original: string; treatmentAlt: string; originalAlt: string }[];
+  archiveVideo?: { type: string; note: string; src: string };
   video?: { src: string; captions: string; title: string; description: string };
 };
 
@@ -41,22 +42,22 @@ const PROJECTS: Project[] = [
     accentDark: "315A97",
     accentSoft: "B8D1E3",
     motif: "phone",
-    year: "2023 — 2026",
+    year: "2026",
     context:
-      "Parti d’une question personnelle : comment rester disponible sans laisser son téléphone décider de son attention ? Le projet prend la forme d’un objet minimal et volontairement précis.",
-    objective: "Réduire l’interface à des usages utiles : communiquer, se repérer, écouter, photographier — puis laisser le reste hors champ.",
-    process: ["Recherche d’usages", "Interface et signe", "Objet & rendu 3D"],
-    learning: ["Construire un système cohérent", "Donner du sens à une interface", "Mettre en lumière un objet 3D"],
+      "Conscient de l’impact nocif possible des smartphones sur notre vie dès mon entrée au lycée en 2023, j’ai cherché à m’en libérer. Pour concilier déconnexion et accès aux outils de messagerie essentiels, j’ai conçu mon propre téléphone minimaliste adapté à mes besoins.",
+    objective: "Réduire l’interface à des usages essentiels : communiquer, se repérer, écouter, photographier — puis laisser le reste hors champ.",
+    process: ["Recherche d’identité", "Interface et logo", "Objet et rendu 3D"],
+    learning: ["Réfléchir à l’identité et l’impact d’un projet", "Concevoir un logo significatif", "Concevoir un objet 3D plus complexe", "Réaliser une scène d’éclairage 3D"],
     tools: ["Blender", "Figma", "Canva"],
     documents: [
-      { label: "A", type: "Recherche", note: "Notes d’usage et intentions", image: "/manus-storage/Brainstorming_18f5122b.webp", alt: "Planche de brainstorming pour Essential Phone", shape: "tall" },
-      { label: "B", type: "Objet", note: "Volume et proportions de l’objet", image: "/manus-storage/Conception_produit_d54893c9.webp", alt: "Croquis de conception du téléphone Essential", shape: "wide" },
-      { label: "C", type: "Interface", note: "Fonctions gardées à l’écran", image: "/manus-storage/Interface_2b746d80.webp", alt: "Interface minimaliste d’Essential Phone", shape: "square" },
+      { label: "", type: "Recherche", note: "Clarification des objectifs", image: "/manus-storage/Brainstorming_18f5122b.webp", alt: "Planche de brainstorming pour Essential Phone", shape: "tall" },
+      { label: "", type: "Croquis", note: "Volume et proportions de l’objet", image: "/manus-storage/Conception_produit_d54893c9.webp", alt: "Croquis de conception du téléphone Essential", shape: "wide" },
+      { label: "", type: "Interface", note: "Fonctions gardées à l’écran", image: "/manus-storage/Interface_2b746d80.webp", alt: "Interface minimaliste d’Essential Phone", shape: "square" },
     ],
     gallery: [
       { image: "/manus-storage/Phone_vue_filaire_fdeeede1.webp", alt: "Vue filaire du téléphone Essential", label: "Vue filaire" },
       { image: "/manus-storage/Phone_all_3b29be5b.webp", alt: "Quatre variantes colorées d’Essential Phone", label: "Déclinaisons" },
-      { image: "/manus-storage/Phone_Bleu_64f2f08f.webp", alt: "Rendu bleu d’Essential Phone", label: "Bleu Plan RC" },
+      { image: "/manus-storage/Phone_Bleu_64f2f08f.webp", alt: "Rendu bleu d’Essential Phone", label: "Bleu" },
       { image: "/manus-storage/Phone_Orange_baa9c0c5.webp", alt: "Rendu orange d’Essential Phone", label: "Orange" },
       { image: "/manus-storage/Phone_Vert_f298d798.webp", alt: "Rendu vert d’Essential Phone", label: "Vert" },
       { image: "/manus-storage/Phone_Jaune_c66dbf63.webp", alt: "Rendu jaune d’Essential Phone", label: "Jaune" },
@@ -72,17 +73,17 @@ const PROJECTS: Project[] = [
     accentDark: "8D4A12",
     accentSoft: "F5D36D",
     motif: "photo",
-    year: "2025 — 2026",
+    year: "2026",
     context:
-      "Un exercice de regard réalisé en ville : chercher dans l’ordinaire des sujets qui s’assemblent par leur lumière, leur teinte et leur cadrage.",
-    objective: "Composer une série où le jaune agit comme un fil conducteur, avant et après retouche, sans faire disparaître la ville qui l’entoure.",
-    process: ["Contrainte couleur", "Prise de vue", "Retouche & séquence"],
-    learning: ["Cadrer avec une contrainte", "Faire émerger un sujet", "Construire une série"],
+      "En classe de Terminale, j’ai souhaité m’investir dans plus de projets. Comme j’aime également la photographie et la retouche photo, j’ai pris l’initiative, avec un ami, de sortir en ville pour prendre des photos autour d’un thème particulier.",
+    objective: "Composer une série où le jaune agit comme un fil conducteur, avant et après retouche, tout en mettant en valeur le sujet.",
+    process: ["Contrainte couleur", "Prise de vue", "Retouche et rendu"],
+    learning: ["Observer l’environnement pour trouver des potentiels sujets", "Composer des photos avec des contraintes", "Mettre en valeur des sujets ordinaires"],
     tools: ["Lightroom", "LiveCollage", "iPhone"],
     documents: [
-      { label: "A", type: "Sélection", note: "Planche-contact de la sortie", image: "/manus-storage/grille_photo_45799468.webp", alt: "Grille de photographies à dominante jaune", shape: "square", ratio: "1 / 1" },
-      { label: "B", type: "Sujet", note: "La moto, étude de contraste", image: "/manus-storage/moto_j_a_e9ccff93.webp", alt: "Photo traitée d’une moto jaune", shape: "tall", ratio: "4 / 5" },
-      { label: "C", type: "Sujet", note: "Le vélo, couleur dans la ville", image: "/manus-storage/velo_j_b_e3acdf92.webp", alt: "Photo d’un vélo jaune en ville", shape: "wide", ratio: "4 / 3" },
+      { label: "", type: "Sélection", note: "Planche-photo de rendu", image: "/manus-storage/grille_photo_45799468.webp", alt: "Grille de photographies à dominante jaune", shape: "square", ratio: "1 / 1" },
+      { label: "", type: "Sujet", note: "La moto, étude de contraste", image: "/manus-storage/moto_j_a_e9ccff93.webp", alt: "Photo traitée d’une moto jaune", shape: "tall", ratio: "4 / 5" },
+      { label: "", type: "Sujet", note: "Le vélo, couleur de l’enfance", image: "/manus-storage/velo_j_b_e3acdf92.webp", alt: "Photo d’un vélo jaune en ville", shape: "wide", ratio: "4 / 3" },
     ],
     comparisons: [
       { subject: "Moto", treatment: "/manus-storage/moto_j_a_e9ccff93.webp", original: "/manus-storage/moto_j_b_e27fde92.webp", treatmentAlt: "Photographie de moto jaune avec traitement", originalAlt: "Photographie de moto jaune avant traitement" },
@@ -100,17 +101,17 @@ const PROJECTS: Project[] = [
     accentDark: "1e503d",
     accentSoft: "a8ceb5",
     motif: "identity",
-    year: "2025 — 2026",
+    year: "2025",
     context:
-      "Pour la première édition du portfolio, l’enjeu était de rendre visible une manière de travailler : précise, curieuse et ouverte à plusieurs domaines de conception.",
-    objective: "Composer un signe, une palette et une typographie capables d’unifier les projets sans leur enlever leur propre caractère.",
-    process: ["Signe & structure", "Couleurs & lettres", "Déclinaisons"],
-    learning: ["Hiérarchiser un système", "Associer formes et usages", "Décliner sans diluer"],
+      "Pour la création de mon premier portfolio au format PDF en fin 2025, j’ai souhaité créer une identité visuelle qui me représente au mieux.",
+    objective: "Composer un logo, une palette et une typographie capables de me représenter et d’unifier les projets.",
+    process: ["Logo", "Couleurs et typographie", "Déclinaisons"],
+    learning: ["Comprendre l’importance et les enjeux des couleurs et typographies", "Créer un logo sur Figma", "Associer les éléments de manière cohérente"],
     tools: ["Figma", "Milanote", "Canva"],
     documents: [
-      { label: "A", type: "Signe", note: "Construction, axe et contre-forme", image: "/manus-storage/Logo_decompose_f1d05b0f.webp", alt: "Décomposition du logo de l’identité visuelle", shape: "wide" },
-      { label: "B", type: "Palette", note: "Couleurs d’usage et contrastes", image: "/manus-storage/Palette_de_couleur_48dbce34.webp", alt: "Palette de couleur de l’identité visuelle", shape: "tall" },
-      { label: "C", type: "Lettres", note: "Un système typographique lisible", image: "/manus-storage/Typographie_130b9b2f.webp", alt: "Étude typographique de l’identité visuelle", shape: "square" },
+      { label: "", type: "Logo", note: "Représenter le R géométriquement", image: "/manus-storage/Logo_decompose_f1d05b0f.webp", alt: "Décomposition du logo de l’identité visuelle", shape: "wide" },
+      { label: "", type: "Palette", note: "Couleurs d’usage", image: "/manus-storage/Palette_de_couleur_48dbce34.webp", alt: "Palette de couleur de l’identité visuelle", shape: "tall" },
+      { label: "", type: "Typographie", note: "Un système typographique lisible", image: "/manus-storage/Typographie_130b9b2f.webp", alt: "Étude typographique de l’identité visuelle", shape: "square" },
     ],
     gallery: [
       { image: "/manus-storage/Identite_visuelle_sur_Portfolio_bf5985cb.webp", alt: "Identité visuelle appliquée au portfolio", label: "Application portfolio" },
@@ -128,26 +129,25 @@ const PROJECTS: Project[] = [
     motif: "drone",
     year: "2024 — 2025",
     context:
-      "Un projet mené à quatre, dans le cadre de Sciences de l’ingénieur, pour imaginer, fabriquer et faire voler un drone doté de sa propre identité.",
-    objective: "Passer d’une intention de mobilité à un prototype : définir les contraintes, modéliser les pièces, intégrer l’électronique et apprendre du test.",
-    process: ["Contraintes & équipe", "Prototype 3D", "Montage & essais"],
-    learning: ["Piloter un projet collectif", "Itérer sur un objet complexe", "Relier forme et technique"],
+      "Durant mon année en classe de Première, en 2024–2025, j’ai réalisé un projet au sein d’un groupe de quatre personnes, en tant que chef de projet, dans le cadre de ma spécialité Sciences de l’ingénieur. Ce projet consistait en la réalisation d’un drone.",
+    objective: "Passer d’une idée à un prototype : définir les contraintes, modéliser les pièces, intégrer l’électronique et apprendre du test.",
+    process: ["Contrainte et structure", "Prototype et identité", "Montage et essais"],
+    learning: ["Travailler en équipe en étant chef de projet", "Réaliser un projet dans son ensemble", "Concevoir des objets 3D complexes", "Créer une identité"],
     tools: ["SolidWorks", "Blender", "Word"],
     documents: [
-      { label: "A", type: "Contraintes", note: "Autonomie, masse et commandes", image: "/manus-storage/Cahier_des_charges_0eb8a6dc.webp", alt: "Cahier des charges fonctionnel du projet Drone", shape: "tall" },
-      { label: "B", type: "Prototype", note: "Implantation des pièces et volumes", image: "/manus-storage/mise_en_plan_8088ebb8.webp", alt: "Mise en plan du drone", shape: "wide" },
-      { label: "C", type: "Électronique", note: "Détail des composants embarqués", image: "/manus-storage/plaque_electronique_48d7d129.webp", alt: "Plaque électronique du drone", shape: "square" },
+      { label: "", type: "Cahier des charges", note: "Contraintes et définitions du projet", image: "/manus-storage/Cahier_des_charges_0eb8a6dc.webp", alt: "Cahier des charges fonctionnel du projet Drone", shape: "tall" },
+      { label: "", type: "Schéma des exigences", note: "Organisation des usages", image: "/manus-storage/schema_des_exigences_e43b8abb.webp", alt: "Schéma des exigences du projet Drone", shape: "wide" },
+      { label: "", type: "Mise en plan", note: "Création des pièces et des mesures", image: "/manus-storage/mise_en_plan_8088ebb8.webp", alt: "Mise en plan du drone", shape: "wide" },
+      { label: "", type: "Prototype 3D", note: "Organisation dans l’espace et préparation à l’impression 3D", image: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp", alt: "Rendu 3D du prototype de drone", shape: "wide" },
+      { label: "", type: "SPEED X", note: "Logo du projet", image: "/manus-storage/speedx-logo_ca6dcda9.png", alt: "Logo SPEED X du projet Drone", shape: "square" },
+      { label: "", type: "Électronique", note: "Montage des composants", image: "/manus-storage/plaque_electronique_48dbce34.webp", alt: "Plaque électronique du drone", shape: "square" },
     ],
-    gallery: [
-      { image: "/manus-storage/schema_des_exigences_e43b8abb.webp", alt: "Schéma des exigences du projet Drone", label: "Architecture des exigences" },
-      { image: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp", alt: "Rendu 3D du prototype de drone", label: "Prototype 3D" },
-      { image: "/manus-storage/speedx-logo_ca6dcda9.png", alt: "Logo SPEED X du projet Drone", label: "SPEED X" },
-    ],
+    archiveVideo: { type: "Test", note: "Vidéo d’essai", src: "/manus-storage/drone-test-vertical_425e9a92.mp4" },
     video: {
       src: "/manus-storage/Video_drone_seul_2fec9be4.mp4",
       captions: "/manus-storage/sous_titres_5f697c02.vtt",
-      title: "SPEED X · Film de démonstration",
-      description: "Une courte séquence de présentation du prototype, avec les sous-titres français activables directement dans le lecteur.",
+      title: "SPEED X · Vidéo de présentation",
+      description: "Rendu final de présentation du prototype.",
     },
   },
 ];
@@ -237,7 +237,7 @@ function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonN
           <span>TRAITEMENT</span>
         </button>
       </div>
-      <footer><span>REGARD CHROMATIQUE</span><strong>{comparison.subject}</strong></footer>
+      <footer><strong>{comparison.subject}</strong></footer>
     </article>
   );
 }
@@ -253,6 +253,52 @@ function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<
         {comparisons.map((comparison, index) => <ProjectComparisonPair key={comparison.subject} comparison={comparison} index={index} onOpen={onOpen} />)}
       </div>
     </div>
+  );
+}
+
+function ProjectArchiveVideo({ archiveVideo }: { archiveVideo: NonNullable<Project["archiveVideo"]> }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const keepMuted = (video: HTMLVideoElement) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const enforcePlayback = () => {
+      keepMuted(video);
+      void video.play().catch(() => undefined);
+    };
+
+    enforcePlayback();
+    const deferredStart = window.setTimeout(enforcePlayback, 180);
+    document.addEventListener("visibilitychange", enforcePlayback);
+
+    return () => {
+      window.clearTimeout(deferredStart);
+      document.removeEventListener("visibilitychange", enforcePlayback);
+    };
+  }, []);
+
+  return (
+    <article className="project-archive-video" aria-label={`Document 07 : ${archiveVideo.type}`}>
+      <header className="project-archive-video__head">
+        <span>DOC. / 07</span>
+        <span>BOUCLE MUETTE</span>
+      </header>
+      <div className="project-archive-video__visual">
+        <video ref={videoRef} autoPlay loop muted playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" onCanPlay={(event) => { keepMuted(event.currentTarget); void event.currentTarget.play().catch(() => undefined); }} onLoadedMetadata={(event) => keepMuted(event.currentTarget)} onVolumeChange={(event) => keepMuted(event.currentTarget)} aria-label="Vidéo verticale d’essai du Drone, diffusée sans son">
+          <source src={resolvePortfolioMedia(archiveVideo.src)} type="video/mp4" />
+        </video>
+      </div>
+      <footer>
+        <strong>{archiveVideo.type}</strong>
+        <p>{archiveVideo.note}</p>
+      </footer>
+    </article>
   );
 }
 
@@ -479,13 +525,13 @@ export default function ProjectPage() {
       <section className="project-archive" id="archives">
         <div className="project-archive__heading">
           <div className="project-section-label"><span>03</span><i /> Archives</div>
-          <p>Classer les pièces du projet : relevés, essais et indices de fabrication composent une archive à examiner étape par étape.</p>
         </div>
         <div className="project-documents">
-          {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} onOpen={setActiveAsset} />)}
+          {project.documents.map((document, documentIndex) => <ProjectDocument key={`${documentIndex}-${document.image}`} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} onOpen={setActiveAsset} />)}
         </div>
         {project.gallery ? <ProjectGallery gallery={project.gallery} onOpen={setActiveAsset} accent={`#${project.accent}`} motif={project.motif} /> : null}
         {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} /> : null}
+        {project.archiveVideo ? <ProjectArchiveVideo archiveVideo={project.archiveVideo} /> : null}
       </section>
 
       {project.slug === "essential-phone" ? <EssentialPhoneViewer /> : null}
