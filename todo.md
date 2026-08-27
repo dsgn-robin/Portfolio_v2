@@ -75,12 +75,19 @@
 
 ## Réduction de surexposition
 
-- [ ] Réduire l’environnement PBR et les remplissages responsables du voile lumineux.
-- [ ] Préserver une lumière minimale sur les blueprints pendant leur rotation.
-- [ ] Vérifier le contraste des matières bois, béton, verre et plans techniques.
+- [x] Réduire l’environnement PBR et les remplissages responsables du voile lumineux.
+- [x] Préserver une lumière minimale sur les blueprints pendant leur rotation.
+- [x] Vérifier le contraste des matières bois, béton, verre et plans techniques.
 
 ## Manipulation combinée
 
 - [x] Autoriser la molette sur l’objet activement déplacé.
 - [x] Préserver simultanément le déplacement, la rotation et la capture du pointeur.
 - [x] Vérifier le clic simple et l’ouverture de lien après manipulation combinée.
+
+## Passe globale de finition
+
+- [x] Auditer le cycle de rendu, les chargements GLB et les gestionnaires d’interaction.
+- [x] Fluidifier le déplacement, la rotation et les retours de survol des prototypes.
+- [x] Stabiliser le rendu et réduire le coût de rendu sur les écrans modestes.
+- [x] Clarifier les repères d’usage et l’état de chargement de la scène.

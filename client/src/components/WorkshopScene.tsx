@@ -86,13 +86,6 @@ function setShadow(root: THREE.Object3D) {
     if (child instanceof THREE.Mesh) {
       child.castShadow = true;
       child.receiveShadow = true;
-      if (Array.isArray(child.material)) {
-        child.material.forEach((material) => {
-          material.needsUpdate = true;
-        });
-      } else {
-        child.material.needsUpdate = true;
-      }
     }
   });
 }
@@ -461,6 +454,7 @@ async function loadOptionalGLB(
 export default function WorkshopScene() {
   const mountRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
+  const [loadProgress, setLoadProgress] = useState({ done: 0, total: 7 });
   const [tooltip, setTooltip] = useState<{ title: string; eyebrow: string; x: number; y: number } | null>(null);
 
   useEffect(() => {
@@ -468,16 +462,19 @@ export default function WorkshopScene() {
     if (!mount) return undefined;
     const viewport: HTMLDivElement = mount;
     setReady(false);
+    setLoadProgress({ done: 0, total: 7 });
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color("#6d685e");
     scene.fog = new THREE.Fog("#6d685e", 16, 30);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, viewport.clientWidth < 740 ? 1.25 : 1.5));
     renderer.setSize(viewport.clientWidth, viewport.clientHeight);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.shadowMap.autoUpdate = false;
+    renderer.shadowMap.needsUpdate = true;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.05;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -637,7 +634,14 @@ export default function WorkshopScene() {
         });
       }),
     ];
-    void Promise.all(loadJobs).finally(() => setReady(true));
+    let completedJobs = 0;
+    setLoadProgress({ done: 0, total: loadJobs.length });
+    void Promise.all(
+      loadJobs.map((job) => job.finally(() => {
+        completedJobs += 1;
+        setLoadProgress({ done: completedJobs, total: loadJobs.length });
+      })),
+    ).finally(() => setReady(true));
 
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
@@ -648,7 +652,19 @@ export default function WorkshopScene() {
     let downPoint = new THREE.Vector2();
     let dragOffset = new THREE.Vector3();
     let didDrag = false;
+    let didRotate = false;
     let previousFrameTime = performance.now();
+    let tooltipFrame = 0;
+    let pendingTooltip: { title: string; eyebrow: string; x: number; y: number } | null = null;
+
+    function scheduleTooltip(next: { title: string; eyebrow: string; x: number; y: number } | null) {
+      pendingTooltip = next;
+      if (tooltipFrame) return;
+      tooltipFrame = window.requestAnimationFrame(() => {
+        tooltipFrame = 0;
+        setTooltip(pendingTooltip);
+      });
+    }
 
     function resize() {
       const width = viewport.clientWidth;
@@ -661,7 +677,7 @@ export default function WorkshopScene() {
       camera.bottom = -vertical / 2;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, width < 740 ? 1.25 : 1.5));
     }
 
     function setPointer(event: PointerEvent) {
@@ -692,7 +708,7 @@ export default function WorkshopScene() {
       if (hit === hovered) {
         if (hit) {
           const project = hit.userData.project as ProjectSpec;
-          setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+          scheduleTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
         }
         return;
       }
@@ -700,9 +716,9 @@ export default function WorkshopScene() {
       viewport.style.cursor = hit ? "grab" : "default";
       if (hit) {
         const project = hit.userData.project as ProjectSpec;
-        setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+        scheduleTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
       } else {
-        setTooltip(null);
+        scheduleTooltip(null);
       }
     }
 
@@ -718,7 +734,7 @@ export default function WorkshopScene() {
         active.position.z = THREE.MathUtils.clamp(next.z, TABLE.minZ, TABLE.maxZ);
         didDrag ||= event.clientX !== downPoint.x || event.clientY !== downPoint.y;
         const project = active.userData.project as ProjectSpec;
-        setTooltip({ title: project.title, eyebrow: "Positionnement", x: event.clientX, y: event.clientY });
+        scheduleTooltip({ title: project.title, eyebrow: "Positionnement", x: event.clientX, y: event.clientY });
       }
     }
 
@@ -728,6 +744,7 @@ export default function WorkshopScene() {
       active = hit;
       downPoint = new THREE.Vector2(event.clientX, event.clientY);
       didDrag = false;
+      didRotate = false;
       setPointer(event);
       if (raycaster.ray.intersectPlane(dragPlane, intersection)) dragOffset.copy(intersection).sub(active.position);
       viewport.style.cursor = "grabbing";
@@ -738,17 +755,17 @@ export default function WorkshopScene() {
       if (!active) return;
       const project = active.userData.project as ProjectSpec;
       const travel = downPoint.distanceTo(new THREE.Vector2(event.clientX, event.clientY));
-      const clicked = !didDrag || travel < 8;
+      const clicked = !didDrag && !didRotate && travel < 8;
       const finished = active;
       active = null;
       viewport.style.cursor = "grab";
       if (renderer.domElement.hasPointerCapture(event.pointerId)) renderer.domElement.releasePointerCapture(event.pointerId);
       if (clicked) window.open(project.url, "_blank", "noopener,noreferrer");
       else {
-        setTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
+        scheduleTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
         window.setTimeout(() => {
           if (hovered === finished) {
-            setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+            scheduleTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
           }
         }, 700);
       }
@@ -758,7 +775,7 @@ export default function WorkshopScene() {
       if (!active) {
         hovered = null;
         viewport.style.cursor = "default";
-        setTooltip(null);
+        scheduleTooltip(null);
       }
     }
 
@@ -770,8 +787,9 @@ export default function WorkshopScene() {
       if (!direction) return;
       const currentTarget = rotatingProject.userData.rotationTargetY as number;
       rotatingProject.userData.rotationTargetY = currentTarget + direction * 0.18;
+      didRotate = true;
       const project = rotatingProject.userData.project as ProjectSpec;
-      setTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
+      scheduleTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
     }
 
     renderer.domElement.addEventListener("pointermove", onPointerMove);
@@ -791,7 +809,9 @@ export default function WorkshopScene() {
       projectWrappers.forEach((project) => {
         const targetY = (project.userData.baseY as number) + (project === hovered || project === active ? 0.11 : 0);
         project.position.y = THREE.MathUtils.damp(project.position.y, targetY, 15, delta);
+        const rotationBefore = project.rotation.y;
         project.rotation.y = THREE.MathUtils.damp(project.rotation.y, project.userData.rotationTargetY as number, 14, delta);
+        if (project === active || Math.abs(project.rotation.y - rotationBefore) > 0.0001) renderer.shadowMap.needsUpdate = true;
       });
       renderer.render(scene, camera);
     }
@@ -799,6 +819,7 @@ export default function WorkshopScene() {
 
     return () => {
       window.cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(tooltipFrame);
       window.removeEventListener("resize", resize);
       renderer.domElement.removeEventListener("pointermove", onPointerMove);
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
@@ -824,8 +845,8 @@ export default function WorkshopScene() {
       <div className={`workshop__loader ${ready ? "workshop__loader--hidden" : ""}`} aria-live="polite">
         <div className="workshop__loading-content">
           <span>Robin Courte</span>
-          <i />
-          <small>Chargement de l’atelier</small>
+          <i style={{ "--loading-progress": `${Math.max(9, (loadProgress.done / loadProgress.total) * 100)}%` } as React.CSSProperties} />
+          <small>Chargement de l’atelier · {loadProgress.done}/{loadProgress.total}</small>
         </div>
       </div>
       <header className="workshop__brand">
