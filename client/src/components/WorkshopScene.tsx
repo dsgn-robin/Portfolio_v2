@@ -455,7 +455,6 @@ export default function WorkshopScene() {
   const mountRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [loadProgress, setLoadProgress] = useState({ done: 0, total: 7 });
-  const [tooltip, setTooltip] = useState<{ title: string; eyebrow: string; x: number; y: number } | null>(null);
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -481,6 +480,25 @@ export default function WorkshopScene() {
     renderer.domElement.setAttribute("aria-label", "Atelier 3D interactif de Robin Courte");
     renderer.domElement.style.touchAction = "none";
     viewport.appendChild(renderer.domElement);
+
+    const tooltipElement = document.createElement("div");
+    tooltipElement.className = "workshop__tooltip";
+    tooltipElement.setAttribute("aria-live", "polite");
+    const tooltipEyebrow = document.createElement("span");
+    const tooltipTitle = document.createElement("strong");
+    tooltipElement.append(tooltipEyebrow, tooltipTitle);
+    viewport.appendChild(tooltipElement);
+
+    function updateTooltip(next: { title: string; eyebrow: string; x: number; y: number } | null) {
+      if (!next) {
+        tooltipElement.classList.remove("workshop__tooltip--visible");
+        return;
+      }
+      tooltipEyebrow.textContent = next.eyebrow;
+      tooltipTitle.textContent = next.title;
+      tooltipElement.style.transform = `translate3d(${next.x + 16}px, ${next.y - 48}px, 0)`;
+      tooltipElement.classList.add("workshop__tooltip--visible");
+    }
 
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     const environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -697,7 +715,7 @@ export default function WorkshopScene() {
       if (hit === hovered) {
         if (hit) {
           const project = hit.userData.project as ProjectSpec;
-          setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+          updateTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
         }
         return;
       }
@@ -705,9 +723,9 @@ export default function WorkshopScene() {
       viewport.style.cursor = hit ? "grab" : "default";
       if (hit) {
         const project = hit.userData.project as ProjectSpec;
-        setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+        updateTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
       } else {
-        setTooltip(null);
+        updateTooltip(null);
       }
     }
 
@@ -723,7 +741,7 @@ export default function WorkshopScene() {
         active.position.z = THREE.MathUtils.clamp(next.z, TABLE.minZ, TABLE.maxZ);
         didDrag ||= event.clientX !== downPoint.x || event.clientY !== downPoint.y;
         const project = active.userData.project as ProjectSpec;
-        setTooltip({ title: project.title, eyebrow: "Positionnement", x: event.clientX, y: event.clientY });
+        updateTooltip({ title: project.title, eyebrow: "Positionnement", x: event.clientX, y: event.clientY });
       }
     }
 
@@ -751,10 +769,10 @@ export default function WorkshopScene() {
       if (renderer.domElement.hasPointerCapture(event.pointerId)) renderer.domElement.releasePointerCapture(event.pointerId);
       if (clicked) window.open(project.url, "_blank", "noopener,noreferrer");
       else {
-        setTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
+        updateTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
         window.setTimeout(() => {
           if (hovered === finished) {
-            setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+            updateTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
           }
         }, 700);
       }
@@ -764,7 +782,7 @@ export default function WorkshopScene() {
       if (!active) {
         hovered = null;
         viewport.style.cursor = "default";
-        setTooltip(null);
+        updateTooltip(null);
       }
     }
 
@@ -778,7 +796,7 @@ export default function WorkshopScene() {
       rotatingProject.userData.rotationTargetY = currentTarget + direction * 0.18;
       didRotate = true;
       const project = rotatingProject.userData.project as ProjectSpec;
-      setTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
+      updateTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
     }
 
     renderer.domElement.addEventListener("pointermove", onPointerMove);
@@ -854,12 +872,6 @@ export default function WorkshopScene() {
         <span>Atelier numérique</span>
         <strong>04</strong>
       </div>
-      {tooltip && (
-        <div className="workshop__tooltip" style={{ transform: `translate3d(${tooltip.x + 16}px, ${tooltip.y - 48}px, 0)` }}>
-          <span>{tooltip.eyebrow}</span>
-          <strong>{tooltip.title}</strong>
-        </div>
-      )}
     </section>
   );
 }

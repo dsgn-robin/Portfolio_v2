@@ -97,3 +97,9 @@
 - [x] Identifier pourquoi les changements de tooltip cadencés ne s’affichent plus au survol.
 - [x] Restaurer le nom et la catégorie au survol de chaque mesh interactif.
 - [x] Vérifier que le tooltip suit le pointeur sans perte de fluidité.
+
+## Tooltip visible
+
+- [x] Vérifier la transmission du projet sélectionné entre le raycaster et l’interface React.
+- [x] Rendre le tooltip visible au-dessus du canvas avec une superposition stable.
+- [x] Confirmer l’apparition du nom et de la catégorie au survol de chaque prototype.
