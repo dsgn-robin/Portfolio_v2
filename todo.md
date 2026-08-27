@@ -149,3 +149,11 @@
 - [x] Enrichir la consultation des images, de la vidéo et du modèle 3D avec des retours utiles.
 - [x] Ajouter des améliorations d’accessibilité et de confort responsive sans altérer les assets source.
 - [x] Vérifier les parcours principaux puis enregistrer une version testée.
+
+## Nouvel accueil scène-dossier
+
+- [x] Mettre l’atelier 3D actuel de côté dans un composant de réserve non destructif.
+- [x] Formaliser la scène d’accueil comme un atelier Bauhaus cohérent avec les dossiers.
+- [x] Recomposer le sol, les supports, l’éclairage et les repères de la nouvelle scène.
+- [x] Reprendre la sélection précise, le déplacement, la rotation et l’ouverture des dossiers.
+- [x] Vérifier la nouvelle scène sur desktop et mobile, puis enregistrer une version testée.

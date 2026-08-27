@@ -160,3 +160,40 @@ Le monogramme de navigation est une **lettre R construite par deux demi-disques 
 #### Couleur signature
 
 **Orange atelier — `#E95A2C`** : une teinte d’encre chaude, énergique et immédiatement reconnaissable, réservée aux accents de navigation, aux mots-clés et aux repères de progression.
+
+---
+
+## Accueil réinterprété — **Scène-dossier interactive**
+
+### Mouvement de design
+
+L’accueil abandonne le réalisme d’établi au profit d’un **Bauhaus d’atelier en volume** : une composition d’affiche rendue dans Three.js, avec des socles en papier, une géométrie noire d’encre, les quatre objets GLB comme pièces de collection et une lumière de vitrine graphique.
+
+### Principes directeurs
+
+1. La première vue est une **page d’index tangible** : quatre pièces-signes reposent sur des podiums, comme les éléments d’une affiche que l’on peut prendre en main.
+2. Les objets réels restent au centre. Chaque GLB conserve ses matériaux et devient l’accès direct à son dossier ; seules les surfaces de scène sont recréées.
+3. Le contraste **papier chaud, noir encre, orange atelier et couleur de projet** remplace la palette bois/béton de l’ancien établi.
+4. La composition privilégie l’asymétrie : disque, bandes, cadrage orthographique et socles décalés guident le regard sans devenir une interface en grille.
+
+### Couleur et matière
+
+Le fond est un papier sable doux ; les podiums ont une rugosité mate, en orange atelier ou en bleu/noir selon leur rôle. Les supports de projet reprennent la couleur de leur dossier — bleu, jaune, vert et rouge-orangé — tandis que les ombres sont noires, nettes mais légèrement adoucies. Les matériaux d’origine des GLB ne sont pas modifiés.
+
+### Paradigme de mise en page
+
+Une **affiche orthographique en profondeur** remplace le plateau d’établi. La marque, l’index et les instructions sont des annotations périphériques sur le DOM ; le centre demeure une composition de volumes réels, avec les projets déposés en diagonale sur quatre socles numérotés. Le premier plan s’ouvre en négatif comme un cartouche de dossier.
+
+### Éléments signatures
+
+1. Les **podiums-couvertures**, chacun marqué par le numéro et l’encre du projet.
+2. Un **grand disque de repérage** et des bandes diagonales orange, projetés au sol comme des formes d’affiche.
+3. Les **graduations RC / 01—04** qui longent les bords de l’accueil et accompagnent la sélection.
+
+### Philosophie d’interaction
+
+Un objet garde une zone de sélection limitée à son mesh GLB réel. Survoler révèle son numéro, titre et catégorie ; glisser le déplace sur son socle ; molette ou glissement avec modificateur le fait tourner ; cliquer sans geste ouvre le dossier dans l’onglet courant. Un bouton de réinitialisation ramène toutes les pièces à leur composition éditoriale.
+
+### Animation et typographie
+
+Les socles et objets apparaissent par une montée de lumière et une opacité courte. Le survol soulève l’objet et renforce son ombre, sans halo décoratif. **Archivo Black** signe les titres périphériques et numéros d’affiche ; **Space Grotesk** compose les instructions, catégories et légendes. Les mouvements non essentiels respectent `prefers-reduced-motion`.
