@@ -36,12 +36,12 @@ type ProjectRuntime = {
 };
 
 const PROJECTS: ProjectSpec[] = [
-  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-1.95, 1.72], baseRotation: -0.26, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.68, shape: "rounded" },
-  { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [0.98, 1.38], baseRotation: 0.18, scale: 0.86, shape: "circle" },
-  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.72, -0.82], baseRotation: 0.34, scale: 0.76, shape: "rounded" },
-  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone-only_8f6c3309.glb", position: [1.22, -1.55], baseRotation: -0.16, scale: 1.72, shape: "circle" },
-  { key: "about", number: "05", title: "À propos", category: "Note personnelle", collection: "Repères", color: 0x397c5d, colorCss: "#397c5d", position: [3.05, 0.85], baseRotation: 0.28, shape: "rounded" },
-  { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [3.35, -1.35], baseRotation: -0.34, shape: "circle" },
+  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-3.36, -1.8], baseRotation: -0.26, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.68, shape: "rounded" },
+  { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [0.28, -1.01], baseRotation: 0.18, scale: 0.86, shape: "circle" },
+  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.23, 1.11], baseRotation: 0.34, scale: 0.76, shape: "rounded" },
+  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone-only_8f6c3309.glb", position: [-0.11, -4.16], baseRotation: -0.16, scale: 1.72, shape: "circle" },
+  { key: "about", number: "05", title: "À propos", category: "Note personnelle", collection: "Repères", color: 0x397c5d, colorCss: "#397c5d", position: [2.92, -2.37], baseRotation: 0.28, shape: "rounded" },
+  { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [-4.89, 1.37], baseRotation: -0.34, shape: "circle" },
 ];
 
 const DESTINATIONS: Record<ProjectKey, string> = {

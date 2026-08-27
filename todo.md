@@ -294,3 +294,21 @@
 - [x] Retirer le cartouche « Test en cours » de la vidéo d’essai.
 - [x] Remplacer les libellés « Dossier / 04 » par « Projet / 04 » dans le dossier Drone.
 - [x] Vérifier et enregistrer l’ajustement.
+
+### Couvertures de stories à la une Instagram
+
+- [x] Définir une série Bauhaus ronde cohérente, sans les encadrés de navigation des références.
+- [x] Générer les six couvertures inédites : 3D, photographie, dessin, Essential Phone, Drone et identité visuelle.
+- [x] Vérifier et livrer les fichiers individuels téléchargeables.
+
+### Régénération des couvertures Instagram
+
+- [x] Créer six compositions Bauhaus clairement différentes et immédiatement reconnaissables par leur sujet.
+- [x] Vérifier séparément les motifs Photo et Drone, puis l’ensemble de la série avant transmission.
+- [x] Livrer uniquement les six visuels distincts validés.
+
+### Recomposition par défaut de l’accueil 3D
+
+- [x] Repositionner les six supports et leurs objets pour correspondre à la référence de composition.
+- [x] Préserver les interactions de déplacement, rotation et ouverture des projets.
+- [x] Vérifier l’équilibre desktop et mobile, puis enregistrer la version.
