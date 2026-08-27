@@ -366,7 +366,7 @@ a { -webkit-tap-highlight-color: transparent; }
 .dossier-home__paper-grain { position: absolute; z-index: 1; inset: 0; pointer-events: none; opacity: 0.35; background-image: radial-gradient(rgb(23 22 18 / 18%) 0.6px, transparent 0.6px), repeating-linear-gradient(0deg, transparent 0 3px, rgb(23 22 18 / 2.5%) 3px 4px); background-size: 5px 5px, auto; mix-blend-mode: multiply; }
 
 .dossier-home__brand { position: absolute; z-index: 3; top: clamp(1rem, 2.4vw, 2.2rem); left: clamp(1rem, 2.4vw, 2.2rem); display: flex; align-items: center; gap: 0.75rem; text-transform: uppercase; }
-.dossier-home__monogram { position: relative; display: block; width: 2.7rem; height: 2.7rem; overflow: hidden; border: 1px solid #171612; background: #f2e9d8; }
+.dossier-home__monogram { position: relative; display: block; width: 2.7rem; height: 2.7rem; overflow: hidden; background: transparent; }
 .dossier-home__monogram i { position: absolute; display: block; }
 .dossier-home__monogram i:first-child { top: 0.34rem; left: 0.47rem; width: 1.32rem; height: 1rem; border: 0.27rem solid #e95a2c; border-left: 0; border-radius: 0 1.1rem 1.1rem 0; }
 .dossier-home__monogram i:nth-child(2) { bottom: 0.46rem; left: 0.72rem; width: 1.38rem; height: 0.27rem; background: #e95a2c; transform: rotate(42deg); transform-origin: left center; }
@@ -381,9 +381,9 @@ a { -webkit-tap-highlight-color: transparent; }
 .dossier-home__statement em { color: #e95a2c; font-style: normal; }
 .dossier-home__statement span { display: block; margin-top: 1rem; color: #5d574d; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.11em; }
 
-.dossier-home__index { position: absolute; z-index: 4; top: clamp(1rem, 2.4vw, 2.2rem); right: clamp(1rem, 2.4vw, 2.2rem); display: grid; width: min(18rem, 28vw); padding-left: 1.75rem; border-top: 0; border-left: 0; }
-.dossier-home__index::before { position: absolute; top: 0; bottom: 0; left: 0.42rem; width: 0.45rem; background: repeating-linear-gradient(0deg, #171612 0 0.12rem, transparent 0.12rem 0.43rem); content: ""; }
-.dossier-home__index::after { position: absolute; top: 0.15rem; bottom: 0.32rem; left: -0.85rem; color: #5d574d; content: "RC / INDEX / 01—04"; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.09em; writing-mode: vertical-rl; }
+.dossier-home__index { position: absolute; z-index: 4; top: clamp(1rem, 2.4vw, 2.2rem); right: clamp(1rem, 2.4vw, 2.2rem); display: grid; width: min(18rem, 28vw); padding-left: 2rem; border-top: 0; border-left: 0; }
+.dossier-home__index::before { position: absolute; top: 0; bottom: 0; left: 0.53rem; width: 0.7rem; background: repeating-linear-gradient(0deg, #171612 0 0.1rem, transparent 0.1rem 0.38rem), repeating-linear-gradient(0deg, transparent 0 2.28rem, #171612 2.28rem 2.38rem, transparent 2.38rem 4.56rem); content: ""; }
+.dossier-home__index::after { position: absolute; top: 0.15rem; bottom: 0.32rem; left: -0.55rem; color: #5d574d; content: "RC / INDEX / 01—06"; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.09em; writing-mode: vertical-rl; }
 .dossier-home__index-title { padding: 0.42rem 0 0.6rem; border-bottom: 2px solid #171612; color: #5d574d; font-size: 0.57rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
 .dossier-home__collection + .dossier-home__collection { margin-top: 0.5rem; }
 .dossier-home__collection > span { display: block; padding: 0.54rem 0 0.28rem; border-top: 1px solid rgb(23 22 18 / 45%); color: #e95a2c; font-size: 0.51rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
@@ -391,9 +391,11 @@ a { -webkit-tap-highlight-color: transparent; }
 .dossier-home__index button::before { position: absolute; top: 0; bottom: 0; left: 0; width: 0.24rem; background: var(--project-color); content: ""; transform: scaleY(0.32); transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .dossier-home__index button > span { color: var(--project-color); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; }
 .dossier-home__index button strong { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.dossier-home__index button i { display: block; width: 0.85rem; height: 0.24rem; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; opacity: 0.72; transition: width 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .dossier-home__index button:hover { padding-left: 0.55rem; color: #e95a2c; }
 .dossier-home__index button:hover::before { transform: scaleY(1); }
 .dossier-home__index button:hover > span { color: #171612; }
+.dossier-home__index button:hover i { width: 1.2rem; }
 
 .dossier-home__controls { display: flex; align-items: center; justify-content: flex-end; gap: 0.9rem; }
 .dossier-home__controls div, .dossier-home__controls button { display: inline-flex; align-items: center; gap: 0.45rem; color: #5d574d; font-size: 0.56rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
@@ -424,13 +426,13 @@ a { -webkit-tap-highlight-color: transparent; }
   .dossier-home__monogram b { top: 0.25rem; bottom: 0.25rem; left: 0.27rem; width: 0.22rem; }
   .dossier-home__brand strong { font-size: 0.66rem; }
   .dossier-home__brand small { display: none; }
-  .dossier-home__index { top: 0.85rem; right: 0.85rem; width: auto; grid-template-columns: repeat(4, auto); padding-left: 0; border-top: 0; border-left: 0; }
+  .dossier-home__index { top: 0.85rem; right: 0.85rem; width: auto; grid-template-columns: repeat(6, auto); padding-left: 0; border-top: 0; border-left: 0; }
   .dossier-home__index::before, .dossier-home__index::after { display: none; }
   .dossier-home__index-title, .dossier-home__collection > span { display: none; }
   .dossier-home__collection { display: contents; }
   .dossier-home__collection + .dossier-home__collection { margin-top: 0; }
   .dossier-home__index button { display: grid; width: 2rem; min-height: 2.15rem; place-items: center; padding: 0; border: 1px solid rgb(23 22 18 / 36%); background: rgb(242 233 216 / 70%); }
-  .dossier-home__index button strong, .dossier-home__index button svg { display: none; }
+  .dossier-home__index button strong, .dossier-home__index button i { display: none; }
   .dossier-home__index button:hover { padding: 0; background: #171612; }
   .dossier-home__cartouche { width: min(17.5rem, 72vw); grid-template-columns: 1fr auto; gap: 0.5rem; padding: 0.75rem 0.8rem; }
   .dossier-home__statement { bottom: auto; left: auto; }

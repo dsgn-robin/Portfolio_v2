@@ -3,7 +3,7 @@
  * géométrie Bauhaus, asymétrie éditoriale et documents d’atelier temporaires.
  */
 import { ArrowDown, ArrowUp, ArrowUpRight, CornerUpLeft, MoveUpRight, Share2, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { Link, useLocation } from "wouter";
 import EssentialPhoneViewer from "@/components/EssentialPhoneViewer";
 
@@ -312,6 +312,36 @@ function ProjectLightbox({ asset, onClose }: { asset: { image: string; alt: stri
   );
 }
 
+function ProjectShareDialog({ title, onClose }: { title: string; onClose: () => void }) {
+  const [copyStatus, setCopyStatus] = useState("Copier le lien");
+  const emailHref = `mailto:?subject=${encodeURIComponent(`${title} — Robin Courte`)}&body=${encodeURIComponent(`Je te partage ce dossier : ${window.location.href}`)}`;
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopyStatus("Lien copié");
+    } catch {
+      setCopyStatus("Copie indisponible");
+    }
+  };
+
+  return (
+    <div className="project-share-dialog" role="dialog" aria-modal="true" aria-labelledby="project-share-title" onClick={onClose}>
+      <section className="project-share-dialog__frame" onClick={(event) => event.stopPropagation()}>
+        <div className="project-share-dialog__topline"><span>RC / PARTAGE</span><span>DOSSIER ACTIF</span></div>
+        <span className="project-share-dialog__number" aria-hidden="true">↗</span>
+        <h2 id="project-share-title">Faire circuler<br /><em>la pièce.</em></h2>
+        <p>Partagez le dossier « {title} » par lien direct ou préparez un message e-mail.</p>
+        <output className="project-share-dialog__url">{window.location.href}</output>
+        <div className="project-share-dialog__actions">
+          <button type="button" onClick={copyLink}>{copyStatus}</button>
+          <a href={emailHref}>Envoyer par e-mail <ArrowUpRight size={17} /></a>
+        </div>
+        <button type="button" className="project-share-dialog__close" onClick={onClose} aria-label="Fermer la fenêtre de partage"><X size={19} /></button>
+      </section>
+    </div>
+  );
+}
+
 export default function ProjectPage() {
   const [location] = useLocation();
   const project = getProject(location);
@@ -319,7 +349,7 @@ export default function ProjectPage() {
   const nextProject = PROJECTS[(index + 1) % PROJECTS.length];
   const [activeAsset, setActiveAsset] = useState<{ image: string; alt: string; label: string } | null>(null);
   const [progress, setProgress] = useState(0);
-  const [shareStatus, setShareStatus] = useState("Partager");
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -360,16 +390,24 @@ export default function ProjectPage() {
     };
   }, [activeAsset]);
 
-  const handleShare = async () => {
-    const title = `${project.title.replace("\n", " ")} — Robin Courte`;
-    try {
-      if (navigator.share) await navigator.share({ title, url: window.location.href });
-      else await navigator.clipboard.writeText(window.location.href);
-      setShareStatus("Lien prêt");
-    } catch {
-      setShareStatus("Partage annulé");
-    }
-    window.setTimeout(() => setShareStatus("Partager"), 1800);
+  useEffect(() => {
+    if (!isShareOpen) return;
+    document.body.classList.add("project-modal-open");
+    const closeWithEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setIsShareOpen(false); };
+    window.addEventListener("keydown", closeWithEscape);
+    return () => {
+      document.body.classList.remove("project-modal-open");
+      window.removeEventListener("keydown", closeWithEscape);
+    };
+  }, [isShareOpen]);
+
+  const handleSectionJump = (event: ReactMouseEvent<HTMLAnchorElement>) => {
+    const selector = event.currentTarget.getAttribute("href");
+    if (!selector?.startsWith("#")) return;
+    const target = document.querySelector(selector);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
   };
 
   const projectStyle = {
@@ -383,7 +421,7 @@ export default function ProjectPage() {
       <div className="project-reading-progress" aria-hidden="true"><span style={{ transform: `scaleX(${progress})` }} /></div>
       <aside className="project-rail" aria-label="Navigation de projet">
         <Link href="/" className="project-rail__home" aria-label="Retourner à l’atelier">
-          <span className="project-rail__monogram" aria-hidden="true">R</span>
+          <span className="project-rail__monogram" aria-hidden="true"><i /><i /><b /></span>
         </Link>
         <p className="project-rail__label">Robin Courte<br />Portfolio / 2026</p>
       </aside>
@@ -398,7 +436,7 @@ export default function ProjectPage() {
           <p className="project-kicker">Dossier / {project.number}</p>
           <h1>{project.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
           <p className="project-hero__subtitle">{project.subtitle}</p>
-          <a className="project-jump" href="#dossier">
+          <a className="project-jump" href="#dossier" onClick={handleSectionJump}>
             Ouvrir le dossier <ArrowDown size={18} strokeWidth={2.6} />
           </a>
         </div>
@@ -475,17 +513,18 @@ export default function ProjectPage() {
         <Link href="/" className="project-back"><CornerUpLeft size={18} /> Retour à l’atelier</Link>
       </nav>
       <nav className="project-quick-nav" aria-label="Repères rapides du dossier">
-        <a href="#dossier"><span>01</span> Ouvrir</a>
-        <a href="#processus"><span>02</span> Processus</a>
-        <a href="#archives"><span>03</span> Examiner</a>
-        {project.slug === "essential-phone" ? <a href="#prototype"><span>04</span> Retourner</a> : null}
-        <a href="#bilan"><span>04</span> Bilan</a>
+        <a href="#dossier" onClick={handleSectionJump}><span>01</span> Ouvrir</a>
+        <a href="#processus" onClick={handleSectionJump}><span>02</span> Processus</a>
+        <a href="#archives" onClick={handleSectionJump}><span>03</span> Examiner</a>
+        {project.slug === "essential-phone" ? <a href="#prototype" onClick={handleSectionJump}><span>04</span> Retourner</a> : null}
+        <a href="#bilan" onClick={handleSectionJump}><span>04</span> Bilan</a>
       </nav>
       <div className="project-utility" aria-label="Outils de lecture">
-        <button type="button" onClick={handleShare}><Share2 size={17} /> {shareStatus}</button>
+        <button type="button" onClick={() => setIsShareOpen(true)}><Share2 size={17} /> Partager</button>
         <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Retourner en haut du dossier"><ArrowUp size={19} /></button>
       </div>
       {activeAsset ? <ProjectLightbox asset={activeAsset} onClose={() => setActiveAsset(null)} /> : null}
+      {isShareOpen ? <ProjectShareDialog title={project.title.replace("\n", " ")} onClose={() => setIsShareOpen(false)} /> : null}
     </main>
   );
 }

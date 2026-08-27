@@ -81,6 +81,9 @@ Le mot-symbole « ROBIN COURTE » s’écrit en capitales géométriques, avec u
 - L’index de l’accueil se comporte comme une graduation de catalogue fixée au bord de l’affiche, jamais comme une barre latérale d’interface générique.
 - Chaque dossier répète son motif propre — cercle et lumière pour Photo, diagonales et schémas pour Drone — du manifeste aux documents et au pied de page.
 - Toute image, vidéo ou plan est traité comme une pièce archivée : référence imprimée, bord d’encre, ombre de contact et matière de feuille.
+- L’index d’accueil est une graduation de catalogue en bord d’affiche, liée aux numéros des socles ; ses traits remplacent les icônes de navigation génériques.
+- Le signe R / RC est un repère imprimé construit : fût noir, demi-cercle et diagonale orange ; il ne prend jamais la forme d’une icône d’application encadrée.
+- Les fiches relationnelles gardent la même série d’affiches mais reçoivent un motif propre : registre quadrillé et repères obliques pour À propos, lignes diagonales et signal d’échange pour Contact.
 
 ---
 

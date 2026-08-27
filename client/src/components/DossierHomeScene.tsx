@@ -2,27 +2,27 @@
  * Style reminder — « Scène-dossier interactive » : papier chaud, noir encre,
  * Orange atelier et socles colorés ; les GLB réels restent les pièces centrales.
  */
-import { Eye, Grip, RotateCw, RotateCcw } from "lucide-react";
+import { Grip, RotateCw, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
-type ProjectKey = "phone" | "photo" | "identity" | "drone";
+type ProjectKey = "phone" | "photo" | "identity" | "drone" | "about" | "contact";
 
 type ProjectSpec = {
   key: ProjectKey;
   number: string;
   title: string;
   category: string;
-  collection: "Projets perso" | "Projets scolaires";
+  collection: "Projets perso" | "Projets scolaires" | "Repères";
   color: number;
   colorCss: string;
-  path: string;
+  path?: string;
   position: [number, number];
   baseRotation: number;
   presentationRotation?: [number, number, number];
-  scale: number;
+  scale?: number;
   shape: "rounded" | "circle";
 };
 
@@ -38,9 +38,19 @@ const PROJECTS: ProjectSpec[] = [
   { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [1.5, 1.45], baseRotation: 0, scale: 0.86, shape: "circle" },
   { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.48, -1.35], baseRotation: 0, scale: 0.76, shape: "rounded" },
   { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone_fbc0d7ed.glb", position: [1.75, -1.18], baseRotation: 0, scale: 1.72, shape: "circle" },
+  { key: "about", number: "05", title: "À propos", category: "Note personnelle", collection: "Repères", color: 0x397c5d, colorCss: "#397c5d", position: [-4.15, 1.72], baseRotation: -0.16, shape: "rounded" },
+  { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [4.15, -1.76], baseRotation: 0.14, shape: "circle" },
 ];
 
-const COLLECTIONS: ProjectSpec["collection"][] = ["Projets perso", "Projets scolaires"];
+const COLLECTIONS: ProjectSpec["collection"][] = ["Projets perso", "Projets scolaires", "Repères"];
+const DESTINATIONS: Record<ProjectKey, string> = {
+  phone: "/projets/essential-phone",
+  photo: "/projets/projet-photo",
+  identity: "/projets/identite-visuelle",
+  drone: "/projets/projet-drone",
+  about: "/a-propos",
+  contact: "/contact",
+};
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(Math.max(value, minimum), maximum);
 
@@ -98,7 +108,7 @@ function makeBackdrop(scene: THREE.Scene) {
   const orange = new THREE.MeshStandardMaterial({ color: 0xe95a2c, roughness: 0.88 });
   const paper = new THREE.MeshStandardMaterial({ color: 0xf2e9d8, roughness: 0.96 });
 
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(16, 12), paper);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(18, 14), paper);
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = -0.25;
   floor.receiveShadow = true;
@@ -167,7 +177,7 @@ export default function DossierHomeScene() {
     const dragPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
     const point = new THREE.Vector3();
     const dragBoundaryCenter = new THREE.Vector2(0, 0);
-    const dragBoundaryRadius = 5.2;
+    const dragBoundaryRadius = 6.35;
     const dragging = { runtime: null as ProjectRuntime | null, startX: 0, startY: 0, moved: false };
     let animationFrame = 0;
     let cancelled = false;
@@ -246,7 +256,7 @@ export default function DossierHomeScene() {
       dragging.runtime = null;
       renderer.domElement.style.cursor = "grab";
       setIsDragging(false);
-      if (!dragging.moved) window.location.assign(`/projets/${runtime.spec.key === "phone" ? "essential-phone" : runtime.spec.key === "photo" ? "projet-photo" : runtime.spec.key === "identity" ? "identite-visuelle" : "projet-drone"}`);
+      if (!dragging.moved) window.location.assign(DESTINATIONS[runtime.spec.key]);
     };
 
     const onWheel = (event: WheelEvent) => {
@@ -273,43 +283,50 @@ export default function DossierHomeScene() {
     renderer.domElement.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("keydown", onKeyDown);
 
-    const loader = new GLTFLoader();
-    PROJECTS.forEach((spec) => {
-      loader.load(spec.path, (gltf) => {
+    const registerRuntime = (spec: ProjectSpec, model?: THREE.Group) => {
         if (cancelled) return;
         const group = new THREE.Group();
         group.userData.projectKey = spec.key;
-        const model = gltf.scene;
-        if (spec.key === "drone") {
-          model.traverse((child) => {
-            if (child.name === "Blueprint-drone") child.rotation.set(0, 0, 0);
-          });
-        }
-        if (spec.presentationRotation) model.rotation.set(...spec.presentationRotation);
-        model.updateMatrixWorld(true);
-        const box = new THREE.Box3().setFromObject(model);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
-        const longestEdge = Math.max(size.x, size.y, size.z) || 1;
-        const scale = spec.scale / longestEdge;
-        model.scale.setScalar(scale);
-        model.position.set(-center.x * scale, -box.min.y * scale + 0.18, -center.z * scale);
-        model.traverse((child) => {
-          if (child instanceof THREE.Mesh) {
-            child.userData.projectKey = spec.key;
-            child.castShadow = true;
-            child.receiveShadow = true;
-          }
-        });
         const platform = platforms.get(spec.key);
         if (platform) group.add(platform);
-        group.add(model);
+        if (model) {
+          if (spec.key === "drone") {
+            model.traverse((child) => {
+              if (child.name === "Blueprint-drone") child.rotation.set(0, 0, 0);
+            });
+          }
+          if (spec.presentationRotation) model.rotation.set(...spec.presentationRotation);
+          model.updateMatrixWorld(true);
+          const box = new THREE.Box3().setFromObject(model);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
+          const longestEdge = Math.max(size.x, size.y, size.z) || 1;
+          const scale = (spec.scale ?? 1) / longestEdge;
+          model.scale.setScalar(scale);
+          model.position.set(-center.x * scale, -box.min.y * scale + 0.18, -center.z * scale);
+          model.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+              child.userData.projectKey = spec.key;
+              child.castShadow = true;
+              child.receiveShadow = true;
+            }
+          });
+          group.add(model);
+        }
         group.position.set(spec.position[0], 0, spec.position[1]);
         group.rotation.y = spec.baseRotation;
         scene.add(group);
         runtimesRef.current.push({ spec, group, initialPosition: group.position.clone(), initialRotation: group.rotation.y });
         setLoaded((count) => count + 1);
-      }, undefined, () => setLoaded((count) => count + 1));
+    };
+
+    const loader = new GLTFLoader();
+    PROJECTS.forEach((spec) => {
+      if (!spec.path) {
+        registerRuntime(spec);
+        return;
+      }
+      loader.load(spec.path, (gltf) => registerRuntime(spec, gltf.scene), undefined, () => setLoaded((count) => count + 1));
     });
 
     const resize = () => {
@@ -364,8 +381,7 @@ export default function DossierHomeScene() {
   }, []);
 
   const openProject = (key: ProjectKey) => {
-    const slug = key === "phone" ? "essential-phone" : key === "photo" ? "projet-photo" : key === "identity" ? "identite-visuelle" : "projet-drone";
-    window.location.assign(`/projets/${slug}`);
+    window.location.assign(DESTINATIONS[key]);
   };
 
   return (
@@ -377,13 +393,13 @@ export default function DossierHomeScene() {
         <div><strong>Robin Courte</strong><small>Atelier / index de projets</small></div>
       </header>
       <aside className="dossier-home__index" aria-label="Index des dossiers">
-        <span className="dossier-home__index-title">Index des projets</span>
+          <span className="dossier-home__index-title">Index des pièces</span>
         {COLLECTIONS.map((collection) => (
           <div className="dossier-home__collection" key={collection}>
             <span>{collection}</span>
             {PROJECTS.filter((project) => project.collection === collection).map((project) => (
               <button key={project.key} type="button" onClick={() => openProject(project.key)} style={{ "--project-color": project.colorCss } as React.CSSProperties}>
-                <span>{project.number}</span><strong>{project.title}</strong><Eye size={15} />
+                <span>{project.number}</span><strong>{project.title}</strong><i aria-hidden="true" />
               </button>
             ))}
           </div>
@@ -392,7 +408,7 @@ export default function DossierHomeScene() {
       <section className="dossier-home__cartouche">
         <div className="dossier-home__statement">
           <p>Portfolio<br /><em>en pièces.</em></p>
-          <span>RC / INDEX 01—04 · MANIPULER / EXAMINER / OUVRIR</span>
+          <span>RC / INDEX 01—06 · MANIPULER / EXAMINER / OUVRIR</span>
         </div>
         <footer className="dossier-home__controls">
           <div><Grip size={15} /><span>Glisser pour déplacer</span></div>

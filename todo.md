@@ -196,3 +196,12 @@
 - [x] Examiner l’encombrement actuel de la grille avant/après sur desktop et mobile.
 - [x] Réduire la taille visuelle et l’espacement des fiches tout en conservant les proportions et les légendes.
 - [x] Vérifier le rendu Photo sur desktop et mobile, puis enregistrer une version testée.
+
+## Pages relationnelles et navigation fluide
+
+- [x] Auditer les routes, les supports et les raccourcis actuels de la scène-dossier.
+- [x] Concevoir les pages À propos et Contact dans le système d’affiches Bauhaus existant.
+- [x] Ajouter deux socles interactifs sans objet 3D, décalés sur les côtés de la scène et soumis aux mêmes interactions.
+- [x] Étendre l’aire circulaire de déplacement en gardant une marge de composition autour de la scène.
+- [x] Rendre les sauts de navigation fluides et créer une fenêtre de partage personnalisée.
+- [x] Vérifier les parcours desktop et mobile, puis enregistrer une version testée.
