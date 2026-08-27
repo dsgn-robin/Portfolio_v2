@@ -174,3 +174,10 @@
 - [x] Faire démarrer le film Drone directement et rendre ses sous-titres visibles dans ses réglages.
 - [x] Rendre opérationnelle l’action d’agrandissement de la visionneuse Essential Phone.
 - [x] Vérifier les quatre comportements dans le navigateur et enregistrer une version testée.
+
+## Réglage final accueil et vidéo
+
+- [x] Réduire et orienter Essential Phone face à la caméra sur l’accueil.
+- [x] Étendre les limites de déplacement jusqu’aux marges utiles de la scène.
+- [x] Rendre les sous-titres Drone immédiatement actifs à la lecture de la vidéo.
+- [x] Vérifier visuellement l’accueil et le lecteur, puis enregistrer une version testée.

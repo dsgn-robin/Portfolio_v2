@@ -3,7 +3,7 @@
  * géométrie Bauhaus, asymétrie éditoriale et documents d’atelier temporaires.
  */
 import { ArrowDown, ArrowUp, ArrowUpRight, CornerUpLeft, MoveUpRight, Share2, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import EssentialPhoneViewer from "@/components/EssentialPhoneViewer";
 
@@ -219,6 +219,17 @@ function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<
 }
 
 function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const activateCaptions = () => {
+    const tracks = videoRef.current?.textTracks;
+    if (!tracks) return;
+    for (let index = 0; index < tracks.length; index += 1) tracks[index].mode = "showing";
+  };
+
+  useEffect(() => {
+    activateCaptions();
+  }, []);
+
   return (
     <section className="project-video" aria-labelledby="project-video-title">
       <div className="project-video__intro">
@@ -227,7 +238,7 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
         <p>{video.description}</p>
       </div>
       <figure className="project-video__frame">
-        <video controls playsInline preload="metadata">
+        <video ref={videoRef} controls playsInline preload="metadata" onLoadedMetadata={activateCaptions} onPlay={activateCaptions}>
           <source src={video.src} type="video/mp4" />
           <track kind="captions" src={video.captions} srcLang="fr" label="Français" default />
           Votre navigateur ne prend pas en charge la lecture vidéo.

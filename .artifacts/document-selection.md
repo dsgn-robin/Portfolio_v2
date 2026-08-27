@@ -44,6 +44,8 @@ La commande d’agrandissement a été exécutée dans le navigateur : lorsque l
 
 Le lecteur Drone a été contrôlé après suppression du poster : il charge directement la vidéo source « Video_drone_seul », ne possède aucun attribut poster, et conserve une piste WebVTT séparée « sous_titres.vtt » dans ses réglages.
 
+Après renforcement du composant vidéo, la piste « Français » est confirmée en mode « showing » dès le chargement ; les sous-titres apparaissent donc automatiquement dès la première réplique de la vidéo.
+
 La visionneuse est accessible depuis le dossier Essential Phone et le lecteur SPEED X est présenté dans une section dédiée au film du Drone. Les deux modules s’insèrent dans le rythme des dossiers, après les archives et avant les apprentissages.
 
 La zone de manipulation Essential Phone est dimensionnée à 577 × 556 px sur la vérification desktop. Un déplacement de pointeur a été émis dans son canvas de contrôle ; le module reste rendu et réactif sans erreur console, tandis que la manipulation manuelle directe demeure le comportement de référence.

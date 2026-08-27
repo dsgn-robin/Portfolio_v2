@@ -75,6 +75,9 @@ Le mot-symbole « ROBIN COURTE » s’écrit en capitales géométriques, avec u
 - Chaque prototype est rattaché à une planche bleu plan RC, jamais traité comme un accessoire libre sans langage de projet.
 - Aucun texte ne figure au centre du plateau ; la marque et les instructions restent en périphérie de caméra.
 - Le monogramme reprend les deux traits parallèles et l’angle de plan pour conserver une lecture d’atelier même à petite taille.
+- Le monogramme doit être lisible au premier regard comme un **R / RC** construit, avant d’être perçu comme une forme abstraite.
+- L’index d’accueil est une **notation en bord d’affiche** : nombres, codes couleur et graduations répondent aux socles plutôt qu’à une navigation conventionnelle.
+- Les surfaces principales gardent une matérialité d’**atelier imprimé** : papier chaud, encre mate, micro-grain, règles et ombres de documents.
 
 ---
 
