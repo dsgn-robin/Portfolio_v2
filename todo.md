@@ -221,3 +221,8 @@
 - [x] Auditer les fichiers de build, les branches distantes et la source Pages active.
 - [x] Ajouter une publication GitHub Pages qui génère le build Vite et fournit un point d’entrée aux routes internes.
 - [x] Vérifier localement le dossier publié et documenter le réglage Pages à sélectionner.
+
+## Correctif pnpm GitHub Actions
+
+- [x] Aligner la version définie dans l’action GitHub avec celle déclarée par package.json.
+- [x] Vérifier le workflow corrigé avant de redéclencher Pages.
