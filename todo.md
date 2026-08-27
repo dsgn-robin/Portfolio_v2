@@ -226,3 +226,9 @@
 
 - [x] Aligner la version définie dans l’action GitHub avec celle déclarée par package.json.
 - [x] Vérifier le workflow corrigé avant de redéclencher Pages.
+
+## Supports historiques et progression de chargement
+
+- [x] Retrouver les formes de supports précédentes et l’affichage de chargement actif.
+- [x] Rétablir les formes demandées et afficher une progression en pourcentage.
+- [x] Vérifier l’accueil sur desktop et mobile, puis enregistrer une version testée.

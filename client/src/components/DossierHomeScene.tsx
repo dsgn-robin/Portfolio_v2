@@ -10,7 +10,7 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
 import { resolvePortfolioMedia } from "@/lib/portfolio-media";
 
 type ProjectKey = "phone" | "photo" | "identity" | "drone" | "about" | "contact";
-type SupportShape = "slab" | "circle" | "arch" | "diamond" | "stepped" | "signal";
+type SupportShape = "rounded" | "circle";
 
 type ProjectSpec = {
   key: ProjectKey;
@@ -36,12 +36,12 @@ type ProjectRuntime = {
 };
 
 const PROJECTS: ProjectSpec[] = [
-  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-2.02, 1.28], baseRotation: 0, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.68, shape: "slab" },
+  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-2.02, 1.28], baseRotation: 0, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.68, shape: "rounded" },
   { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [1.5, 1.45], baseRotation: 0, scale: 0.86, shape: "circle" },
-  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.48, -1.35], baseRotation: 0, scale: 0.76, shape: "arch" },
-  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone_fbc0d7ed.glb", position: [1.75, -1.18], baseRotation: 0.12, scale: 1.72, shape: "diamond" },
-  { key: "about", number: "05", title: "À propos", category: "Note personnelle", collection: "Repères", color: 0x397c5d, colorCss: "#397c5d", position: [-4.65, 0], baseRotation: 0, shape: "stepped" },
-  { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [4.65, 0], baseRotation: 0, shape: "signal" },
+  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.48, -1.35], baseRotation: 0, scale: 0.76, shape: "rounded" },
+  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone_fbc0d7ed.glb", position: [1.75, -1.18], baseRotation: 0.12, scale: 1.72, shape: "circle" },
+  { key: "about", number: "05", title: "À propos", category: "Note personnelle", collection: "Repères", color: 0x397c5d, colorCss: "#397c5d", position: [-4.15, 1.72], baseRotation: -0.16, shape: "rounded" },
+  { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [4.15, -1.76], baseRotation: 0.14, shape: "circle" },
 ];
 
 const COLLECTIONS: ProjectSpec["collection"][] = ["Projets perso", "Projets scolaires", "Repères"];
@@ -79,22 +79,15 @@ function makePlatformLabel(spec: ProjectSpec) {
     new THREE.MeshBasicMaterial({ map: texture, transparent: true, toneMapped: false }),
   );
   label.rotation.x = -Math.PI / 2;
-  label.position.set(0, 0.125, ["circle", "diamond", "signal"].includes(spec.shape) ? 0.36 : 0.42);
+  label.position.set(0, 0.125, spec.shape === "circle" ? 0.36 : 0.42);
   return label;
 }
 
 function makePlatformMesh(shape: SupportShape, height: number, material: THREE.Material) {
   let geometry: THREE.BufferGeometry;
   if (shape === "circle") geometry = new THREE.CylinderGeometry(0.83, 0.83, height, 64);
-  else if (shape === "diamond") geometry = new THREE.CylinderGeometry(0.86, 0.86, height, 4);
-  else if (shape === "arch") geometry = new THREE.CylinderGeometry(0.92, 0.92, height, 64, 1, false, 0, Math.PI);
-  else if (shape === "signal") {
-    geometry = new THREE.CylinderGeometry(0.82, 0.82, height, 64);
-    geometry.scale(1.18, 1, 0.66);
-  } else if (shape === "slab") geometry = new RoundedBoxGeometry(2.05, height, 1.05, 0.08, 4);
   else geometry = new RoundedBoxGeometry(1.74, height, 1.18, 0.08, 4);
   const mesh = new THREE.Mesh(geometry, material);
-  if (shape === "diamond") mesh.rotation.y = Math.PI / 4;
   return mesh;
 }
 
@@ -112,18 +105,6 @@ function makePlatform(spec: ProjectSpec) {
   top.castShadow = true;
   top.receiveShadow = true;
   holder.add(top);
-
-  if (spec.shape === "stepped") {
-    const step = new THREE.Mesh(new RoundedBoxGeometry(0.8, 0.075, 0.45, 0.05, 4), new THREE.MeshStandardMaterial({ color: 0xf2e9d8, roughness: 0.88 }));
-    step.position.set(-0.3, 0.135, -0.18);
-    step.castShadow = true;
-    holder.add(step);
-  }
-  if (spec.shape === "arch") {
-    const inlay = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.025, 0.1), new THREE.MeshStandardMaterial({ color: 0xf2e9d8, roughness: 0.9 }));
-    inlay.position.set(0, 0.11, -0.05);
-    holder.add(inlay);
-  }
 
   holder.add(makePlatformLabel(spec));
   return holder;
@@ -441,7 +422,7 @@ export default function DossierHomeScene() {
         </footer>
       </section>
       <div className={`dossier-home__loader ${loaded >= PROJECTS.length ? "dossier-home__loader--hidden" : ""}`} aria-live="polite">
-        <strong>Robin Courte</strong><i><b style={{ width: `${(loaded / PROJECTS.length) * 100}%` }} /></i><span>Composition des pièces / {loaded} — {PROJECTS.length}</span>
+        <strong>Robin Courte</strong><i><b style={{ width: `${Math.round((loaded / PROJECTS.length) * 100)}%` }} /></i><span>Chargement de la composition / {Math.round((loaded / PROJECTS.length) * 100)} %</span>
       </div>
       {hovered ? (
         <div className={`dossier-home__tooltip ${isDragging ? "dossier-home__tooltip--dragging" : ""}`} style={{ transform: `translate3d(${pointer.x + 18}px, ${pointer.y - 54}px, 0)` }}>
