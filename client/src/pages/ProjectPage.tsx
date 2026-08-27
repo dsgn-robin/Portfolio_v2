@@ -144,7 +144,7 @@ const PROJECTS: Project[] = [
     ],
     video: {
       src: "/manus-storage/Video_drone_seul_2fec9be4.mp4",
-      captions: "/manus-storage/speedx-fr_5f831d53.vtt",
+      captions: "/manus-storage/sous_titres_990aa539.vtt",
       poster: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp",
       title: "SPEED X · Film de démonstration",
       description: "Une courte séquence de présentation du prototype, avec les sous-titres français activables directement dans le lecteur.",
@@ -210,8 +210,8 @@ function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<
         <article key={item.subject} className="project-comparison">
           <header><strong>{item.subject}</strong><span>Étude 0{itemIndex + 1}</span></header>
           <div className="project-comparison__images">
-            <button type="button" onClick={() => onOpen({ image: item.treatment, alt: item.treatmentAlt, label: `${item.subject} — traitement` })}><img src={item.treatment} alt={item.treatmentAlt} /><span>Traitement</span></button>
             <button type="button" onClick={() => onOpen({ image: item.original, alt: item.originalAlt, label: `${item.subject} — prise` })}><img src={item.original} alt={item.originalAlt} /><span>Prise</span></button>
+            <button type="button" onClick={() => onOpen({ image: item.treatment, alt: item.treatmentAlt, label: `${item.subject} — traitement` })}><img src={item.treatment} alt={item.treatmentAlt} /><span>Traitement</span></button>
           </div>
         </article>
       ))}
@@ -323,13 +323,7 @@ export default function ProjectPage() {
       <aside className="project-rail" aria-label="Navigation de projet">
         <Link href="/" className="project-rail__home" aria-label="Retourner à l’atelier">
           <span className="project-rail__monogram" aria-hidden="true">R</span>
-          <span className="project-rail__home-label">Atelier</span>
         </Link>
-        <div className="project-rail__index" aria-hidden="true">
-          <span>0{project.number}</span>
-          <i />
-          <span>04</span>
-        </div>
         <p className="project-rail__label">Robin Courte<br />Portfolio / 2026</p>
       </aside>
 

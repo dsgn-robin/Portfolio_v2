@@ -1,0 +1,410 @@
+[
+  {
+    "file": "photo.glb",
+    "meshCount": 7,
+    "nodeCount": 15,
+    "materialCount": 7,
+    "materials": [
+      "Cilindro_material",
+      "lambert1",
+      "lambert3",
+      "lambert4",
+      "Camara_material",
+      "ruleta_2",
+      "ruleta"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 11251273,
+        "name": "Image_5"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "bytes": 180147,
+        "name": "Image_3"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "bytes": 9014449,
+        "name": "Image_4"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "bytes": 12607622,
+        "name": "Image_2"
+      },
+      {
+        "index": 4,
+        "mimeType": "image/png",
+        "bytes": 1229762,
+        "name": "Image_0"
+      },
+      {
+        "index": 5,
+        "mimeType": "image/png",
+        "bytes": 9181287,
+        "name": "Image_1"
+      },
+      {
+        "index": 6,
+        "mimeType": "image/png",
+        "bytes": 296639,
+        "name": "Image_8"
+      },
+      {
+        "index": 7,
+        "mimeType": "image/png",
+        "bytes": 20555,
+        "name": "Image_6"
+      },
+      {
+        "index": 8,
+        "mimeType": "image/png",
+        "bytes": 97768,
+        "name": "Image_7"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Cilindro_material",
+        "baseColor": 1,
+        "metallicRoughness": 2,
+        "normal": 0,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      },
+      {
+        "index": 1,
+        "name": "lambert1",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.396921306848526,
+        "metallicFactor": 0.950217068195343
+      },
+      {
+        "index": 2,
+        "name": "lambert3",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.07467212527990341,
+        "metallicFactor": 1
+      },
+      {
+        "index": 3,
+        "name": "lambert4",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.23883679509162903,
+        "metallicFactor": 1
+      },
+      {
+        "index": 4,
+        "name": "Camara_material",
+        "baseColor": 4,
+        "metallicRoughness": 5,
+        "normal": 3,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      },
+      {
+        "index": 5,
+        "name": "ruleta_2",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.3300394117832184,
+        "metallicFactor": 0.9988584518432617
+      },
+      {
+        "index": 6,
+        "name": "ruleta",
+        "baseColor": 7,
+        "metallicRoughness": 8,
+        "normal": 6,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 0
+      }
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission"
+    ],
+    "bounds": {
+      "min": [
+        3.4823,
+        1.0025,
+        -0.5819
+      ],
+      "max": [
+        3.7197,
+        1.168,
+        -0.3235
+      ],
+      "size": [
+        0.2374,
+        0.1654,
+        0.2584
+      ],
+      "center": [
+        3.601,
+        1.0852,
+        -0.4527
+      ]
+    }
+  },
+  {
+    "file": "identite.glb",
+    "meshCount": 2,
+    "nodeCount": 2,
+    "materialCount": 2,
+    "materials": [
+      "Logo",
+      "Material"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 4169,
+        "name": "Logo"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Logo",
+        "baseColor": 0,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 1,
+        "name": "Material",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 1,
+        "metallicFactor": 1
+      }
+    ],
+    "extensions": [],
+    "bounds": {
+      "min": [
+        2.8972,
+        1.0051,
+        -1.443
+      ],
+      "max": [
+        3.156,
+        1.0465,
+        -1.1842
+      ],
+      "size": [
+        0.2588,
+        0.0414,
+        0.2588
+      ],
+      "center": [
+        3.0266,
+        1.0258,
+        -1.3136
+      ]
+    }
+  },
+  {
+    "file": "Phone_bleu.glb",
+    "meshCount": 15,
+    "nodeCount": 15,
+    "materialCount": 10,
+    "materials": [
+      "Blue-2",
+      "Matériau.040",
+      "Matériau.039",
+      "Matériau.029",
+      "Group 1.002",
+      "Matériau.033",
+      "Matériau.034",
+      "Matériau.032",
+      "Matériau.031",
+      "Matériau.042"
+    ],
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "bytes": 952,
+        "name": "Logo 1"
+      }
+    ],
+    "materialMaps": [
+      {
+        "index": 0,
+        "name": "Blue-2",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.30000001192092896,
+        "metallicFactor": 0.3370000123977661
+      },
+      {
+        "index": 1,
+        "name": "Matériau.040",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 2,
+        "name": "Matériau.039",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 3,
+        "name": "Matériau.029",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.44999998807907104,
+        "metallicFactor": 0
+      },
+      {
+        "index": 4,
+        "name": "Group 1.002",
+        "baseColor": 0,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 5,
+        "name": "Matériau.033",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 6,
+        "name": "Matériau.034",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.029999999329447746,
+        "metallicFactor": 0
+      },
+      {
+        "index": 7,
+        "name": "Matériau.032",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      },
+      {
+        "index": 8,
+        "name": "Matériau.031",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.029999999329447746,
+        "metallicFactor": 0
+      },
+      {
+        "index": 9,
+        "name": "Matériau.042",
+        "baseColor": null,
+        "metallicRoughness": null,
+        "normal": null,
+        "occlusion": null,
+        "emissive": null,
+        "roughnessFactor": 0.5,
+        "metallicFactor": 0
+      }
+    ],
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission",
+      "KHR_materials_specular",
+      "KHR_materials_ior",
+      "KHR_materials_anisotropy"
+    ],
+    "bounds": {
+      "min": [
+        -2.2264,
+        0.0058,
+        -1.7231
+      ],
+      "max": [
+        4.3655,
+        9.0208,
+        5.5134
+      ],
+      "size": [
+        6.5919,
+        9.0149,
+        7.2365
+      ],
+      "center": [
+        1.0695,
+        4.5133,
+        1.8952
+      ]
+    }
+  }
+]

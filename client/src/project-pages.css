@@ -27,7 +27,7 @@
 .project-page :focus-visible { outline: 3px solid var(--atelier-orange); outline-offset: 4px; }
 body.project-document-open.project-modal-open { overflow: hidden; }
 
-.project-reading-progress { position: fixed; z-index: 30; top: 0; right: 0; left: 6.4rem; height: 0.32rem; background: color-mix(in srgb, var(--ink) 11%, transparent); transform: translateZ(0); }
+.project-reading-progress { position: fixed; z-index: 30; top: 0; right: 0; left: 4.4rem; height: 0.32rem; background: color-mix(in srgb, var(--ink) 11%, transparent); transform: translateZ(0); }
 .project-reading-progress span { display: block; width: 100%; height: 100%; background: var(--atelier-orange); transform: scaleX(0); transform-origin: left; transition: transform 70ms linear; }
 
 .project-rail { 
@@ -35,7 +35,7 @@ body.project-document-open.project-modal-open { overflow: hidden; }
   z-index: 10;
   inset: 0 auto 0 0;
   display: flex;
-  width: 6.4rem;
+  width: 4.4rem;
   min-height: 100dvh;
   flex-direction: column;
   justify-content: space-between;
@@ -46,10 +46,10 @@ body.project-document-open.project-modal-open { overflow: hidden; }
 
 .project-rail::after { 
   position: absolute;
-  top: 7.2rem;
-  right: 0.68rem;
-  bottom: 7rem;
-  width: 0.3rem;
+  top: 6.4rem;
+  right: 0.46rem;
+  bottom: 6.15rem;
+  width: 0.22rem;
   background: repeating-linear-gradient(to bottom, var(--atelier-orange) 0 0.18rem, transparent 0.18rem 0.44rem);
   content: "";
   opacity: 0.92;
@@ -58,9 +58,8 @@ body.project-document-open.project-modal-open { overflow: hidden; }
 .project-rail__home {
   display: grid;
   place-items: center;
-  gap: 0.65rem;
-  padding: 1.7rem 0 1.1rem;
-  border-bottom: 1px solid var(--line);
+  padding: 1.15rem 0;
+  border-bottom: 0;
   text-align: center;
   transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -81,13 +80,7 @@ body.project-document-open.project-modal-open { overflow: hidden; }
   line-height: 1;
 }
 
-.project-rail__home-label,
-.project-rail__label,
-.project-rail__index { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
-.project-rail__index { position: relative; display: grid; place-items: center; gap: 0.6rem; padding: 1.25rem 0; }
-.project-rail__index::before { position: absolute; top: 0; right: 0; left: 0; height: 0.26rem; background: var(--atelier-orange); content: ""; }
-.project-rail__index i { display: block; width: 1px; height: 3rem; background: currentColor; }
-.project-rail__label { margin: 0; padding: 1.5rem 0.5rem; color: var(--quiet-ink); line-height: 1.65; text-align: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+.project-rail__label { margin: 0; padding: 1.5rem 0.35rem; color: var(--quiet-ink); font-size: 0.5rem; font-weight: 700; letter-spacing: 0.09em; line-height: 1.65; text-align: center; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
 
 .project-hero,
 .project-intro,
@@ -96,7 +89,7 @@ body.project-document-open.project-modal-open { overflow: hidden; }
 .phone-viewer,
 .project-video,
 .project-closing,
-.project-next { margin-left: 6.4rem; }
+.project-next { margin-left: 4.4rem; }
 
 .project-hero {
   position: relative;
@@ -214,8 +207,9 @@ body.project-document-open.project-modal-open { overflow: hidden; }
 .project-archive__heading p { max-width: 32rem; margin: -0.4rem 0 0; font-size: 1rem; font-weight: 500; line-height: 1.55; }
 .project-documents { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.28fr 0.9fr; align-items: start; gap: clamp(1rem, 2.2vw, 2rem); }
 
-.project-document { position: relative; display: grid; width: 100%; min-height: 0; grid-template-rows: auto 1fr auto; gap: 1rem; padding: 1rem; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.5rem 0.5rem 0 var(--ink); color: inherit; cursor: zoom-in; text-align: left; transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1); }
-.project-document:hover { box-shadow: 0.75rem 0.75rem 0 var(--ink); transform: translate(-0.22rem, -0.22rem) rotate(-0.45deg); }
+.project-document, .project-gallery__item, .project-comparison__images button { transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1); }
+.project-document { position: relative; display: grid; width: 100%; min-height: 0; grid-template-rows: auto 1fr auto; gap: 1rem; padding: 1rem; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.5rem 0.5rem 0 var(--ink); color: inherit; cursor: zoom-in; text-align: left; }
+.project-document:hover, .project-gallery__item:hover, .project-comparison__images button:hover { box-shadow: 0.75rem 0.75rem 0 var(--ink); transform: translate(-0.22rem, -0.22rem) rotate(-0.45deg); }
 .project-document--wide { margin-top: 3rem; }
 .project-document--square { margin-top: 7rem; }
 .project-document__head { display: flex; justify-content: space-between; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.09em; }
@@ -236,10 +230,10 @@ body.project-document-open.project-modal-open { overflow: hidden; }
 
 .project-gallery { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.2vw, 2rem); margin-top: clamp(3rem, 8vw, 8rem); }
 .project-gallery--1 { grid-template-columns: minmax(0, 0.64fr); margin-left: auto; }
-.project-gallery__item { position: relative; width: 100%; margin: 0; overflow: hidden; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.45rem 0.45rem 0 var(--ink); color: inherit; cursor: zoom-in; text-align: left; }
+.project-gallery__item { position: relative; width: 100%; margin: 0; overflow: hidden; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.5rem 0.5rem 0 var(--ink); color: inherit; cursor: zoom-in; text-align: left; }
 .project-gallery__item:nth-child(2n) { margin-top: clamp(1.3rem, 3vw, 3.5rem); }
 .project-gallery__item img { display: block; width: 100%; aspect-ratio: 1.08; object-fit: contain; background: var(--paper); transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1); }
-.project-gallery__item:hover img { transform: scale(1.025); }
+.project-gallery__item:hover img { transform: none; }
 .project-gallery__item > span { display: block; padding: 0.75rem 0.85rem; border-top: 1px solid var(--line); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
 
 .project-comparisons { position: relative; z-index: 1; display: grid; grid-template-columns: 0.55fr 1.45fr; gap: clamp(2rem, 7vw, 8rem); margin-top: clamp(4rem, 10vw, 10rem); padding-top: 1.25rem; border-top: 2px solid var(--ink); }
@@ -251,7 +245,7 @@ body.project-document-open.project-modal-open { overflow: hidden; }
 .project-comparison header strong { color: var(--project-accent-dark); }
 .project-comparison__images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
 .project-comparison figure { margin: 0; }
-.project-comparison__images button { padding: 0; border: 0; background: transparent; color: inherit; cursor: zoom-in; text-align: left; }
+.project-comparison__images button { padding: 0; border: 0; background: transparent; color: inherit; cursor: zoom-in; text-align: left; box-shadow: 0.5rem 0.5rem 0 var(--ink); }
 .project-comparison img { display: block; width: 100%; aspect-ratio: 1.08; object-fit: contain; border: 1px solid var(--line); background: var(--paper); }
 .project-comparison__images button > span { display: block; margin-top: 0.4rem; color: var(--quiet-ink); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
 
@@ -378,8 +372,6 @@ body.project-document-open.project-modal-open { overflow: hidden; }
   .project-rail { position: relative; width: 100%; min-height: 4.65rem; flex-direction: row; align-items: center; border-right: 0; border-bottom: 1px solid var(--line); }
   .project-rail__home { display: flex; height: 4.65rem; align-items: center; gap: 0.65rem; padding: 0 1.2rem; border-bottom: 0; border-right: 1px solid var(--line); }
   .project-rail__monogram { width: 2rem; height: 2rem; font-size: 1rem; }
-  .project-rail__index { display: flex; gap: 0.55rem; padding: 0 1.25rem; }
-  .project-rail__index i { width: 2.5rem; height: 1px; }
   .project-rail__label { padding: 0 1rem; text-align: right; writing-mode: initial; transform: none; }
   .project-rail::after { top: auto; right: 0; bottom: 0.3rem; left: 8rem; width: auto; height: 0.25rem; background: repeating-linear-gradient(90deg, var(--project-accent) 0 0.18rem, transparent 0.18rem 0.44rem); }
   .project-reading-progress { left: 0; }

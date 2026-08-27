@@ -383,6 +383,8 @@ a { -webkit-tap-highlight-color: transparent; }
 
 .dossier-home__index { position: absolute; z-index: 4; top: clamp(1rem, 2.4vw, 2.2rem); right: clamp(1rem, 2.4vw, 2.2rem); display: grid; width: min(18rem, 28vw); border-top: 2px solid #171612; }
 .dossier-home__index-title { padding: 0.55rem 0; color: #5d574d; font-size: 0.57rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
+.dossier-home__collection + .dossier-home__collection { margin-top: 0.5rem; }
+.dossier-home__collection > span { display: block; padding: 0.35rem 0 0.28rem; border-top: 1px solid rgb(23 22 18 / 45%); color: #e95a2c; font-size: 0.51rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 .dossier-home__index button { position: relative; display: grid; min-height: 2.55rem; grid-template-columns: 1.6rem 1fr auto; align-items: center; gap: 0.55rem; padding: 0.35rem 0; border: 0; border-top: 1px solid rgb(23 22 18 / 24%); background: transparent; color: #171612; cursor: pointer; text-align: left; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), padding 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .dossier-home__index button::before { position: absolute; top: 0; bottom: 0; left: 0; width: 0.24rem; background: var(--project-color); content: ""; transform: scaleY(0.32); transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .dossier-home__index button > span { color: var(--project-color); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; }
@@ -423,7 +425,9 @@ a { -webkit-tap-highlight-color: transparent; }
   .dossier-home__brand strong { font-size: 0.66rem; }
   .dossier-home__brand small { display: none; }
   .dossier-home__index { top: 0.85rem; right: 0.85rem; width: auto; grid-template-columns: repeat(4, auto); border-top: 0; }
-  .dossier-home__index-title { display: none; }
+  .dossier-home__index-title, .dossier-home__collection > span { display: none; }
+  .dossier-home__collection { display: contents; }
+  .dossier-home__collection + .dossier-home__collection { margin-top: 0; }
   .dossier-home__index button { display: grid; width: 2rem; min-height: 2.15rem; place-items: center; padding: 0; border: 1px solid rgb(23 22 18 / 36%); background: rgb(242 233 216 / 70%); }
   .dossier-home__index button strong, .dossier-home__index button svg { display: none; }
   .dossier-home__index button:hover { padding: 0; background: #171612; }

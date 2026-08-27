@@ -36,6 +36,8 @@ La nouvelle scène-dossier ouvre Essential Phone via son index dans l’onglet c
 
 La scène-dossier d’accueil présente désormais les quatre modèles source sur des podiums colorés, avec leurs étiquettes imprimées, un index correspondant et un cartouche d’atelier unifié. Le contrôle de survol automatisé est resté dépendant du navigateur de prévisualisation ; la sélection est donc aussi couverte par le test des routes d’index et la logique de raycasting limitée aux meshes GLB.
 
+Le lecteur Drone utilise désormais la vidéo source « Video_drone_seul » et la piste fournie « sous_titres.vtt ». Le navigateur confirme une piste de sous-titres disponible et active dans les réglages du lecteur.
+
 La visionneuse est accessible depuis le dossier Essential Phone et le lecteur SPEED X est présenté dans une section dédiée au film du Drone. Les deux modules s’insèrent dans le rythme des dossiers, après les archives et avant les apprentissages.
 
 La zone de manipulation Essential Phone est dimensionnée à 577 × 556 px sur la vérification desktop. Un déplacement de pointeur a été émis dans son canvas de contrôle ; le module reste rendu et réactif sans erreur console, tandis que la manipulation manuelle directe demeure le comportement de référence.

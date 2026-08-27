@@ -21,7 +21,7 @@ export default function EssentialPhoneViewer() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(33, 1, 0.1, 100);
-    camera.position.set(2.7, 2.05, 3.35);
+    camera.position.set(0, 0.22, 4.25);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
@@ -39,11 +39,11 @@ export default function EssentialPhoneViewer() {
     controls.enablePan = false;
     controls.minDistance = 2.3;
     controls.maxDistance = 5.3;
-    controls.target.set(0, 0.1, 0);
+    controls.target.set(0, 0, 0);
 
     const resetCamera = () => {
-      camera.position.set(2.7, 2.05, 3.35);
-      controls.target.set(0, 0.1, 0);
+      camera.position.set(0, 0.22, 4.25);
+      controls.target.set(0, 0, 0);
       controls.update();
     };
     resetView.current = resetCamera;
@@ -60,15 +60,6 @@ export default function EssentialPhoneViewer() {
     blueFill.position.set(-2.8, 0.6, 2.5);
     scene.add(blueFill);
 
-    const floor = new THREE.Mesh(
-      new THREE.CircleGeometry(1.8, 64),
-      new THREE.MeshStandardMaterial({ color: 0x14181d, roughness: 0.9, metalness: 0 }),
-    );
-    floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -0.76;
-    floor.receiveShadow = true;
-    scene.add(floor);
-
     let loadedModel: THREE.Object3D | null = null;
     const loader = new GLTFLoader();
     loader.load(
@@ -81,7 +72,7 @@ export default function EssentialPhoneViewer() {
         const scale = longestSide > 0 ? 2.25 / longestSide : 1;
         loadedModel.scale.setScalar(scale);
         loadedModel.position.copy(center).multiplyScalar(-scale);
-        loadedModel.rotation.set(-0.09, -0.55, 0.02);
+        loadedModel.rotation.set(0, 0, 0);
         loadedModel.traverse((node) => {
           if (node instanceof THREE.Mesh) {
             node.castShadow = true;

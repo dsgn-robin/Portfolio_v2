@@ -157,3 +157,12 @@
 - [x] Recomposer le sol, les supports, l’éclairage et les repères de la nouvelle scène.
 - [x] Reprendre la sélection précise, le déplacement, la rotation et l’ouverture des dossiers.
 - [x] Vérifier la nouvelle scène sur desktop et mobile, puis enregistrer une version testée.
+
+## Ajustements précis accueil et dossiers
+
+- [x] Corriger la taille, l’orientation et les supports visuels des quatre objets de l’accueil.
+- [x] Remplacer le duo blueprint+téléphone par le téléphone seul sur le support Essential Phone.
+- [x] Étendre les zones de clic aux socles, la zone de déplacement à la scène et organiser l’index par catégories.
+- [x] Simplifier le rail des dossiers, uniformiser les hovers et inverser la comparaison photo demandée.
+- [x] Remplacer la piste de sous-titres Drone et rectifier la visionneuse Essential Phone.
+- [x] Vérifier les interactions desktop/mobile puis enregistrer une version testée.

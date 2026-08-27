@@ -15,11 +15,13 @@ type ProjectSpec = {
   number: string;
   title: string;
   category: string;
+  collection: "Projets perso" | "Projets scolaires";
   color: number;
   colorCss: string;
   path: string;
   position: [number, number];
   baseRotation: number;
+  presentationRotation?: [number, number, number];
   scale: number;
   shape: "rounded" | "circle";
 };
@@ -32,11 +34,13 @@ type ProjectRuntime = {
 };
 
 const PROJECTS: ProjectSpec[] = [
-  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/phone_0fd05b3c.glb", position: [-2.02, 1.28], baseRotation: -0.22, scale: 2.05, shape: "rounded" },
-  { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [1.5, 1.45], baseRotation: 0.15, scale: 1.58, shape: "circle" },
-  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.48, -1.35], baseRotation: 0.21, scale: 1.45, shape: "rounded" },
-  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone_fbc0d7ed.glb", position: [1.75, -1.18], baseRotation: -0.17, scale: 2.15, shape: "circle" },
+  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-2.02, 1.28], baseRotation: 0, scale: 1.28, shape: "rounded" },
+  { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [1.5, 1.45], baseRotation: 0, scale: 0.86, shape: "circle" },
+  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.48, -1.35], baseRotation: 0, scale: 0.76, shape: "rounded" },
+  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone_fbc0d7ed.glb", position: [1.75, -1.18], baseRotation: 0, scale: 1.72, shape: "circle" },
 ];
+
+const COLLECTIONS: ProjectSpec["collection"][] = ["Projets perso", "Projets scolaires"];
 
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(Math.max(value, minimum), maximum);
 
@@ -91,7 +95,6 @@ function makePlatform(spec: ProjectSpec) {
 }
 
 function makeBackdrop(scene: THREE.Scene) {
-  const black = new THREE.MeshStandardMaterial({ color: 0x171612, roughness: 0.92 });
   const orange = new THREE.MeshStandardMaterial({ color: 0xe95a2c, roughness: 0.88 });
   const paper = new THREE.MeshStandardMaterial({ color: 0xf2e9d8, roughness: 0.96 });
 
@@ -106,13 +109,8 @@ function makeBackdrop(scene: THREE.Scene) {
   disc.position.set(2.65, -0.235, 2.05);
   scene.add(disc);
 
-  const inkBlock = new THREE.Mesh(new THREE.PlaneGeometry(2.65, 1.05), black);
-  inkBlock.rotation.x = -Math.PI / 2;
-  inkBlock.position.set(-2.6, -0.232, 1.96);
-  scene.add(inkBlock);
-
   [-1.4, -0.98, -0.56, -0.14, 0.28, 0.7].forEach((offset) => {
-    const marker = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.022, 0.08), black);
+    const marker = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.022, 0.08), new THREE.MeshStandardMaterial({ color: 0x171612, roughness: 0.92 }));
     marker.position.set(-3.96, -0.22, offset);
     scene.add(marker);
   });
@@ -211,8 +209,8 @@ export default function DossierHomeScene() {
         if (Math.hypot(event.clientX - dragging.startX, event.clientY - dragging.startY) > 6) dragging.moved = true;
         getNdc(event);
         if (raycaster.ray.intersectPlane(dragPlane, point)) {
-          dragging.runtime.group.position.x = clamp(point.x, -3.15, 3.1);
-          dragging.runtime.group.position.z = clamp(point.z, -2.05, 2.05);
+          dragging.runtime.group.position.x = clamp(point.x, -3.7, 3.7);
+          dragging.runtime.group.position.z = clamp(point.z, -2.45, 2.45);
         }
         return;
       }
@@ -276,7 +274,15 @@ export default function DossierHomeScene() {
       loader.load(spec.path, (gltf) => {
         if (cancelled) return;
         const group = new THREE.Group();
+        group.userData.projectKey = spec.key;
         const model = gltf.scene;
+        if (spec.key === "drone") {
+          model.traverse((child) => {
+            if (child.name === "Blueprint-drone") child.rotation.set(0, 0, 0);
+          });
+        }
+        if (spec.presentationRotation) model.rotation.set(...spec.presentationRotation);
+        model.updateMatrixWorld(true);
         const box = new THREE.Box3().setFromObject(model);
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
@@ -367,11 +373,16 @@ export default function DossierHomeScene() {
         <div><strong>Robin Courte</strong><small>Atelier / index de projets</small></div>
       </header>
       <aside className="dossier-home__index" aria-label="Index des dossiers">
-        <span className="dossier-home__index-title">Ouvrir une pièce</span>
-        {PROJECTS.map((project) => (
-          <button key={project.key} type="button" onClick={() => openProject(project.key)} style={{ "--project-color": project.colorCss } as React.CSSProperties}>
-            <span>{project.number}</span><strong>{project.title}</strong><Eye size={15} />
-          </button>
+        <span className="dossier-home__index-title">Index des projets</span>
+        {COLLECTIONS.map((collection) => (
+          <div className="dossier-home__collection" key={collection}>
+            <span>{collection}</span>
+            {PROJECTS.filter((project) => project.collection === collection).map((project) => (
+              <button key={project.key} type="button" onClick={() => openProject(project.key)} style={{ "--project-color": project.colorCss } as React.CSSProperties}>
+                <span>{project.number}</span><strong>{project.title}</strong><Eye size={15} />
+              </button>
+            ))}
+          </div>
         ))}
       </aside>
       <section className="dossier-home__cartouche">
