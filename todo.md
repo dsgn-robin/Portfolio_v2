@@ -109,3 +109,12 @@
 - [x] Enregistrer les hits du raycaster et les changements de survol pour isoler la rupture.
 - [x] Réparer le chemin qui empêchait le texte projet de recevoir une position visible.
 - [x] Vérifier le chemin d’affichage du libellé au-dessus du canvas pour les quatre prototypes.
+
+## Pages projets éditoriales
+
+- [x] Relever l’architecture et le ton du portfolio existant pour la déclinaison éditoriale.
+- [x] Définir le système visuel commun inspiré des affiches Bauhaus et des cartes illustrées.
+- [x] Écrire les contenus documentaires temporaires et la structure partagée des études de cas.
+- [x] Concevoir les pages dédiées aux projets et leurs compositions graphiques.
+- [x] Relier les objets de l’atelier aux routes projets et contrôler l’expérience mobile.
+- [x] Vérifier les pages, ajuster les contrastes et enregistrer une version testée.

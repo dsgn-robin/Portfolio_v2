@@ -75,3 +75,88 @@ Le mot-symbole « ROBIN COURTE » s’écrit en capitales géométriques, avec u
 - Chaque prototype est rattaché à une planche bleu plan RC, jamais traité comme un accessoire libre sans langage de projet.
 - Aucun texte ne figure au centre du plateau ; la marque et les instructions restent en périphérie de caméra.
 - Le monogramme reprend les deux traits parallèles et l’angle de plan pour conserver une lecture d’atelier même à petite taille.
+
+---
+
+## Extension éditoriale — Pages projets
+
+### Trois pistes envisagées
+
+#### 1. **Catalogue d’atelier**
+
+Une étude de cas pensée comme un dossier de fabrication : matière, annotations, pièces et résultats sont présentés dans une composition chaude et tactile. La lecture évoque une table de travail, sans imiter l’interface d’un logiciel.
+
+**Probabilité : 0,07**
+
+#### 2. **Affiches en série**
+
+Chaque projet devient une affiche éditoriale construite à partir de formes franches, de couleurs d’encre et de typographie architecturée. L’inspiration Bauhaus devient un système de rythme plutôt qu’un décor nostalgique.
+
+**Probabilité : 0,04**
+
+#### 3. **Archives de personnages**
+
+Les projets sont traités comme des cartes de collection, combinant cadre noir, code de référence, emblème, attributs et compositions illustrées. La personnalité de chaque travail passe avant la répétition d’une simple grille.
+
+**Probabilité : 0,09**
+
+### Piste retenue — **Affiches en série**
+
+#### Mouvement de design
+
+Cette extension traduit le **Bauhaus éditorial contemporain** en études de cas numériques : géométrie rationnelle, asymétrie construite, couleurs d’encre et typographie à forte présence. Les références de cartes illustrées inspirent les cartouches, les codes de série et la manière de donner une identité autonome à chaque projet.
+
+#### Principes directeurs
+
+1. Chaque page fonctionne comme une **affiche verticale lisible**, avec une idée graphique forte et une lecture de haut en bas.
+2. Les contenus sont structurés en **blocs éditoriaux contrastés** plutôt qu’en cartes UI répétitives.
+3. Les grandes formes géométriques guident le regard, encadrent les documents et matérialisent les catégories de projet.
+4. Les métadonnées — numéro, type de projet, rôle, année et statut du dossier — forment un vocabulaire de collection discret mais récurrent.
+
+#### Philosophie de la couleur
+
+Le papier chaud (`#F2E9D8`) est la base commune : il relie les études de cas à un carnet d’atelier et rend les couleurs plus matérielles. Chaque projet reçoit ensuite une couleur d’encre dominante : **bleu plan technique** pour Essential Phone, **vert signal** pour l’identité visuelle, **jaune lumière** pour le projet photo et **rouge-orangé** pour le drone. Le noir encre (`#171612`) porte titres et repères techniques ; la couleur oriente sans recouvrir l’ensemble des surfaces.
+
+#### Paradigme de mise en page
+
+Chaque étude de cas est une **colonne d’affiche asymétrique**. Une bande verticale de référence persiste à gauche sur desktop, tandis que le contenu alterne entre un grand panneau manifeste, une planche documentaire, des annotations et une conclusion. Les documents temporaires n’occupent jamais une grille uniforme : certains sont grands, d’autres légèrement décalés, selon le rythme propre au projet.
+
+#### Éléments signatures
+
+1. Un **sceau géométrique numéroté**, propre à chaque projet, relie les pages à l’idée de série.
+2. Une **règle d’atelier** à points et graduations accompagne les documents et légendes.
+3. Des **formes Bauhaus de découpe** — arcs, demi-disques, bandes, yeux et cibles — s’insèrent derrière le contenu sans nuire à la lecture.
+
+#### Philosophie d’interaction
+
+Les interactions sont nettes et matérielles : les liens se soulignent comme un trait d’encre, les documents se soulèvent très légèrement et les retours à l’atelier se comportent comme l’index d’un dossier. Aucun effet décoratif ne ralentit la lecture ou ne masque les informations.
+
+#### Animation
+
+Les cartouches et documents entrent par échelons de 40 à 70 ms, avec un léger déplacement vertical et une opacité progressive. Les formes décoratives restent statiques. Les transitions de survol durent de 140 à 180 ms et animent uniquement `transform`, `opacity` et les traits. Les préférences de réduction des mouvements désactivent les entrées non essentielles.
+
+#### Système typographique
+
+**Archivo Black** porte titres, numéros et légendes à impact : capitales serrées, lignes courtes, composition quasi-affiche. **Space Grotesk** assure texte courant, métadonnées et boutons : géométrique, lisible, technique sans être froide. Les titres sont très grands mais jamais centrés par défaut ; les paragraphes gardent une mesure courte et respirante.
+
+#### Essence de marque
+
+**Des études de conception pour montrer comment une idée devient une forme, destinées aux personnes curieuses de design matériel et numérique, avec un regard d’atelier plus qu’un portfolio vitrine.**
+
+Personnalité : **curieuse, précise, expressive**.
+
+#### Voix de marque
+
+La voix est directe, concrète et jeune sans être décontractée. Les titres annoncent une intention, les microcopies décrivent une action ou une pièce du dossier, sans remplissage générique.
+
+> « Une interface pensée comme un objet que l’on a envie de retourner. »
+
+> « Ouvrir le dossier — croquis, choix, essais. »
+
+#### Logotype et symbole
+
+Le monogramme de navigation est une **lettre R construite par deux demi-disques et une barre verticale**, imprimée en noir sur papier chaud. Il s’emploie seul dans le retour atelier et les repères de section ; le nom complet reste composé dans la typographie de titre, jamais dans une police par défaut.
+
+#### Couleur signature
+
+**Orange atelier — `#E95A2C`** : une teinte d’encre chaude, énergique et immédiatement reconnaissable, réservée aux accents de navigation, aux mots-clés et aux repères de progression.
