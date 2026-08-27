@@ -91,3 +91,9 @@
 - [x] Fluidifier le déplacement, la rotation et les retours de survol des prototypes.
 - [x] Stabiliser le rendu et réduire le coût de rendu sur les écrans modestes.
 - [x] Clarifier les repères d’usage et l’état de chargement de la scène.
+
+## Tooltip de projet
+
+- [x] Identifier pourquoi les changements de tooltip cadencés ne s’affichent plus au survol.
+- [x] Restaurer le nom et la catégorie au survol de chaque mesh interactif.
+- [x] Vérifier que le tooltip suit le pointeur sans perte de fluidité.

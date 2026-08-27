@@ -654,17 +654,6 @@ export default function WorkshopScene() {
     let didDrag = false;
     let didRotate = false;
     let previousFrameTime = performance.now();
-    let tooltipFrame = 0;
-    let pendingTooltip: { title: string; eyebrow: string; x: number; y: number } | null = null;
-
-    function scheduleTooltip(next: { title: string; eyebrow: string; x: number; y: number } | null) {
-      pendingTooltip = next;
-      if (tooltipFrame) return;
-      tooltipFrame = window.requestAnimationFrame(() => {
-        tooltipFrame = 0;
-        setTooltip(pendingTooltip);
-      });
-    }
 
     function resize() {
       const width = viewport.clientWidth;
@@ -708,7 +697,7 @@ export default function WorkshopScene() {
       if (hit === hovered) {
         if (hit) {
           const project = hit.userData.project as ProjectSpec;
-          scheduleTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+          setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
         }
         return;
       }
@@ -716,9 +705,9 @@ export default function WorkshopScene() {
       viewport.style.cursor = hit ? "grab" : "default";
       if (hit) {
         const project = hit.userData.project as ProjectSpec;
-        scheduleTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+        setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
       } else {
-        scheduleTooltip(null);
+        setTooltip(null);
       }
     }
 
@@ -734,7 +723,7 @@ export default function WorkshopScene() {
         active.position.z = THREE.MathUtils.clamp(next.z, TABLE.minZ, TABLE.maxZ);
         didDrag ||= event.clientX !== downPoint.x || event.clientY !== downPoint.y;
         const project = active.userData.project as ProjectSpec;
-        scheduleTooltip({ title: project.title, eyebrow: "Positionnement", x: event.clientX, y: event.clientY });
+        setTooltip({ title: project.title, eyebrow: "Positionnement", x: event.clientX, y: event.clientY });
       }
     }
 
@@ -762,10 +751,10 @@ export default function WorkshopScene() {
       if (renderer.domElement.hasPointerCapture(event.pointerId)) renderer.domElement.releasePointerCapture(event.pointerId);
       if (clicked) window.open(project.url, "_blank", "noopener,noreferrer");
       else {
-        scheduleTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
+        setTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
         window.setTimeout(() => {
           if (hovered === finished) {
-            scheduleTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
+            setTooltip({ title: project.title, eyebrow: project.eyebrow, x: event.clientX, y: event.clientY });
           }
         }, 700);
       }
@@ -775,7 +764,7 @@ export default function WorkshopScene() {
       if (!active) {
         hovered = null;
         viewport.style.cursor = "default";
-        scheduleTooltip(null);
+        setTooltip(null);
       }
     }
 
@@ -789,7 +778,7 @@ export default function WorkshopScene() {
       rotatingProject.userData.rotationTargetY = currentTarget + direction * 0.18;
       didRotate = true;
       const project = rotatingProject.userData.project as ProjectSpec;
-      scheduleTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
+      setTooltip({ title: project.title, eyebrow: active ? "Positionnement · rotation" : "Rotation", x: event.clientX, y: event.clientY });
     }
 
     renderer.domElement.addEventListener("pointermove", onPointerMove);
@@ -819,7 +808,6 @@ export default function WorkshopScene() {
 
     return () => {
       window.cancelAnimationFrame(frame);
-      window.cancelAnimationFrame(tooltipFrame);
       window.removeEventListener("resize", resize);
       renderer.domElement.removeEventListener("pointermove", onPointerMove);
       renderer.domElement.removeEventListener("pointerdown", onPointerDown);
