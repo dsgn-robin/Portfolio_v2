@@ -247,3 +247,10 @@
 - [x] Corriger le chevauchement de la fenêtre Partager et rendre Mentions légales plus accessible.
 - [x] Vérifier l’orientation et l’espacement de chaque support sur la scène d’accueil.
 - [x] Contrôler les corrections sur desktop et mobile, puis enregistrer une version testée.
+
+## Refonte index et simplification partage
+
+- [x] Retirer le repère « 04 · Film » de la navigation du dossier Drone.
+- [x] Simplifier la fenêtre Partager en supprimant le texte décoratif en conflit avec la croix.
+- [x] Créer un nouveau format d’index d’accueil plus clair, compact et graphique.
+- [x] Vérifier le dossier Drone, la fenêtre de partage et l’index sur desktop et mobile.

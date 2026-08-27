@@ -44,7 +44,6 @@ const PROJECTS: ProjectSpec[] = [
   { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [3.35, -1.35], baseRotation: -0.34, shape: "circle" },
 ];
 
-const COLLECTIONS: ProjectSpec["collection"][] = ["Projets perso", "Projets scolaires", "Repères"];
 const DESTINATIONS: Record<ProjectKey, string> = {
   phone: "/projets/essential-phone",
   photo: "/projets/projet-photo",
@@ -399,16 +398,11 @@ export default function DossierHomeScene() {
         <div><strong>Robin Courte</strong><small>Atelier / index de projets</small></div>
       </header>
       <aside className="dossier-home__index" aria-label="Index des dossiers">
-          <span className="dossier-home__index-title">Index des pièces</span>
-        {COLLECTIONS.map((collection) => (
-          <div className="dossier-home__collection" key={collection}>
-            <span>{collection}</span>
-            {PROJECTS.filter((project) => project.collection === collection).map((project) => (
-              <button key={project.key} type="button" onClick={() => openProject(project.key)} style={{ "--project-color": project.colorCss } as React.CSSProperties}>
-                <span>{project.number}</span><strong>{project.title}</strong><i aria-hidden="true" />
-              </button>
-            ))}
-          </div>
+        <span className="dossier-home__index-title">Sommaire <b>06</b></span>
+        {PROJECTS.map((project) => (
+          <button key={project.key} type="button" onClick={() => openProject(project.key)} style={{ "--project-color": project.colorCss } as React.CSSProperties}>
+            <span>{project.number}</span><strong>{project.title}</strong><i aria-hidden="true" />
+          </button>
         ))}
       </aside>
       <section className="dossier-home__cartouche">

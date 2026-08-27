@@ -381,20 +381,19 @@ a { -webkit-tap-highlight-color: transparent; }
 .dossier-home__statement em { color: #e95a2c; font-style: normal; }
 .dossier-home__statement span { display: block; margin-top: 1rem; color: #5d574d; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.11em; }
 
-.dossier-home__index { position: absolute; z-index: 4; top: clamp(1rem, 2.4vw, 2.2rem); right: clamp(1rem, 2.4vw, 2.2rem); display: grid; width: min(13.5rem, 20vw); padding: 0.35rem 0.55rem 0.45rem 1.35rem; border-top: 1px solid rgb(23 22 18 / 26%); border-bottom: 1px solid rgb(23 22 18 / 26%); background: rgb(242 233 216 / 68%); backdrop-filter: blur(8px); }
-.dossier-home__index::before { position: absolute; top: 0.35rem; bottom: 0.35rem; left: 0.42rem; width: 0.45rem; background: repeating-linear-gradient(0deg, #171612 0 0.09rem, transparent 0.09rem 0.32rem), repeating-linear-gradient(0deg, transparent 0 1.8rem, #171612 1.8rem 1.9rem, transparent 1.9rem 3.6rem); content: ""; }
+.dossier-home__index { position: absolute; z-index: 4; top: clamp(1rem, 2.4vw, 2.2rem); right: clamp(1rem, 2.4vw, 2.2rem); display: grid; width: min(15rem, 23vw); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.32rem; padding: 0.5rem; border: 1px solid #171612; background: rgb(242 233 216 / 86%); box-shadow: 0.28rem 0.28rem 0 #171612; backdrop-filter: blur(8px); }
+.dossier-home__index::before { position: absolute; top: -0.22rem; right: -0.22rem; width: 1rem; height: 1rem; border-top: 0.22rem solid #e95a2c; border-right: 0.22rem solid #e95a2c; content: ""; }
 .dossier-home__index::after { display: none; }
-.dossier-home__index-title { padding: 0.16rem 0 0.4rem; border-bottom: 1px solid #171612; color: #5d574d; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-.dossier-home__collection + .dossier-home__collection { margin-top: 0.26rem; }
-.dossier-home__collection > span { display: block; padding: 0.34rem 0 0.16rem; border-top: 0; color: #e95a2c; font-size: 0.45rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
-.dossier-home__index button { position: relative; display: grid; min-height: 1.85rem; grid-template-columns: 1.25rem 1fr; align-items: center; gap: 0.35rem; padding: 0.2rem 0; border: 0; border-top: 1px solid rgb(23 22 18 / 20%); background: transparent; color: #171612; cursor: pointer; text-align: left; transition: color 160ms cubic-bezier(0.23, 1, 0.32, 1), padding 160ms cubic-bezier(0.23, 1, 0.32, 1); }
-.dossier-home__index button::before { position: absolute; top: 0; bottom: 0; left: 0; width: 0.24rem; background: var(--project-color); content: ""; transform: scaleY(0.32); transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
-.dossier-home__index button > span { color: var(--project-color); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; }
-.dossier-home__index button strong { overflow: hidden; font-size: 0.57rem; font-weight: 700; letter-spacing: 0.045em; line-height: 1.05; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.dossier-home__index-title { display: flex; grid-column: 1 / -1; align-items: baseline; justify-content: space-between; padding: 0.12rem 0.08rem 0.42rem; border-bottom: 1px solid #171612; color: #5d574d; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.dossier-home__index-title b { color: #e95a2c; font-family: "Archivo Black", sans-serif; font-size: 0.7rem; letter-spacing: -0.04em; }
+.dossier-home__index button { position: relative; display: grid; min-height: 2.4rem; grid-template-columns: 1.15rem minmax(0, 1fr); align-items: center; gap: 0.28rem; padding: 0.28rem 0.32rem; border: 1px solid rgb(23 22 18 / 28%); background: rgb(242 233 216 / 58%); color: #171612; cursor: pointer; text-align: left; transition: color 160ms cubic-bezier(0.23, 1, 0.32, 1), background 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.dossier-home__index button::before { position: absolute; top: 0.24rem; left: 0.18rem; width: 0.18rem; height: 0.18rem; background: var(--project-color); content: ""; }
+.dossier-home__index button > span { color: var(--project-color); font-size: 0.56rem; font-weight: 700; letter-spacing: 0.06em; }
+.dossier-home__index button strong { overflow: hidden; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.035em; line-height: 1.05; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
 .dossier-home__index button i { display: none; }
-.dossier-home__index button:hover { padding-left: 0.35rem; color: #e95a2c; }
-.dossier-home__index button:hover::before { transform: scaleY(1); }
-.dossier-home__index button:hover > span { color: #171612; }
+.dossier-home__index button:hover { background: #171612; color: #f2e9d8; transform: translate(-0.12rem, -0.12rem); }
+.dossier-home__index button:hover::before { background: #f2e9d8; }
+.dossier-home__index button:hover > span { color: var(--project-color); }
 
 .dossier-home__controls { display: flex; align-items: center; justify-content: flex-end; gap: 0.9rem; }
 .dossier-home__controls div, .dossier-home__controls button { display: inline-flex; align-items: center; gap: 0.45rem; color: #5d574d; font-size: 0.56rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
@@ -425,11 +424,9 @@ a { -webkit-tap-highlight-color: transparent; }
   .dossier-home__monogram b { top: 0.25rem; bottom: 0.25rem; left: 0.27rem; width: 0.22rem; }
   .dossier-home__brand strong { font-size: 0.66rem; }
   .dossier-home__brand small { display: none; }
-  .dossier-home__index { top: 0.85rem; right: 0.85rem; width: auto; grid-template-columns: repeat(6, auto); padding-left: 0; border-top: 0; border-left: 0; }
+  .dossier-home__index { top: 0.85rem; right: 0.85rem; width: auto; grid-template-columns: repeat(6, auto); gap: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
   .dossier-home__index::before, .dossier-home__index::after { display: none; }
-  .dossier-home__index-title, .dossier-home__collection > span { display: none; }
-  .dossier-home__collection { display: contents; }
-  .dossier-home__collection + .dossier-home__collection { margin-top: 0; }
+  .dossier-home__index-title { display: none; }
   .dossier-home__index button { display: grid; width: 2rem; min-height: 2.15rem; place-items: center; padding: 0; border: 1px solid rgb(23 22 18 / 36%); background: rgb(242 233 216 / 70%); }
   .dossier-home__index button strong, .dossier-home__index button i { display: none; }
   .dossier-home__index button:hover { padding: 0; background: #171612; }

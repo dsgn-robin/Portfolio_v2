@@ -284,7 +284,6 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   return (
     <section className="project-video" aria-labelledby="project-video-title">
       <div className="project-video__intro">
-        <div className="project-section-label"><span>04</span><i /> Film</div>
         <h2 id="project-video-title">{video.title}</h2>
         <p>{video.description.replace("activables directement dans le lecteur", "affichés pendant la lecture et disponibles dans les réglages")}</p>
       </div>
@@ -328,7 +327,7 @@ function ProjectShareDialog({ title, onClose }: { title: string; onClose: () => 
   return (
     <div className="project-share-dialog" role="dialog" aria-modal="true" aria-labelledby="project-share-title" onClick={onClose}>
       <section className="project-share-dialog__frame" onClick={(event) => event.stopPropagation()}>
-        <div className="project-share-dialog__topline"><span>RC / PARTAGE</span><span>DOSSIER ACTIF</span></div>
+        <div className="project-share-dialog__topline"><span>RC / PARTAGE</span></div>
         <h2 id="project-share-title">Faire circuler<br /><em>la pièce.</em></h2>
         <p>Partagez le dossier « {title} » par lien direct ou préparez un message e-mail.</p>
         <output className="project-share-dialog__url">{window.location.href}</output>
