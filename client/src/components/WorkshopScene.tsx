@@ -767,7 +767,7 @@ export default function WorkshopScene() {
       active = null;
       viewport.style.cursor = "grab";
       if (renderer.domElement.hasPointerCapture(event.pointerId)) renderer.domElement.releasePointerCapture(event.pointerId);
-      if (clicked) window.open(project.url, "_blank", "noopener,noreferrer");
+      if (clicked) window.location.assign(project.url);
       else {
         updateTooltip({ title: project.title, eyebrow: "Position enregistrée", x: event.clientX, y: event.clientY });
         window.setTimeout(() => {

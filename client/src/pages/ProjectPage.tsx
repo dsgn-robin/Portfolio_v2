@@ -3,6 +3,7 @@
  * géométrie Bauhaus, asymétrie éditoriale et documents d’atelier temporaires.
  */
 import { ArrowDown, ArrowUpRight, CornerUpLeft, MoveUpRight } from "lucide-react";
+import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
 
 type Project = {
@@ -162,6 +163,20 @@ export default function ProjectPage() {
   const project = getProject(location);
   const index = PROJECTS.findIndex((item) => item.slug === project.slug);
   const nextProject = PROJECTS[(index + 1) % PROJECTS.length];
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.documentElement.classList.add("project-document-open");
+    document.body.classList.add("project-document-open");
+    document.title = `${project.title.replace("\n", " ")} — Robin Courte`;
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+    return () => {
+      document.documentElement.classList.remove("project-document-open");
+      document.body.classList.remove("project-document-open");
+      document.title = previousTitle;
+    };
+  }, [project]);
 
   const projectStyle = {
     "--project-accent": `#${project.accent}`,

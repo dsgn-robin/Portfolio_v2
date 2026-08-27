@@ -77,6 +77,19 @@ body {
   text-rendering: geometricPrecision;
 }
 
+html.project-document-open,
+body.project-document-open {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.project-document-open #root {
+  height: auto;
+  min-height: 100%;
+}
+
 button,
 a { -webkit-tap-highlight-color: transparent; }
 

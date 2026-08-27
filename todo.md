@@ -118,3 +118,10 @@
 - [x] Concevoir les pages dédiées aux projets et leurs compositions graphiques.
 - [x] Relier les objets de l’atelier aux routes projets et contrôler l’expérience mobile.
 - [x] Vérifier les pages, ajuster les contrastes et enregistrer une version testée.
+
+## Correction de navigation des dossiers
+
+- [x] Ouvrir les dossiers internes dans l’onglet actuel plutôt que dans une nouvelle fenêtre.
+- [x] Autoriser le défilement vertical uniquement sur les pages projets, sans perturber l’atelier 3D plein écran.
+- [x] Mettre à jour le titre du navigateur selon le dossier actuellement affiché.
+- [x] Vérifier le parcours atelier, changement de dossier et retour sur desktop et mobile.
