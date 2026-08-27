@@ -2,8 +2,8 @@
  * Style reminder — « Affiches en série » : papier chaud, encre noire,
  * géométrie Bauhaus, asymétrie éditoriale et documents d’atelier temporaires.
  */
-import { ArrowDown, ArrowUpRight, CornerUpLeft, MoveUpRight } from "lucide-react";
-import { useEffect } from "react";
+import { ArrowDown, ArrowUp, ArrowUpRight, CornerUpLeft, MoveUpRight, Share2, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import EssentialPhoneViewer from "@/components/EssentialPhoneViewer";
 
@@ -168,9 +168,9 @@ function ProjectMark({ motif }: { motif: Project["motif"] }) {
   );
 }
 
-function ProjectDocument({ document, accent, motif, index }: { document: Project["documents"][number]; accent: string; motif: Project["motif"]; index: number }) {
+function ProjectDocument({ document, accent, motif, index, onOpen }: { document: Project["documents"][number]; accent: string; motif: Project["motif"]; index: number; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
   return (
-    <article className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={{ "--project-accent": accent } as React.CSSProperties}>
+    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={{ "--project-accent": accent } as React.CSSProperties} type="button" onClick={() => onOpen({ image: document.image, alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
       <header className="project-document__head">
         <span>{document.label}</span>
         <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
@@ -182,24 +182,24 @@ function ProjectDocument({ document, accent, motif, index }: { document: Project
         <strong>{document.type}</strong>
         <p>{document.note}</p>
       </footer>
-    </article>
+    </button>
   );
 }
 
-function ProjectGallery({ gallery }: { gallery: NonNullable<Project["gallery"]> }) {
+function ProjectGallery({ gallery, onOpen }: { gallery: NonNullable<Project["gallery"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
   return (
     <div className={`project-gallery project-gallery--${gallery.length}`}>
       {gallery.map((item) => (
-        <figure key={item.image} className="project-gallery__item">
+        <button key={item.image} type="button" className="project-gallery__item" onClick={() => onOpen(item)} aria-label={`Examiner : ${item.label}`}>
           <img src={item.image} alt={item.alt} />
-          <figcaption>{item.label}</figcaption>
-        </figure>
+          <span>{item.label}</span>
+        </button>
       ))}
     </div>
   );
 }
 
-function ProjectComparisons({ comparisons }: { comparisons: NonNullable<Project["comparisons"]> }) {
+function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
   return (
     <div className="project-comparisons">
       <div className="project-comparisons__heading">
@@ -210,8 +210,8 @@ function ProjectComparisons({ comparisons }: { comparisons: NonNullable<Project[
         <article key={item.subject} className="project-comparison">
           <header><strong>{item.subject}</strong><span>Étude 0{itemIndex + 1}</span></header>
           <div className="project-comparison__images">
-            <figure><img src={item.treatment} alt={item.treatmentAlt} /><figcaption>Traitement</figcaption></figure>
-            <figure><img src={item.original} alt={item.originalAlt} /><figcaption>Prise</figcaption></figure>
+            <button type="button" onClick={() => onOpen({ image: item.treatment, alt: item.treatmentAlt, label: `${item.subject} — traitement` })}><img src={item.treatment} alt={item.treatmentAlt} /><span>Traitement</span></button>
+            <button type="button" onClick={() => onOpen({ image: item.original, alt: item.originalAlt, label: `${item.subject} — prise` })}><img src={item.original} alt={item.originalAlt} /><span>Prise</span></button>
           </div>
         </article>
       ))}
@@ -239,11 +239,26 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   );
 }
 
+function ProjectLightbox({ asset, onClose }: { asset: { image: string; alt: string; label: string }; onClose: () => void }) {
+  return (
+    <div className="project-lightbox" role="dialog" aria-modal="true" aria-label={`Examen du document ${asset.label}`} onClick={onClose}>
+      <div className="project-lightbox__frame" onClick={(event) => event.stopPropagation()}>
+        <div className="project-lightbox__topline"><span>Dossier / examen</span><span>{asset.label}</span></div>
+        <img src={asset.image} alt={asset.alt} />
+        <button type="button" className="project-lightbox__close" onClick={onClose} aria-label="Fermer l’examen"><X size={20} /></button>
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectPage() {
   const [location] = useLocation();
   const project = getProject(location);
   const index = PROJECTS.findIndex((item) => item.slug === project.slug);
   const nextProject = PROJECTS[(index + 1) % PROJECTS.length];
+  const [activeAsset, setActiveAsset] = useState<{ image: string; alt: string; label: string } | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [shareStatus, setShareStatus] = useState("Partager");
 
   useEffect(() => {
     const previousTitle = document.title;
@@ -259,6 +274,43 @@ export default function ProjectPage() {
     };
   }, [project]);
 
+  useEffect(() => {
+    const updateProgress = () => {
+      const maximum = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+      setProgress(maximum ? Math.min(window.scrollY / maximum, 1) : 0);
+    };
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, [project]);
+
+  useEffect(() => {
+    if (!activeAsset) return;
+    document.body.classList.add("project-modal-open");
+    const closeWithEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setActiveAsset(null); };
+    window.addEventListener("keydown", closeWithEscape);
+    return () => {
+      document.body.classList.remove("project-modal-open");
+      window.removeEventListener("keydown", closeWithEscape);
+    };
+  }, [activeAsset]);
+
+  const handleShare = async () => {
+    const title = `${project.title.replace("\n", " ")} — Robin Courte`;
+    try {
+      if (navigator.share) await navigator.share({ title, url: window.location.href });
+      else await navigator.clipboard.writeText(window.location.href);
+      setShareStatus("Lien prêt");
+    } catch {
+      setShareStatus("Partage annulé");
+    }
+    window.setTimeout(() => setShareStatus("Partager"), 1800);
+  };
+
   const projectStyle = {
     "--project-accent": `#${project.accent}`,
     "--project-accent-dark": `#${project.accentDark}`,
@@ -266,7 +318,8 @@ export default function ProjectPage() {
   } as React.CSSProperties;
 
   return (
-    <main className="project-page" style={projectStyle}>
+    <main className={`project-page project-page--${project.motif}`} style={projectStyle}>
+      <div className="project-reading-progress" aria-hidden="true"><span style={{ transform: `scaleX(${progress})` }} /></div>
       <aside className="project-rail" aria-label="Navigation de projet">
         <Link href="/" className="project-rail__home" aria-label="Retourner à l’atelier">
           <span className="project-rail__monogram" aria-hidden="true">R</span>
@@ -301,7 +354,7 @@ export default function ProjectPage() {
           <ProjectMark motif={project.motif} />
           <div className="project-hero__poster-meta">
             <span>RC / {project.number}</span>
-            <span>ÉTUDE EN COURS</span>
+            <span>FICHE D’ATELIER</span>
           </div>
         </div>
       </section>
@@ -317,7 +370,7 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      <section className="project-process">
+      <section className="project-process" id="processus">
         <div className="project-section-label"><span>02</span><i /> Processus</div>
         <div className="project-process__steps">
           {project.process.map((step, stepIndex) => (
@@ -330,22 +383,22 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      <section className="project-archive">
+      <section className="project-archive" id="archives">
         <div className="project-archive__heading">
           <div className="project-section-label"><span>03</span><i /> Archives</div>
           <p>Classer les pièces du projet : relevés, essais et indices de fabrication composent une archive à examiner étape par étape.</p>
         </div>
         <div className="project-documents">
-          {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} />)}
+          {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} onOpen={setActiveAsset} />)}
         </div>
-        {project.gallery ? <ProjectGallery gallery={project.gallery} /> : null}
-        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} /> : null}
+        {project.gallery ? <ProjectGallery gallery={project.gallery} onOpen={setActiveAsset} /> : null}
+        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} /> : null}
       </section>
 
       {project.slug === "essential-phone" ? <EssentialPhoneViewer /> : null}
       {project.video ? <ProjectVideo video={project.video} /> : null}
 
-      <section className="project-closing">
+      <section className="project-closing" id="bilan">
         <div className="project-closing__learning">
           <div className="project-section-label"><span>04</span><i /> Ce que j’ai appris</div>
           <ul>
@@ -360,12 +413,24 @@ export default function ProjectPage() {
 
       <nav className="project-next" aria-label="Dossier suivant">
         <Link href={`/projets/${nextProject.slug}`}>
-          <span>Dossier suivant / {nextProject.number}</span>
+          <span>Classer puis ouvrir / {nextProject.number}</span>
           <strong>{nextProject.title.replace("\n", " ")}</strong>
           <ArrowUpRight size={35} strokeWidth={2.4} />
         </Link>
         <Link href="/" className="project-back"><CornerUpLeft size={18} /> Retour à l’atelier</Link>
       </nav>
+      <nav className="project-quick-nav" aria-label="Repères rapides du dossier">
+        <a href="#dossier"><span>01</span> Ouvrir</a>
+        <a href="#processus"><span>02</span> Processus</a>
+        <a href="#archives"><span>03</span> Examiner</a>
+        {project.slug === "essential-phone" ? <a href="#prototype"><span>04</span> Retourner</a> : null}
+        <a href="#bilan"><span>04</span> Bilan</a>
+      </nav>
+      <div className="project-utility" aria-label="Outils de lecture">
+        <button type="button" onClick={handleShare}><Share2 size={17} /> {shareStatus}</button>
+        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Retourner en haut du dossier"><ArrowUp size={19} /></button>
+      </div>
+      {activeAsset ? <ProjectLightbox asset={activeAsset} onClose={() => setActiveAsset(null)} /> : null}
     </main>
   );
 }

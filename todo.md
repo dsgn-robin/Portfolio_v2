@@ -141,3 +141,11 @@
 - [x] Préparer le GLB Essential Phone pour une visionneuse 3D autonome et manipulable.
 - [x] Adapter les modules d’archives, la vidéo et la visionneuse au langage éditorial des dossiers.
 - [x] Vérifier sur desktop et mobile le cadrage, la lecture vidéo et la manipulation 3D.
+
+## Passe d’utilité et de finition
+
+- [x] Auditer les actions essentielles disponibles dans l’atelier et les dossiers.
+- [x] Ajouter une navigation de dossier plus rapide et des repères de progression lisibles.
+- [x] Enrichir la consultation des images, de la vidéo et du modèle 3D avec des retours utiles.
+- [x] Ajouter des améliorations d’accessibilité et de confort responsive sans altérer les assets source.
+- [x] Vérifier les parcours principaux puis enregistrer une version testée.

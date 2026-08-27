@@ -2,7 +2,7 @@
  * Style reminder — « Affiches en série » : une vitrine d’objet tangible,
  * encre sombre et bleu plan RC, qui préserve le GLB et ses matériaux d’origine.
  */
-import { Maximize2, MousePointer2, Rotate3D, ZoomIn } from "lucide-react";
+import { Maximize2, MousePointer2, Rotate3D, RotateCcw, ZoomIn } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -12,6 +12,7 @@ const PHONE_MODEL = "/manus-storage/Phone_bleu_b4045bcc.glb";
 
 export default function EssentialPhoneViewer() {
   const canvasHost = useRef<HTMLDivElement>(null);
+  const resetView = useRef<() => void>(() => undefined);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
 
   useEffect(() => {
@@ -39,6 +40,13 @@ export default function EssentialPhoneViewer() {
     controls.minDistance = 2.3;
     controls.maxDistance = 5.3;
     controls.target.set(0, 0.1, 0);
+
+    const resetCamera = () => {
+      camera.position.set(2.7, 2.05, 3.35);
+      controls.target.set(0, 0.1, 0);
+      controls.update();
+    };
+    resetView.current = resetCamera;
 
     scene.add(new THREE.HemisphereLight(0xdce8f4, 0x1d2130, 2.1));
 
@@ -105,6 +113,7 @@ export default function EssentialPhoneViewer() {
 
     return () => {
       resizeObserver.disconnect();
+      resetView.current = () => undefined;
       renderer.setAnimationLoop(null);
       controls.dispose();
       if (loadedModel) {
@@ -122,7 +131,7 @@ export default function EssentialPhoneViewer() {
   }, []);
 
   return (
-    <section className="phone-viewer" aria-labelledby="phone-viewer-title">
+    <section className="phone-viewer" id="prototype" aria-labelledby="phone-viewer-title">
       <div className="phone-viewer__intro">
         <div className="project-section-label"><span>04</span><i /> Modèle 3D</div>
         <h2 id="phone-viewer-title">Retourner<br />l’objet.</h2>
@@ -138,6 +147,9 @@ export default function EssentialPhoneViewer() {
         {status === "loading" ? <span className="phone-viewer__status">Chargement du prototype…</span> : null}
         {status === "error" ? <span className="phone-viewer__status phone-viewer__status--error">Le modèle 3D n’a pas pu être chargé.</span> : null}
         <span className="phone-viewer__frame" aria-hidden="true"><Maximize2 size={16} /></span>
+        <button className="phone-viewer__reset" type="button" onClick={() => resetView.current()} aria-label="Réinitialiser la vue du modèle">
+          <RotateCcw size={15} /> Réinitialiser
+        </button>
       </div>
     </section>
   );

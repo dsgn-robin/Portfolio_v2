@@ -28,6 +28,10 @@ La visionneuse Essential Phone est bien créée avec un canvas accessible et les
 
 Le lecteur SPEED X est présent dans le dossier Drone, ses métadonnées sont chargées (durée détectée : 27,07 s) et une piste WebVTT française est associée comme sous-titrage par défaut. Le poster reprend le rendu de prototype fourni.
 
+La passe d’utilité ajoute un mode d’examen accessible pour les documents. La planche de brainstorming Essential Phone s’ouvre en grand dans une boîte de dialogue identifiée, puis peut être fermée avec son bouton dédié ou avec la touche Échap.
+
+Les repères rapides permettent d’atteindre directement la section de manipulation Essential Phone. La fermeture au clavier du mode d’examen a été vérifiée, et la commande de réinitialisation reste disponible au-dessus de la visionneuse.
+
 La visionneuse est accessible depuis le dossier Essential Phone et le lecteur SPEED X est présenté dans une section dédiée au film du Drone. Les deux modules s’insèrent dans le rythme des dossiers, après les archives et avant les apprentissages.
 
 La zone de manipulation Essential Phone est dimensionnée à 577 × 556 px sur la vérification desktop. Un déplacement de pointeur a été émis dans son canvas de contrôle ; le module reste rendu et réactif sans erreur console, tandis que la manipulation manuelle directe demeure le comportement de référence.
