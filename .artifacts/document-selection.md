@@ -38,6 +38,12 @@ La scène-dossier d’accueil présente désormais les quatre modèles source su
 
 Le lecteur Drone utilise désormais la vidéo source « Video_drone_seul » et la piste fournie « sous_titres.vtt ». Le navigateur confirme une piste de sous-titres disponible et active dans les réglages du lecteur.
 
+La visionneuse Essential Phone expose désormais un bouton « Agrandir la visionneuse » distinct de la réinitialisation ; son activation utilise l’API plein écran de la scène afin de préserver les contrôles 3D dans une surface étendue.
+
+La commande d’agrandissement a été exécutée dans le navigateur : lorsque le plein écran natif n’est pas disponible, la visionneuse passe bien dans son mode de secours plein viewport et le bouton devient « Réduire la visionneuse ».
+
+Le lecteur Drone a été contrôlé après suppression du poster : il charge directement la vidéo source « Video_drone_seul », ne possède aucun attribut poster, et conserve une piste WebVTT séparée « sous_titres.vtt » dans ses réglages.
+
 La visionneuse est accessible depuis le dossier Essential Phone et le lecteur SPEED X est présenté dans une section dédiée au film du Drone. Les deux modules s’insèrent dans le rythme des dossiers, après les archives et avant les apprentissages.
 
 La zone de manipulation Essential Phone est dimensionnée à 577 × 556 px sur la vérification desktop. Un déplacement de pointeur a été émis dans son canvas de contrôle ; le module reste rendu et réactif sans erreur console, tandis que la manipulation manuelle directe demeure le comportement de référence.

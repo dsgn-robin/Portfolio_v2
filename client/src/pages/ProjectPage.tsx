@@ -26,7 +26,7 @@ type Project = {
   documents: { label: string; type: string; note: string; image: string; alt: string; shape: "tall" | "wide" | "square" }[];
   gallery?: { image: string; alt: string; label: string }[];
   comparisons?: { subject: string; treatment: string; original: string; treatmentAlt: string; originalAlt: string }[];
-  video?: { src: string; captions: string; poster: string; title: string; description: string };
+  video?: { src: string; captions: string; title: string; description: string };
 };
 
 const PROJECTS: Project[] = [
@@ -145,7 +145,6 @@ const PROJECTS: Project[] = [
     video: {
       src: "/manus-storage/Video_drone_seul_2fec9be4.mp4",
       captions: "/manus-storage/sous_titres_990aa539.vtt",
-      poster: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp",
       title: "SPEED X · Film de démonstration",
       description: "Une courte séquence de présentation du prototype, avec les sous-titres français activables directement dans le lecteur.",
     },
@@ -228,7 +227,7 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
         <p>{video.description}</p>
       </div>
       <figure className="project-video__frame">
-        <video controls playsInline preload="metadata" poster={video.poster}>
+        <video controls playsInline preload="metadata">
           <source src={video.src} type="video/mp4" />
           <track kind="captions" src={video.captions} srcLang="fr" label="Français" default />
           Votre navigateur ne prend pas en charge la lecture vidéo.

@@ -166,3 +166,11 @@
 - [x] Simplifier le rail des dossiers, uniformiser les hovers et inverser la comparaison photo demandée.
 - [x] Remplacer la piste de sous-titres Drone et rectifier la visionneuse Essential Phone.
 - [x] Vérifier les interactions desktop/mobile puis enregistrer une version testée.
+
+## Correction des interactions signalées
+
+- [x] Distinguer la zone de prise initiale de la zone de déplacement étendue sur l’accueil.
+- [x] Réduire le téléphone de l’accueil sans modifier son GLB ou ses matériaux.
+- [x] Faire démarrer le film Drone directement et rendre ses sous-titres visibles dans ses réglages.
+- [x] Rendre opérationnelle l’action d’agrandissement de la visionneuse Essential Phone.
+- [x] Vérifier les quatre comportements dans le navigateur et enregistrer une version testée.

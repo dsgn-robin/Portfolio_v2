@@ -2,7 +2,7 @@
  * Style reminder — « Affiches en série » : une vitrine d’objet tangible,
  * encre sombre et bleu plan RC, qui préserve le GLB et ses matériaux d’origine.
  */
-import { Maximize2, MousePointer2, Rotate3D, RotateCcw, ZoomIn } from "lucide-react";
+import { Maximize2, Minimize2, MousePointer2, Rotate3D, RotateCcw, ZoomIn } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -12,8 +12,46 @@ const PHONE_MODEL = "/manus-storage/Phone_bleu_b4045bcc.glb";
 
 export default function EssentialPhoneViewer() {
   const canvasHost = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const resetView = useRef<() => void>(() => undefined);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const updateFullscreen = () => setIsFullscreen(document.fullscreenElement === stageRef.current);
+    document.addEventListener("fullscreenchange", updateFullscreen);
+    return () => document.removeEventListener("fullscreenchange", updateFullscreen);
+  }, []);
+
+  useEffect(() => {
+    if (!isExpanded || isFullscreen) return;
+    const closeWithEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setIsExpanded(false); };
+    document.body.classList.add("project-modal-open");
+    window.addEventListener("keydown", closeWithEscape);
+    return () => {
+      document.body.classList.remove("project-modal-open");
+      window.removeEventListener("keydown", closeWithEscape);
+    };
+  }, [isExpanded, isFullscreen]);
+
+  const toggleFullscreen = async () => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    if (isExpanded && !document.fullscreenElement) {
+      setIsExpanded(false);
+      return;
+    }
+    if (document.fullscreenElement === stage) {
+      await document.exitFullscreen();
+      return;
+    }
+    try {
+      await stage.requestFullscreen();
+    } catch {
+      setIsExpanded(true);
+    }
+  };
 
   useEffect(() => {
     const host = canvasHost.current;
@@ -133,11 +171,13 @@ export default function EssentialPhoneViewer() {
           <span><Rotate3D size={15} /> Rotation libre</span>
         </div>
       </div>
-      <div className="phone-viewer__stage">
+      <div className={`phone-viewer__stage ${isExpanded && !isFullscreen ? "phone-viewer__stage--expanded" : ""}`} ref={stageRef}>
         <div className="phone-viewer__canvas" ref={canvasHost} />
         {status === "loading" ? <span className="phone-viewer__status">Chargement du prototype…</span> : null}
         {status === "error" ? <span className="phone-viewer__status phone-viewer__status--error">Le modèle 3D n’a pas pu être chargé.</span> : null}
-        <span className="phone-viewer__frame" aria-hidden="true"><Maximize2 size={16} /></span>
+        <button className="phone-viewer__frame" type="button" onClick={toggleFullscreen} aria-label={isFullscreen || isExpanded ? "Réduire la visionneuse" : "Agrandir la visionneuse"}>
+          {isFullscreen || isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+        </button>
         <button className="phone-viewer__reset" type="button" onClick={() => resetView.current()} aria-label="Réinitialiser la vue du modèle">
           <RotateCcw size={15} /> Réinitialiser
         </button>
