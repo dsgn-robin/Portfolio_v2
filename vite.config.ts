@@ -206,6 +206,9 @@ function vitePluginStorageProxy(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
+  // En développement et dans Manus, le site reste à la racine. GitHub Pages
+  // sert ce dépôt sous /Portfolio_v2/, d’où le préfixe injecté par le workflow.
+  base: process.env.GITHUB_PAGES === "true" ? "/Portfolio_v2/" : "/",
   plugins,
   resolve: {
     alias: {

@@ -215,3 +215,9 @@
 - [x] Ajouter un formulaire Contact connecté à Formspree avec ses états de saisie, d’envoi et de retour.
 - [x] Créer la page Mentions légales avec les informations publiques appropriées et ses accès internes.
 - [x] Vérifier la scène et les trois pages relationnelles sur desktop et mobile, puis enregistrer une version testée.
+
+## Correctif GitHub Pages
+
+- [x] Auditer les fichiers de build, les branches distantes et la source Pages active.
+- [x] Ajouter une publication GitHub Pages qui génère le build Vite et fournit un point d’entrée aux routes internes.
+- [x] Vérifier localement le dossier publié et documenter le réglage Pages à sélectionner.

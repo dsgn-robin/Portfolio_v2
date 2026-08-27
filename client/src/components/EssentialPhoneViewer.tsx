@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { resolvePortfolioMedia } from "@/lib/portfolio-media";
 
 const PHONE_MODEL = "/manus-storage/Phone_bleu_b4045bcc.glb";
 
@@ -101,7 +102,7 @@ export default function EssentialPhoneViewer() {
     let loadedModel: THREE.Object3D | null = null;
     const loader = new GLTFLoader();
     loader.load(
-      PHONE_MODEL,
+      resolvePortfolioMedia(PHONE_MODEL),
       (gltf) => {
         loadedModel = gltf.scene;
         const bounds = new THREE.Box3().setFromObject(loadedModel);

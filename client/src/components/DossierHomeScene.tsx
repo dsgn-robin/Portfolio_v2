@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import { resolvePortfolioMedia } from "@/lib/portfolio-media";
 
 type ProjectKey = "phone" | "photo" | "identity" | "drone" | "about" | "contact";
 type SupportShape = "slab" | "circle" | "arch" | "diamond" | "stepped" | "signal";
@@ -53,6 +54,7 @@ const DESTINATIONS: Record<ProjectKey, string> = {
   contact: "/contact",
 };
 
+const sitePath = (destination: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}${destination}` || "/";
 const clamp = (value: number, minimum: number, maximum: number) => Math.min(Math.max(value, minimum), maximum);
 
 function makePlatformLabel(spec: ProjectSpec) {
@@ -279,7 +281,7 @@ export default function DossierHomeScene() {
       dragging.runtime = null;
       renderer.domElement.style.cursor = "grab";
       setIsDragging(false);
-      if (!dragging.moved) window.location.assign(DESTINATIONS[runtime.spec.key]);
+      if (!dragging.moved) window.location.assign(sitePath(DESTINATIONS[runtime.spec.key]));
     };
 
     const onWheel = (event: WheelEvent) => {
@@ -349,7 +351,7 @@ export default function DossierHomeScene() {
         registerRuntime(spec);
         return;
       }
-      loader.load(spec.path, (gltf) => registerRuntime(spec, gltf.scene), undefined, () => setLoaded((count) => count + 1));
+      loader.load(resolvePortfolioMedia(spec.path), (gltf) => registerRuntime(spec, gltf.scene), undefined, () => setLoaded((count) => count + 1));
     });
 
     const resize = () => {
@@ -404,7 +406,7 @@ export default function DossierHomeScene() {
   }, []);
 
   const openProject = (key: ProjectKey) => {
-    window.location.assign(DESTINATIONS[key]);
+    window.location.assign(sitePath(DESTINATIONS[key]));
   };
 
   return (

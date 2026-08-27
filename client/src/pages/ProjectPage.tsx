@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUp, ArrowUpRight, CornerUpLeft, MoveUpRight, Share2, X 
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { Link, useLocation } from "wouter";
 import EssentialPhoneViewer from "@/components/EssentialPhoneViewer";
+import { resolvePortfolioMedia } from "@/lib/portfolio-media";
 
 type Project = {
   slug: string;
@@ -175,13 +176,13 @@ function ProjectDocument({ document, accent, motif, index, onOpen }: { document:
   } as React.CSSProperties;
 
   return (
-    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={documentStyle} type="button" onClick={() => onOpen({ image: document.image, alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
+    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={documentStyle} type="button" onClick={() => onOpen({ image: resolvePortfolioMedia(document.image), alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
       <header className="project-document__head">
         <span>{document.label}</span>
         <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
       </header>
       <figure className="project-document__visual">
-        <img src={document.image} alt={document.alt} onLoad={(event) => {
+        <img src={resolvePortfolioMedia(document.image)} alt={document.alt} onLoad={(event) => {
           const { naturalHeight, naturalWidth } = event.currentTarget;
           if (naturalWidth && naturalHeight) setAssetRatio(`${naturalWidth} / ${naturalHeight}`);
         }} />
@@ -228,11 +229,11 @@ function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonN
       </header>
       <div className="project-comparison-pair__images">
         <button type="button" onClick={() => onOpen({ image: comparison.original, alt: comparison.originalAlt, label: `${comparison.subject} / prise` })} aria-label={`Examiner ${comparison.subject} avant traitement`}>
-          <img src={comparison.original} alt={comparison.originalAlt} onLoad={updateRatio} />
+          <img src={resolvePortfolioMedia(comparison.original)} alt={comparison.originalAlt} onLoad={updateRatio} />
           <span>PRISE</span>
         </button>
         <button type="button" onClick={() => onOpen({ image: comparison.treatment, alt: comparison.treatmentAlt, label: `${comparison.subject} / traitement` })} aria-label={`Examiner ${comparison.subject} après traitement`}>
-          <img src={comparison.treatment} alt={comparison.treatmentAlt} onLoad={updateRatio} />
+          <img src={resolvePortfolioMedia(comparison.treatment)} alt={comparison.treatmentAlt} onLoad={updateRatio} />
           <span>TRAITEMENT</span>
         </button>
       </div>
@@ -289,8 +290,8 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
       </div>
       <figure className="project-video__frame">
         <video ref={videoRef} controls playsInline preload="metadata" onLoadedMetadata={() => { activateCaptions(); updateCaption(); }} onPlay={() => { activateCaptions(); updateCaption(); }} onTimeUpdate={updateCaption} onSeeked={updateCaption}>
-          <source src={video.src} type="video/mp4" />
-          <track kind="captions" src={video.captions} srcLang="fr" label="Français" default />
+          <source src={resolvePortfolioMedia(video.src)} type="video/mp4" />
+          <track kind="captions" src={resolvePortfolioMedia(video.captions)} srcLang="fr" label="Français" default />
           Votre navigateur ne prend pas en charge la lecture vidéo.
         </video>
         {caption ? <p className="project-video__caption" aria-live="polite">{caption}</p> : null}
@@ -305,7 +306,7 @@ function ProjectLightbox({ asset, onClose }: { asset: { image: string; alt: stri
     <div className="project-lightbox" role="dialog" aria-modal="true" aria-label={`Examen du document ${asset.label}`} onClick={onClose}>
       <div className="project-lightbox__frame" onClick={(event) => event.stopPropagation()}>
         <div className="project-lightbox__topline"><span>Dossier / examen</span><span>{asset.label}</span></div>
-        <img src={asset.image} alt={asset.alt} />
+        <img src={resolvePortfolioMedia(asset.image)} alt={asset.alt} />
         <button type="button" className="project-lightbox__close" onClick={onClose} aria-label="Fermer l’examen"><X size={20} /></button>
       </div>
     </div>
