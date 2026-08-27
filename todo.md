@@ -232,3 +232,9 @@
 - [x] Retrouver les formes de supports précédentes et l’affichage de chargement actif.
 - [x] Rétablir les formes demandées et afficher une progression en pourcentage.
 - [x] Vérifier l’accueil sur desktop et mobile, puis enregistrer une version testée.
+
+## Recomposition de la scène d’accueil
+
+- [x] Réorienter et espacer les quatre supports de projets pour créer une lecture plus fluide.
+- [x] Regrouper À propos et Contact en une paire relationnelle cohérente dans la composition.
+- [x] Vérifier la scène sur desktop et mobile, puis enregistrer une version testée.
