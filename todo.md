@@ -190,3 +190,9 @@
 - [x] Limiter le déplacement 3D à une zone circulaire et orienter Essential Phone vers ses caméras.
 - [x] Vérifier la piste de sous-titres Drone et les proportions des GLB sans déformation.
 - [x] Contrôler les quatre dossiers et l’accueil, puis enregistrer une version testée.
+
+## Comparaison Photo compacte
+
+- [x] Examiner l’encombrement actuel de la grille avant/après sur desktop et mobile.
+- [x] Réduire la taille visuelle et l’espacement des fiches tout en conservant les proportions et les légendes.
+- [x] Vérifier le rendu Photo sur desktop et mobile, puis enregistrer une version testée.

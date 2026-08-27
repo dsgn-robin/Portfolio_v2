@@ -211,7 +211,37 @@ function ProjectGallery({ gallery, onOpen, accent, motif }: { gallery: NonNullab
   );
 }
 
-function ProjectComparisons({ comparisons, onOpen, accent }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void; accent: string }) {
+function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonNullable<Project["comparisons"]>[number]; index: number; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+  const fallbackRatio = comparison.subject === "Moto" ? "4 / 5" : comparison.subject === "Poteau" ? "3 / 4" : "4 / 3";
+  const [assetRatio, setAssetRatio] = useState(fallbackRatio);
+  const pairStyle = { "--asset-ratio": assetRatio } as React.CSSProperties;
+  const updateRatio = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalHeight, naturalWidth } = event.currentTarget;
+    if (naturalWidth && naturalHeight) setAssetRatio(`${naturalWidth} / ${naturalHeight}`);
+  };
+
+  return (
+    <article className="project-comparison-pair" style={pairStyle}>
+      <header className="project-comparison-pair__head">
+        <span>{String(index + 1).padStart(2, "0")} / {comparison.subject}</span>
+        <span>AVANT · APRÈS</span>
+      </header>
+      <div className="project-comparison-pair__images">
+        <button type="button" onClick={() => onOpen({ image: comparison.original, alt: comparison.originalAlt, label: `${comparison.subject} / prise` })} aria-label={`Examiner ${comparison.subject} avant traitement`}>
+          <img src={comparison.original} alt={comparison.originalAlt} onLoad={updateRatio} />
+          <span>PRISE</span>
+        </button>
+        <button type="button" onClick={() => onOpen({ image: comparison.treatment, alt: comparison.treatmentAlt, label: `${comparison.subject} / traitement` })} aria-label={`Examiner ${comparison.subject} après traitement`}>
+          <img src={comparison.treatment} alt={comparison.treatmentAlt} onLoad={updateRatio} />
+          <span>TRAITEMENT</span>
+        </button>
+      </div>
+      <footer><span>REGARD CHROMATIQUE</span><strong>{comparison.subject}</strong></footer>
+    </article>
+  );
+}
+
+function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
   return (
     <div className="project-comparisons">
       <div className="project-comparisons__heading">
@@ -219,16 +249,7 @@ function ProjectComparisons({ comparisons, onOpen, accent }: { comparisons: NonN
         <p>Trois scènes, observées selon la même contrainte chromatique.</p>
       </div>
       <div className="project-comparisons__grid">
-        {comparisons.flatMap((item, itemIndex) => {
-          const ratio = item.subject === "Moto" ? "4 / 5" : item.subject === "Poteau" ? "3 / 4" : "4 / 3";
-          const shape: "wide" | "tall" = item.subject === "Vélo" ? "wide" : "tall";
-          return [
-            { label: `${itemIndex + 1}A`, type: `${item.subject} / prise`, note: "Image avant réglage", image: item.original, alt: item.originalAlt, shape, ratio },
-            { label: `${itemIndex + 1}B`, type: `${item.subject} / traitement`, note: "Image après réglage", image: item.treatment, alt: item.treatmentAlt, shape, ratio },
-          ];
-        }).map((item, itemIndex) => (
-          <ProjectDocument key={`${item.label}-${item.image}`} document={item} accent={accent} motif="photo" index={itemIndex + 6} onOpen={onOpen} />
-        ))}
+        {comparisons.map((comparison, index) => <ProjectComparisonPair key={comparison.subject} comparison={comparison} index={index} onOpen={onOpen} />)}
       </div>
     </div>
   );
@@ -426,7 +447,7 @@ export default function ProjectPage() {
           {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} onOpen={setActiveAsset} />)}
         </div>
         {project.gallery ? <ProjectGallery gallery={project.gallery} onOpen={setActiveAsset} accent={`#${project.accent}`} motif={project.motif} /> : null}
-        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} accent={`#${project.accent}`} /> : null}
+        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} /> : null}
       </section>
 
       {project.slug === "essential-phone" ? <EssentialPhoneViewer /> : null}
