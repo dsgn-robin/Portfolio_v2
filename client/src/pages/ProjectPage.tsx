@@ -23,7 +23,7 @@ type Project = {
   process: string[];
   learning: string[];
   tools: string[];
-  documents: { label: string; type: string; note: string; image: string; alt: string; shape: "tall" | "wide" | "square" }[];
+  documents: { label: string; type: string; note: string; image: string; alt: string; shape: "tall" | "wide" | "square"; ratio?: string }[];
   gallery?: { image: string; alt: string; label: string }[];
   comparisons?: { subject: string; treatment: string; original: string; treatmentAlt: string; originalAlt: string }[];
   video?: { src: string; captions: string; title: string; description: string };
@@ -79,9 +79,9 @@ const PROJECTS: Project[] = [
     learning: ["Cadrer avec une contrainte", "Faire émerger un sujet", "Construire une série"],
     tools: ["Lightroom", "LiveCollage", "iPhone"],
     documents: [
-      { label: "A", type: "Sélection", note: "Planche-contact de la sortie", image: "/manus-storage/grille_photo_45799468.webp", alt: "Grille de photographies à dominante jaune", shape: "wide" },
-      { label: "B", type: "Sujet", note: "La moto, étude de contraste", image: "/manus-storage/moto_j_a_e9ccff93.webp", alt: "Photo traitée d’une moto jaune", shape: "tall" },
-      { label: "C", type: "Sujet", note: "Le vélo, couleur dans la ville", image: "/manus-storage/velo_j_b_e3acdf92.webp", alt: "Photo d’un vélo jaune en ville", shape: "square" },
+      { label: "A", type: "Sélection", note: "Planche-contact de la sortie", image: "/manus-storage/grille_photo_45799468.webp", alt: "Grille de photographies à dominante jaune", shape: "square", ratio: "1 / 1" },
+      { label: "B", type: "Sujet", note: "La moto, étude de contraste", image: "/manus-storage/moto_j_a_e9ccff93.webp", alt: "Photo traitée d’une moto jaune", shape: "tall", ratio: "4 / 5" },
+      { label: "C", type: "Sujet", note: "Le vélo, couleur dans la ville", image: "/manus-storage/velo_j_b_e3acdf92.webp", alt: "Photo d’un vélo jaune en ville", shape: "wide", ratio: "4 / 3" },
     ],
     comparisons: [
       { subject: "Moto", treatment: "/manus-storage/moto_j_a_e9ccff93.webp", original: "/manus-storage/moto_j_b_e27fde92.webp", treatmentAlt: "Photographie de moto jaune avec traitement", originalAlt: "Photographie de moto jaune avant traitement" },
@@ -144,7 +144,7 @@ const PROJECTS: Project[] = [
     ],
     video: {
       src: "/manus-storage/Video_drone_seul_2fec9be4.mp4",
-      captions: "/manus-storage/sous_titres_990aa539.vtt",
+      captions: "/manus-storage/sous_titres_5f697c02.vtt",
       title: "SPEED X · Film de démonstration",
       description: "Une courte séquence de présentation du prototype, avec les sous-titres français activables directement dans le lecteur.",
     },
@@ -168,14 +168,23 @@ function ProjectMark({ motif }: { motif: Project["motif"] }) {
 }
 
 function ProjectDocument({ document, accent, motif, index, onOpen }: { document: Project["documents"][number]; accent: string; motif: Project["motif"]; index: number; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+  const [assetRatio, setAssetRatio] = useState(document.ratio ?? "1 / 1");
+  const documentStyle = {
+    "--project-accent": accent,
+    "--asset-ratio": assetRatio,
+  } as React.CSSProperties;
+
   return (
-    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={{ "--project-accent": accent } as React.CSSProperties} type="button" onClick={() => onOpen({ image: document.image, alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
+    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={documentStyle} type="button" onClick={() => onOpen({ image: document.image, alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
       <header className="project-document__head">
         <span>{document.label}</span>
         <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
       </header>
       <figure className="project-document__visual">
-        <img src={document.image} alt={document.alt} />
+        <img src={document.image} alt={document.alt} onLoad={(event) => {
+          const { naturalHeight, naturalWidth } = event.currentTarget;
+          if (naturalWidth && naturalHeight) setAssetRatio(`${naturalWidth} / ${naturalHeight}`);
+        }} />
       </figure>
       <footer>
         <strong>{document.type}</strong>
@@ -185,45 +194,65 @@ function ProjectDocument({ document, accent, motif, index, onOpen }: { document:
   );
 }
 
-function ProjectGallery({ gallery, onOpen }: { gallery: NonNullable<Project["gallery"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+function ProjectGallery({ gallery, onOpen, accent, motif }: { gallery: NonNullable<Project["gallery"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void; accent: string; motif: Project["motif"] }) {
   return (
     <div className={`project-gallery project-gallery--${gallery.length}`}>
-      {gallery.map((item) => (
-        <button key={item.image} type="button" className="project-gallery__item" onClick={() => onOpen(item)} aria-label={`Examiner : ${item.label}`}>
-          <img src={item.image} alt={item.alt} />
-          <span>{item.label}</span>
-        </button>
+      {gallery.map((item, itemIndex) => (
+        <ProjectDocument
+          key={item.image}
+          document={{ label: String(itemIndex + 4).padStart(2, "0"), type: item.label, note: "Planche de présentation", image: item.image, alt: item.alt, shape: itemIndex < 2 ? "wide" : "tall" }}
+          accent={accent}
+          motif={motif}
+          index={itemIndex + 3}
+          onOpen={onOpen}
+        />
       ))}
     </div>
   );
 }
 
-function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+function ProjectComparisons({ comparisons, onOpen, accent }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void; accent: string }) {
   return (
     <div className="project-comparisons">
       <div className="project-comparisons__heading">
         <span>Traitement couleur</span>
         <p>Trois scènes, observées selon la même contrainte chromatique.</p>
       </div>
-      {comparisons.map((item, itemIndex) => (
-        <article key={item.subject} className="project-comparison">
-          <header><strong>{item.subject}</strong><span>Étude 0{itemIndex + 1}</span></header>
-          <div className="project-comparison__images">
-            <button type="button" onClick={() => onOpen({ image: item.original, alt: item.originalAlt, label: `${item.subject} — prise` })}><img src={item.original} alt={item.originalAlt} /><span>Prise</span></button>
-            <button type="button" onClick={() => onOpen({ image: item.treatment, alt: item.treatmentAlt, label: `${item.subject} — traitement` })}><img src={item.treatment} alt={item.treatmentAlt} /><span>Traitement</span></button>
-          </div>
-        </article>
-      ))}
+      <div className="project-comparisons__grid">
+        {comparisons.flatMap((item, itemIndex) => {
+          const ratio = item.subject === "Moto" ? "4 / 5" : item.subject === "Poteau" ? "3 / 4" : "4 / 3";
+          const shape: "wide" | "tall" = item.subject === "Vélo" ? "wide" : "tall";
+          return [
+            { label: `${itemIndex + 1}A`, type: `${item.subject} / prise`, note: "Image avant réglage", image: item.original, alt: item.originalAlt, shape, ratio },
+            { label: `${itemIndex + 1}B`, type: `${item.subject} / traitement`, note: "Image après réglage", image: item.treatment, alt: item.treatmentAlt, shape, ratio },
+          ];
+        }).map((item, itemIndex) => (
+          <ProjectDocument key={`${item.label}-${item.image}`} document={item} accent={accent} motif="photo" index={itemIndex + 6} onOpen={onOpen} />
+        ))}
+      </div>
     </div>
   );
 }
 
 function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [caption, setCaption] = useState("SPEED X — Drone de prototypage");
+  const captions = [
+    { start: 0, end: 10.68, text: "SPEED X — Drone de prototypage" },
+    { start: 10.68, end: 15, text: "Un moteur innovant de 3,7 V\nqui révolutionne le monde" },
+    { start: 15, end: 18.92, text: "Un support solide et clipsable" },
+    { start: 18.92, end: 21.56, text: "Une puissance jamais vue" },
+    { start: 21.56, end: 24.92, text: "Un design incomparable" },
+    { start: 24.92, end: 26.72, text: "Voici Speedx" },
+  ];
   const activateCaptions = () => {
     const tracks = videoRef.current?.textTracks;
     if (!tracks) return;
     for (let index = 0; index < tracks.length; index += 1) tracks[index].mode = "showing";
+  };
+  const updateCaption = () => {
+    const time = videoRef.current?.currentTime ?? 0;
+    setCaption(captions.find((item) => time >= item.start && time < item.end)?.text ?? "");
   };
 
   useEffect(() => {
@@ -235,14 +264,15 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
       <div className="project-video__intro">
         <div className="project-section-label"><span>04</span><i /> Film</div>
         <h2 id="project-video-title">{video.title}</h2>
-        <p>{video.description}</p>
+        <p>{video.description.replace("activables directement dans le lecteur", "affichés pendant la lecture et disponibles dans les réglages")}</p>
       </div>
       <figure className="project-video__frame">
-        <video ref={videoRef} controls playsInline preload="metadata" onLoadedMetadata={activateCaptions} onPlay={activateCaptions}>
+        <video ref={videoRef} controls playsInline preload="metadata" onLoadedMetadata={() => { activateCaptions(); updateCaption(); }} onPlay={() => { activateCaptions(); updateCaption(); }} onTimeUpdate={updateCaption} onSeeked={updateCaption}>
           <source src={video.src} type="video/mp4" />
           <track kind="captions" src={video.captions} srcLang="fr" label="Français" default />
           Votre navigateur ne prend pas en charge la lecture vidéo.
         </video>
+        {caption ? <p className="project-video__caption" aria-live="polite">{caption}</p> : null}
         <figcaption>Prototype Drone / SPEED X / 2025</figcaption>
       </figure>
     </section>
@@ -395,8 +425,8 @@ export default function ProjectPage() {
         <div className="project-documents">
           {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} onOpen={setActiveAsset} />)}
         </div>
-        {project.gallery ? <ProjectGallery gallery={project.gallery} onOpen={setActiveAsset} /> : null}
-        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} /> : null}
+        {project.gallery ? <ProjectGallery gallery={project.gallery} onOpen={setActiveAsset} accent={`#${project.accent}`} motif={project.motif} /> : null}
+        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} accent={`#${project.accent}`} /> : null}
       </section>
 
       {project.slug === "essential-phone" ? <EssentialPhoneViewer /> : null}

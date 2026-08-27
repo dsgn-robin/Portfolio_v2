@@ -181,3 +181,12 @@
 - [x] Étendre les limites de déplacement jusqu’aux marges utiles de la scène.
 - [x] Rendre les sous-titres Drone immédiatement actifs à la lecture de la vidéo.
 - [x] Vérifier visuellement l’accueil et le lecteur, puis enregistrer une version testée.
+
+## Uniformisation des documents et scène circulaire
+
+- [x] Mesurer les ratios des images et définir le cadre documentaire unique adapté à chaque format.
+- [x] Remplacer toutes les galeries et comparaisons par le cadre détaillé cohérent.
+- [x] Recomposer les six visuels photo sans cadres noirs lourds.
+- [x] Limiter le déplacement 3D à une zone circulaire et orienter Essential Phone vers ses caméras.
+- [x] Vérifier la piste de sous-titres Drone et les proportions des GLB sans déformation.
+- [x] Contrôler les quatre dossiers et l’accueil, puis enregistrer une version testée.

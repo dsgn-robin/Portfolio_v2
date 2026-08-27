@@ -46,6 +46,12 @@ Le lecteur Drone a été contrôlé après suppression du poster : il charge dir
 
 Après renforcement du composant vidéo, la piste « Français » est confirmée en mode « showing » dès le chargement ; les sous-titres apparaissent donc automatiquement dès la première réplique de la vidéo.
 
+Ratios relevés pour le module photo : planche-contact 1:1 ; moto 4:5 ; poteau 3:4 ; vélo 4:3. Les cadres de comparaison doivent respecter ces rapports natifs avec `object-fit: contain`, sans étirement ni recadrage destructif.
+
+Contrôle visuel final : les six images Photo et les documents Drone utilisent à présent le même cadre de dossier avec en-tête, référence et note. L’accueil présente Essential Phone côté caméras. La vidéo Drone utilise le fichier `sous_titres_5f697c02.vtt`, comprenant une légende d’ouverture puis les sous-titres de démonstration.
+
+Contrôle de diffusion : le fichier VTT est accessible avec le type `text/vtt`, son contenu est valide et la piste native est demandée en mode `showing`. Un remplacement par une piste de secours rendue dans la page garantit néanmoins les sous-titres, y compris lorsque le navigateur ne peuple pas les cues du lecteur natif.
+
 La visionneuse est accessible depuis le dossier Essential Phone et le lecteur SPEED X est présenté dans une section dédiée au film du Drone. Les deux modules s’insèrent dans le rythme des dossiers, après les archives et avant les apprentissages.
 
 La zone de manipulation Essential Phone est dimensionnée à 577 × 556 px sur la vérification desktop. Un déplacement de pointeur a été émis dans son canvas de contrôle ; le module reste rendu et réactif sans erreur console, tandis que la manipulation manuelle directe demeure le comportement de référence.

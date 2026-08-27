@@ -34,7 +34,7 @@ type ProjectRuntime = {
 };
 
 const PROJECTS: ProjectSpec[] = [
-  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-2.02, 1.28], baseRotation: 0, presentationRotation: [0, 0.68, 0], scale: 0.68, shape: "rounded" },
+  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-2.02, 1.28], baseRotation: 0, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.68, shape: "rounded" },
   { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [1.5, 1.45], baseRotation: 0, scale: 0.86, shape: "circle" },
   { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.48, -1.35], baseRotation: 0, scale: 0.76, shape: "rounded" },
   { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone_fbc0d7ed.glb", position: [1.75, -1.18], baseRotation: 0, scale: 1.72, shape: "circle" },
@@ -166,6 +166,8 @@ export default function DossierHomeScene() {
     const pointerNdc = new THREE.Vector2();
     const dragPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
     const point = new THREE.Vector3();
+    const dragBoundaryCenter = new THREE.Vector2(0, 0);
+    const dragBoundaryRadius = 5.2;
     const dragging = { runtime: null as ProjectRuntime | null, startX: 0, startY: 0, moved: false };
     let animationFrame = 0;
     let cancelled = false;
@@ -209,8 +211,10 @@ export default function DossierHomeScene() {
         if (Math.hypot(event.clientX - dragging.startX, event.clientY - dragging.startY) > 6) dragging.moved = true;
         getNdc(event);
         if (raycaster.ray.intersectPlane(dragPlane, point)) {
-          dragging.runtime.group.position.x = clamp(point.x, -6.8, 6.8);
-          dragging.runtime.group.position.z = clamp(point.z, -4.4, 4.4);
+          const nextPosition = new THREE.Vector2(point.x, point.z).sub(dragBoundaryCenter);
+          if (nextPosition.length() > dragBoundaryRadius) nextPosition.setLength(dragBoundaryRadius);
+          dragging.runtime.group.position.x = nextPosition.x + dragBoundaryCenter.x;
+          dragging.runtime.group.position.z = nextPosition.y + dragBoundaryCenter.y;
         }
         return;
       }

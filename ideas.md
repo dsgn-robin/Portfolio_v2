@@ -78,6 +78,9 @@ Le mot-symbole « ROBIN COURTE » s’écrit en capitales géométriques, avec u
 - Le monogramme doit être lisible au premier regard comme un **R / RC** construit, avant d’être perçu comme une forme abstraite.
 - L’index d’accueil est une **notation en bord d’affiche** : nombres, codes couleur et graduations répondent aux socles plutôt qu’à une navigation conventionnelle.
 - Les surfaces principales gardent une matérialité d’**atelier imprimé** : papier chaud, encre mate, micro-grain, règles et ombres de documents.
+- L’index de l’accueil se comporte comme une graduation de catalogue fixée au bord de l’affiche, jamais comme une barre latérale d’interface générique.
+- Chaque dossier répète son motif propre — cercle et lumière pour Photo, diagonales et schémas pour Drone — du manifeste aux documents et au pied de page.
+- Toute image, vidéo ou plan est traité comme une pièce archivée : référence imprimée, bord d’encre, ombre de contact et matière de feuille.
 
 ---
 
