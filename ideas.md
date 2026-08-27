@@ -84,6 +84,9 @@ Le mot-symbole « ROBIN COURTE » s’écrit en capitales géométriques, avec u
 - L’index d’accueil est une graduation de catalogue en bord d’affiche, liée aux numéros des socles ; ses traits remplacent les icônes de navigation génériques.
 - Le signe R / RC est un repère imprimé construit : fût noir, demi-cercle et diagonale orange ; il ne prend jamais la forme d’une icône d’application encadrée.
 - Les fiches relationnelles gardent la même série d’affiches mais reçoivent un motif propre : registre quadrillé et repères obliques pour À propos, lignes diagonales et signal d’échange pour Contact.
+- Les repères relationnels sont posés sur les bords horizontaux de la scène, hors du carré central des projets ; ils servent de contrepoids et non de cinquième et sixième projets principaux.
+- Chaque support porte une silhouette de papier différente — dalle, disque, arche, losange, gradin ou signal ovale — afin que la collection reste lisible par sa géométrie autant que par sa couleur.
+- La page À propos révèle le parcours par un registre activable : une date sélectionnée ouvre un contexte précis. Contact reste une pièce de correspondance avec le formulaire Formspree intégré directement dans le dossier.
 
 ---
 

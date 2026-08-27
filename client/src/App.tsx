@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import InfoPage from "./pages/InfoPage";
+import LegalPage from "./pages/LegalPage";
 import ProjectPage from "./pages/ProjectPage";
 
 
@@ -15,6 +16,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/a-propos"}>{() => <InfoPage kind="about" />}</Route>
       <Route path={"/contact"}>{() => <InfoPage kind="contact" />}</Route>
+      <Route path={"/mentions-legales"} component={LegalPage} />
       <Route path={"/projets/:slug"} component={ProjectPage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

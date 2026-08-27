@@ -355,6 +355,71 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
 .project-share-dialog__close { position: absolute; z-index: 2; top: 0.85rem; right: 0.85rem; display: grid; width: 2.2rem; height: 2.2rem; place-items: center; border: 1px solid var(--ink); background: var(--project-accent); color: var(--ink); cursor: pointer; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .project-share-dialog__close:hover { transform: rotate(90deg); }
 
+.journey-explorer, .contact-form { margin-left: 4.4rem; padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 7vw, 7.75rem); }
+.journey-explorer { display: grid; grid-template-columns: minmax(13rem, 0.56fr) minmax(24rem, 1.44fr); gap: clamp(2rem, 7vw, 8rem); overflow: hidden; background: var(--ink); color: var(--paper); }
+.journey-explorer__intro h2, .contact-form__intro h2 { max-width: 29rem; margin: clamp(2rem, 4vw, 4rem) 0 1.35rem; font-family: "Archivo Black", sans-serif; font-size: clamp(2.5rem, 5vw, 5.25rem); letter-spacing: -0.075em; line-height: 0.83; text-transform: uppercase; }
+.journey-explorer__intro h2 em, .contact-form__intro h2 em { color: var(--project-accent-soft); font-style: normal; }
+.journey-explorer__intro p, .contact-form__intro p { max-width: 23rem; margin: 0; color: color-mix(in srgb, var(--paper) 76%, transparent); font-size: 0.95rem; font-weight: 500; line-height: 1.5; }
+.journey-explorer .project-section-label, .contact-form .project-section-label { color: color-mix(in srgb, var(--paper) 68%, transparent); }
+.journey-explorer .project-section-label span, .contact-form .project-section-label span { color: var(--project-accent-soft); }
+.journey-explorer__board { position: relative; display: grid; grid-template-columns: minmax(13rem, 0.82fr) minmax(15rem, 1.18fr); align-items: stretch; border-top: 1px solid rgb(242 233 216 / 36%); }
+.journey-explorer__line { position: relative; display: grid; gap: 0; margin: 0; padding: 1.35rem 1.2rem 1.35rem 0; list-style: none; }
+.journey-explorer__line::before { position: absolute; top: 1.8rem; bottom: 1.8rem; left: 5.95rem; width: 2px; background: var(--project-accent); content: ""; }
+.journey-explorer__line li { position: relative; }
+.journey-explorer__line button { position: relative; display: grid; width: 100%; min-height: 3.8rem; grid-template-columns: 3.75rem 1.25rem 1fr; align-items: center; gap: 0.6rem; padding: 0.4rem 0.45rem 0.4rem 0; border: 0; border-bottom: 1px solid rgb(242 233 216 / 18%); background: transparent; color: var(--paper); cursor: pointer; text-align: left; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), padding 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.journey-explorer__line time { color: color-mix(in srgb, var(--paper) 62%, transparent); font-size: 0.57rem; font-weight: 700; letter-spacing: 0.05em; }
+.journey-explorer__line button > span { z-index: 1; display: grid; width: 1.1rem; height: 1.1rem; place-items: center; border: 2px solid var(--paper); border-radius: 50%; background: var(--ink); color: var(--paper); font-size: 0.42rem; font-weight: 700; }
+.journey-explorer__line strong { font-size: 0.69rem; font-weight: 700; letter-spacing: 0.055em; line-height: 1.1; text-transform: uppercase; }
+.journey-explorer__line button:hover, .journey-explorer__line button.is-active { padding-left: 0.55rem; background: var(--project-accent-dark); }
+.journey-explorer__line button.is-active > span { border-color: var(--project-accent-soft); background: var(--project-accent-soft); color: var(--ink); }
+.journey-explorer__detail { position: relative; display: flex; min-height: 29rem; flex-direction: column; justify-content: flex-end; padding: 1.5rem; overflow: hidden; border-left: 1px solid rgb(242 233 216 / 36%); background: var(--project-accent); color: var(--ink); }
+.journey-explorer__detail::before { position: absolute; top: -7rem; right: -6rem; width: 20rem; height: 20rem; border: 2rem solid color-mix(in srgb, var(--paper) 74%, transparent); border-radius: 50%; content: ""; }
+.journey-explorer__detail > * { position: relative; z-index: 1; }
+.journey-explorer__detail > span, .journey-explorer__detail em { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.journey-explorer__date { margin: 4rem 0 0.65rem; color: var(--project-accent-dark); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; }
+.journey-explorer__detail h3 { max-width: 18rem; margin: 0; font-family: "Archivo Black", sans-serif; font-size: clamp(2rem, 3.5vw, 3.7rem); letter-spacing: -0.065em; line-height: 0.85; text-transform: uppercase; }
+.journey-explorer__detail em { margin-top: 1rem; font-style: normal; }
+.journey-explorer__detail > p:last-child { max-width: 25rem; margin: 1rem 0 0; font-size: 0.92rem; font-weight: 500; line-height: 1.45; }
+
+.contact-form { display: grid; grid-template-columns: minmax(13rem, 0.56fr) minmax(24rem, 1.44fr); gap: clamp(2rem, 7vw, 8rem); background: var(--ink); color: var(--paper); }
+.contact-form form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; align-content: start; padding: 1.35rem 0 0; border-top: 1px solid rgb(242 233 216 / 36%); }
+.contact-form label { display: grid; gap: 0.55rem; }
+.contact-form label > span { color: var(--project-accent-soft); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.contact-form input, .contact-form textarea { width: 100%; border: 1px solid rgb(242 233 216 / 46%); border-radius: 0; outline: 0; background: rgb(242 233 216 / 7%); color: var(--paper); font: inherit; font-size: 0.96rem; line-height: 1.45; transition: border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), background 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.contact-form input { min-height: 3rem; padding: 0.7rem; }
+.contact-form textarea { min-height: 10rem; padding: 0.7rem; resize: vertical; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgb(242 233 216 / 48%); }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--project-accent-soft); background: rgb(242 233 216 / 12%); }
+.contact-form__message, .contact-form__footer, .contact-form__status { grid-column: 1 / -1; }
+.contact-form__footer { display: flex; align-items: end; justify-content: space-between; gap: 1.4rem; margin-top: 0.25rem; padding-top: 1rem; border-top: 1px solid rgb(242 233 216 / 28%); }
+.contact-form__footer p { max-width: 26rem; margin: 0; color: color-mix(in srgb, var(--paper) 70%, transparent); font-size: 0.62rem; font-weight: 500; line-height: 1.45; }
+.contact-form__footer p a { color: var(--project-accent-soft); text-decoration: underline; text-underline-offset: 0.18rem; }
+.contact-form button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 0.9rem; border: 1px solid var(--paper); background: var(--paper); color: var(--ink); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; cursor: pointer; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.contact-form button:hover { background: var(--project-accent-soft); transform: translateY(-0.14rem); }
+.contact-form button:disabled { cursor: wait; opacity: 0.64; }
+.contact-form__status { display: flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.75rem; border: 1px solid var(--project-accent-soft); color: var(--paper); font-size: 0.76rem; font-weight: 600; }
+.contact-form__status--success { background: color-mix(in srgb, var(--project-accent-dark) 42%, transparent); }
+.contact-form__status--error { border-color: #ff9979; color: #ffd6c9; }
+
+.legal-page { --legal-line: color-mix(in srgb, var(--ink) 25%, transparent); }
+.legal-page__hero { position: relative; min-height: min(38rem, 86dvh); margin-left: 4.4rem; padding: clamp(2rem, 6vw, 6.75rem) clamp(1.5rem, 7vw, 7.75rem); overflow: hidden; background: var(--ink); color: var(--paper); }
+.legal-page__hero::before { position: absolute; right: -9rem; bottom: -12rem; width: 34rem; height: 34rem; border: 2.2rem solid var(--project-accent); border-radius: 50%; content: ""; }
+.legal-page__hero > * { position: relative; z-index: 1; }
+.legal-page__hero > span { display: block; margin-bottom: clamp(4rem, 15vh, 10rem); color: var(--project-accent-soft); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.11em; }
+.legal-page__hero h1 { max-width: 58rem; margin: 0; font-family: "Archivo Black", sans-serif; font-size: clamp(4.5rem, 11vw, 11rem); letter-spacing: -0.085em; line-height: 0.78; text-transform: uppercase; }
+.legal-page__hero h1 em { color: var(--project-accent); font-style: normal; }
+.legal-page__hero p { max-width: 36rem; margin: 2rem 0 0; color: color-mix(in srgb, var(--paper) 72%, transparent); font-size: 1rem; font-weight: 500; line-height: 1.45; }
+.legal-page__register { margin-left: 4.4rem; padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 7vw, 7.75rem); background: var(--paper); }
+.legal-page__register article { display: grid; grid-template-columns: minmax(4.5rem, 0.3fr) minmax(13rem, 0.7fr) minmax(18rem, 1.3fr); gap: clamp(1rem, 3vw, 3rem); padding: 1.45rem 0; border-top: 2px solid var(--ink); }
+.legal-page__register article:last-child { border-bottom: 2px solid var(--ink); }
+.legal-page__register span { color: var(--project-accent-dark); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; }
+.legal-page__register h2 { margin: 0; font-family: "Archivo Black", sans-serif; font-size: clamp(1.25rem, 2.1vw, 2rem); letter-spacing: -0.055em; line-height: 0.95; text-transform: uppercase; }
+.legal-page__register p { max-width: 40rem; margin: 0; color: var(--quiet-ink); font-size: 0.9rem; font-weight: 500; line-height: 1.5; }
+.legal-page__footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-left: 4.4rem; padding: 1.2rem clamp(1.5rem, 7vw, 7.75rem); background: var(--project-accent); color: var(--ink); }
+.legal-page__footer p, .legal-page__footer a { margin: 0; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.legal-page__footer > a:not(.project-back) { display: inline-flex; align-items: center; gap: 0.45rem; }
+.legal-page__footer .project-back { margin: 0; color: var(--ink); }
+
 .project-document--phone .project-document__disc { top: 12%; left: 39%; width: 26%; height: 75%; aspect-ratio: auto; border-radius: 0.65rem; border-width: 0.8rem; }
 .project-document--phone .project-document__bar { height: 0.5rem; background: var(--project-accent-dark); transform: rotate(-28deg); }
 .project-document--phone .project-document__grid { opacity: 0.66; background-size: 0.8rem 0.8rem; }
@@ -439,12 +504,14 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .project-quick-nav a { width: 2.3rem; height: 2.3rem; justify-content: center; padding: 0; border: 1px solid var(--ink); background: var(--paper); font-size: 0; }
   .project-quick-nav a span { font-size: 0.58rem; }
   .project-utility { right: calc(1rem + 12rem); bottom: 1rem; }
-  .project-hero, .project-intro, .project-process, .project-archive, .phone-viewer, .project-video, .project-closing, .project-next, .info-page__body { margin-left: 0; }
+  .project-hero, .project-intro, .project-process, .project-archive, .phone-viewer, .project-video, .project-closing, .project-next, .info-page__body, .journey-explorer, .contact-form, .legal-page__hero, .legal-page__register, .legal-page__footer { margin-left: 0; }
   .project-hero { min-height: auto; grid-template-columns: 1fr; padding-top: 1.3rem; background: var(--paper); }
   .project-hero__copy { order: 2; padding: 5rem 0 3rem; }
   .project-hero__poster { order: 1; width: min(100%, 34rem); justify-self: start; }
   .project-intro, .project-archive__heading, .phone-viewer, .project-video, .project-closing, .info-page__body { grid-template-columns: 1fr; }
   .info-page__copy, .info-page__records, .info-page__write { grid-column: auto; }
+  .journey-explorer, .contact-form { grid-template-columns: 1fr; }
+  .legal-page__register article { grid-template-columns: minmax(3rem, 0.2fr) minmax(11rem, 0.6fr) minmax(14rem, 1.2fr); }
   .project-intro__statement { margin-top: 0; }
 }
 
@@ -452,7 +519,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .project-rail__home-label, .project-rail__label { display: none; }
   .project-rail { justify-content: space-between; }
   .project-rail__home { padding: 0 1rem; }
-  .project-hero, .project-intro, .project-process, .project-archive, .phone-viewer, .project-video, .project-closing, .info-page__body { padding-right: 1.25rem; padding-left: 1.25rem; }
+  .project-hero, .project-intro, .project-process, .project-archive, .phone-viewer, .project-video, .project-closing, .info-page__body, .journey-explorer, .contact-form, .legal-page__hero, .legal-page__register { padding-right: 1.25rem; padding-left: 1.25rem; }
   .project-hero__topline { padding-bottom: 0; }
   .project-hero__poster { box-shadow: 0.55rem 0.55rem 0 var(--ink); }
   .project-hero h1 { font-size: clamp(3.6rem, 17vw, 5.2rem); }
@@ -492,6 +559,20 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .info-page__record { grid-template-columns: 1fr auto; gap: 0.5rem; min-height: 4.9rem; }
   .info-page__record span { grid-column: 1 / -1; }
   .info-page__record strong { font-size: 1.1rem; }
+  .journey-explorer__board { grid-template-columns: 1fr; }
+  .journey-explorer__line { padding-right: 0; }
+  .journey-explorer__detail { min-height: 22rem; border-top: 1px solid rgb(242 233 216 / 36%); border-left: 0; }
+  .contact-form form { grid-template-columns: 1fr; }
+  .contact-form__footer { align-items: stretch; flex-direction: column; }
+  .contact-form button { width: 100%; }
+  .legal-page__hero { min-height: 31rem; padding-top: 2rem; }
+  .legal-page__hero > span { margin-bottom: 6rem; }
+  .legal-page__hero h1 { font-size: clamp(3.3rem, 15vw, 5.3rem); }
+  .legal-page__hero p { max-width: 19rem; font-size: 0.92rem; }
+  .legal-page__register article { grid-template-columns: 2.6rem 1fr; gap: 0.65rem; padding: 1.15rem 0; }
+  .legal-page__register p { grid-column: 2; margin-top: 0.35rem; font-size: 0.84rem; }
+  .legal-page__footer { display: grid; grid-template-columns: 1fr 1fr; padding: 1rem 1.25rem; }
+  .legal-page__footer .project-back { grid-column: 1 / -1; }
   .project-video__frame::before { top: 0.55rem; left: 0.55rem; font-size: 0.44rem; }
   .project-page [id] { scroll-margin-top: 5.25rem; }
 }

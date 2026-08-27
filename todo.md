@@ -205,3 +205,13 @@
 - [x] Étendre l’aire circulaire de déplacement en gardant une marge de composition autour de la scène.
 - [x] Rendre les sauts de navigation fluides et créer une fenêtre de partage personnalisée.
 - [x] Vérifier les parcours desktop et mobile, puis enregistrer une version testée.
+
+## Recomposition relationnelle et formulaire
+
+- [x] Relever les mentions légales et le point de terminaison Formspree publiés sur le site existant.
+- [x] Recomposer la position des supports À propos et Contact et diversifier la silhouette des six supports.
+- [x] Retirer les microcopies inutiles de l’accueil tout en conservant les consignes de manipulation utiles.
+- [x] Écrire un parcours À propos plus narratif, interactif et centré sur les étapes du parcours de Robin.
+- [x] Ajouter un formulaire Contact connecté à Formspree avec ses états de saisie, d’envoi et de retour.
+- [x] Créer la page Mentions légales avec les informations publiques appropriées et ses accès internes.
+- [x] Vérifier la scène et les trois pages relationnelles sur desktop et mobile, puis enregistrer une version testée.
