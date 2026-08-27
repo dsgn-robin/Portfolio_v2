@@ -195,7 +195,8 @@
 .project-document--wide { margin-top: 3rem; min-height: 17rem; }
 .project-document--square { min-height: 18.5rem; margin-top: 7rem; }
 .project-document__head { display: flex; justify-content: space-between; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.09em; }
-.project-document__visual { position: absolute; inset: 3.5rem 1rem 4.6rem; overflow: hidden; border: 1px solid var(--line); background: color-mix(in srgb, var(--project-accent) 12%, var(--paper)); }
+.project-document__visual { position: absolute; inset: 3.5rem 1rem 4.6rem; overflow: hidden; margin: 0; border: 1px solid var(--line); background: color-mix(in srgb, var(--project-accent) 12%, var(--paper)); }
+.project-document__visual img { display: block; width: 100%; height: 100%; object-fit: contain; background: color-mix(in srgb, var(--paper) 82%, var(--project-accent-soft)); }
 .project-document__disc { position: absolute; top: 18%; left: 22%; width: 45%; aspect-ratio: 1; border: 1.25rem solid var(--project-accent); border-radius: 50%; }
 .project-document__bar { position: absolute; top: 49%; left: -4%; width: 108%; height: 1.15rem; background: var(--ink); transform: rotate(-28deg); }
 .project-document__line { position: absolute; right: 0; left: 0; height: 1px; background: var(--ink); opacity: 0.35; }
@@ -205,6 +206,26 @@
 .project-document footer { position: relative; z-index: 1; }
 .project-document footer strong { display: block; margin-bottom: 0.25rem; font-family: "Archivo Black", sans-serif; font-size: 0.98rem; letter-spacing: -0.03em; text-transform: uppercase; }
 .project-document footer p { margin: 0; font-size: 0.66rem; font-weight: 500; line-height: 1.35; }
+
+.project-gallery { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.2vw, 2rem); margin-top: clamp(3rem, 8vw, 8rem); }
+.project-gallery--1 { grid-template-columns: minmax(0, 0.64fr); margin-left: auto; }
+.project-gallery__item { position: relative; margin: 0; overflow: hidden; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.45rem 0.45rem 0 var(--ink); }
+.project-gallery__item:nth-child(2n) { margin-top: clamp(1.3rem, 3vw, 3.5rem); }
+.project-gallery__item img { display: block; width: 100%; aspect-ratio: 1.08; object-fit: contain; background: var(--paper); transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1); }
+.project-gallery__item:hover img { transform: scale(1.025); }
+.project-gallery__item figcaption { padding: 0.75rem 0.85rem; border-top: 1px solid var(--line); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+
+.project-comparisons { position: relative; z-index: 1; display: grid; grid-template-columns: 0.55fr 1.45fr; gap: clamp(2rem, 7vw, 8rem); margin-top: clamp(4rem, 10vw, 10rem); padding-top: 1.25rem; border-top: 2px solid var(--ink); }
+.project-comparisons__heading span { color: var(--project-accent-dark); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
+.project-comparisons__heading p { max-width: 14rem; margin: 1.25rem 0 0; font-size: 1.05rem; font-weight: 500; line-height: 1.3; }
+.project-comparison { display: grid; gap: 1rem; padding: 0 0 1.4rem; border-bottom: 1px solid var(--line); }
+.project-comparison + .project-comparison { margin-top: 1.35rem; }
+.project-comparison header { display: flex; justify-content: space-between; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.project-comparison header strong { color: var(--project-accent-dark); }
+.project-comparison__images { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+.project-comparison figure { margin: 0; }
+.project-comparison img { display: block; width: 100%; aspect-ratio: 1.08; object-fit: contain; border: 1px solid var(--line); background: var(--paper); }
+.project-comparison figcaption { margin-top: 0.4rem; color: var(--quiet-ink); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
 
 .project-document--phone .project-document__disc { top: 12%; left: 39%; width: 26%; height: 75%; aspect-ratio: auto; border-radius: 0.65rem; border-width: 0.8rem; }
 .project-document--phone .project-document__bar { height: 0.5rem; background: var(--project-accent-dark); transform: rotate(-28deg); }
@@ -268,6 +289,9 @@
   .project-documents { grid-template-columns: 1fr; gap: 2rem; }
   .project-document--wide, .project-document--square { margin-top: 0; }
   .project-document { min-height: 17rem; }
+  .project-gallery, .project-gallery--1, .project-comparisons { grid-template-columns: 1fr; margin-left: 0; }
+  .project-gallery__item:nth-child(2n) { margin-top: 0; }
+  .project-comparisons { gap: 2rem; }
   .project-next { grid-template-columns: 1fr; padding: 0 1.25rem; }
   .project-next > a:first-child { min-height: 13rem; }
   .project-back { margin: 0 0 1.6rem; }

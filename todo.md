@@ -125,3 +125,11 @@
 - [x] Autoriser le défilement vertical uniquement sur les pages projets, sans perturber l’atelier 3D plein écran.
 - [x] Mettre à jour le titre du navigateur selon le dossier actuellement affiché.
 - [x] Vérifier le parcours atelier, changement de dossier et retour sur desktop et mobile.
+
+## Intégration des documents projets
+
+- [x] Décompresser et inventorier les documents du drone, de l’identité, du téléphone et du projet photo.
+- [x] Sélectionner les visuels les plus adaptés aux sections de chaque dossier.
+- [x] Préparer des versions web légères sans rogner les documents importants.
+- [x] Remplacer les archives temporaires par les documents réels et enrichir les galeries.
+- [x] Vérifier les quatre dossiers sur desktop et mobile, puis enregistrer une version testée.

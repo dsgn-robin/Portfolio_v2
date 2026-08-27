@@ -22,7 +22,9 @@ type Project = {
   process: string[];
   learning: string[];
   tools: string[];
-  documents: { label: string; type: string; note: string; shape: "tall" | "wide" | "square" }[];
+  documents: { label: string; type: string; note: string; image: string; alt: string; shape: "tall" | "wide" | "square" }[];
+  gallery?: { image: string; alt: string; label: string }[];
+  comparisons?: { subject: string; treatment: string; original: string; treatmentAlt: string; originalAlt: string }[];
 };
 
 const PROJECTS: Project[] = [
@@ -44,9 +46,17 @@ const PROJECTS: Project[] = [
     learning: ["Construire un système cohérent", "Donner du sens à une interface", "Mettre en lumière un objet 3D"],
     tools: ["Blender", "Figma", "Canva"],
     documents: [
-      { label: "A", type: "Recherche", note: "Notes d’usage et intentions", shape: "tall" },
-      { label: "B", type: "Interface", note: "Fonctions gardées à l’écran", shape: "wide" },
-      { label: "C", type: "Forme", note: "Volume et proportions de l’objet", shape: "square" },
+      { label: "A", type: "Recherche", note: "Notes d’usage et intentions", image: "/manus-storage/Brainstorming_18f5122b.webp", alt: "Planche de brainstorming pour Essential Phone", shape: "tall" },
+      { label: "B", type: "Objet", note: "Volume et proportions de l’objet", image: "/manus-storage/Conception_produit_d54893c9.webp", alt: "Croquis de conception du téléphone Essential", shape: "wide" },
+      { label: "C", type: "Interface", note: "Fonctions gardées à l’écran", image: "/manus-storage/Interface_2b746d80.webp", alt: "Interface minimaliste d’Essential Phone", shape: "square" },
+    ],
+    gallery: [
+      { image: "/manus-storage/Phone_vue_filaire_fdeeede1.webp", alt: "Vue filaire du téléphone Essential", label: "Vue filaire" },
+      { image: "/manus-storage/Phone_all_3b29be5b.webp", alt: "Quatre variantes colorées d’Essential Phone", label: "Déclinaisons" },
+      { image: "/manus-storage/Phone_Bleu_64f2f08f.webp", alt: "Rendu bleu d’Essential Phone", label: "Bleu Plan RC" },
+      { image: "/manus-storage/Phone_Orange_baa9c0c5.webp", alt: "Rendu orange d’Essential Phone", label: "Orange" },
+      { image: "/manus-storage/Phone_Vert_f298d798.webp", alt: "Rendu vert d’Essential Phone", label: "Vert" },
+      { image: "/manus-storage/Phone_Jaune_c66dbf63.webp", alt: "Rendu jaune d’Essential Phone", label: "Jaune" },
     ],
   },
   {
@@ -67,9 +77,14 @@ const PROJECTS: Project[] = [
     learning: ["Cadrer avec une contrainte", "Faire émerger un sujet", "Construire une série"],
     tools: ["Lightroom", "LiveCollage", "iPhone"],
     documents: [
-      { label: "A", type: "Sélection", note: "Planche-contact de la sortie", shape: "wide" },
-      { label: "B", type: "Avant / après", note: "Jeu de contrastes et de teintes", shape: "tall" },
-      { label: "C", type: "Série", note: "Séquence jaune, rythme et cadrage", shape: "square" },
+      { label: "A", type: "Sélection", note: "Planche-contact de la sortie", image: "/manus-storage/grille_photo_45799468.webp", alt: "Grille de photographies à dominante jaune", shape: "wide" },
+      { label: "B", type: "Sujet", note: "La moto, étude de contraste", image: "/manus-storage/moto_j_a_e9ccff93.webp", alt: "Photo traitée d’une moto jaune", shape: "tall" },
+      { label: "C", type: "Sujet", note: "Le vélo, couleur dans la ville", image: "/manus-storage/velo_j_b_e3acdf92.webp", alt: "Photo d’un vélo jaune en ville", shape: "square" },
+    ],
+    comparisons: [
+      { subject: "Moto", treatment: "/manus-storage/moto_j_a_e9ccff93.webp", original: "/manus-storage/moto_j_b_e27fde92.webp", treatmentAlt: "Photographie de moto jaune avec traitement", originalAlt: "Photographie de moto jaune avant traitement" },
+      { subject: "Poteau", treatment: "/manus-storage/poteau_j_a_85a0583d.webp", original: "/manus-storage/poteau_j_b_7c1b96e3.webp", treatmentAlt: "Photographie de poteau jaune avec traitement", originalAlt: "Photographie de poteau jaune avant traitement" },
+      { subject: "Vélo", treatment: "/manus-storage/velo_j_a_7b8a6040.webp", original: "/manus-storage/velo_j_b_e3acdf92.webp", treatmentAlt: "Photographie de vélo jaune avec traitement", originalAlt: "Photographie de vélo jaune avant traitement" },
     ],
   },
   {
@@ -90,9 +105,12 @@ const PROJECTS: Project[] = [
     learning: ["Hiérarchiser un système", "Associer formes et usages", "Décliner sans diluer"],
     tools: ["Figma", "Milanote", "Canva"],
     documents: [
-      { label: "A", type: "Signe", note: "Construction, axe et contre-forme", shape: "square" },
-      { label: "B", type: "Palette", note: "Couleurs d’usage et contrastes", shape: "tall" },
-      { label: "C", type: "Usage", note: "Déclinaisons du système graphique", shape: "wide" },
+      { label: "A", type: "Signe", note: "Construction, axe et contre-forme", image: "/manus-storage/Logo_decompose_f1d05b0f.webp", alt: "Décomposition du logo de l’identité visuelle", shape: "wide" },
+      { label: "B", type: "Palette", note: "Couleurs d’usage et contrastes", image: "/manus-storage/Palette_de_couleur_48dbce34.webp", alt: "Palette de couleur de l’identité visuelle", shape: "tall" },
+      { label: "C", type: "Lettres", note: "Un système typographique lisible", image: "/manus-storage/Typographie_130b9b2f.webp", alt: "Étude typographique de l’identité visuelle", shape: "square" },
+    ],
+    gallery: [
+      { image: "/manus-storage/Identite_visuelle_sur_Portfolio_bf5985cb.webp", alt: "Identité visuelle appliquée au portfolio", label: "Application portfolio" },
     ],
   },
   {
@@ -113,9 +131,14 @@ const PROJECTS: Project[] = [
     learning: ["Piloter un projet collectif", "Itérer sur un objet complexe", "Relier forme et technique"],
     tools: ["SolidWorks", "Blender", "Word"],
     documents: [
-      { label: "A", type: "Contraintes", note: "Autonomie, masse et commandes", shape: "tall" },
-      { label: "B", type: "Prototype", note: "Implantation des pièces et volumes", shape: "wide" },
-      { label: "C", type: "Essais", note: "Observations de montage et de test", shape: "square" },
+      { label: "A", type: "Contraintes", note: "Autonomie, masse et commandes", image: "/manus-storage/Cahier_des_charges_0eb8a6dc.webp", alt: "Cahier des charges fonctionnel du projet Drone", shape: "tall" },
+      { label: "B", type: "Prototype", note: "Implantation des pièces et volumes", image: "/manus-storage/mise_en_plan_8088ebb8.webp", alt: "Mise en plan du drone", shape: "wide" },
+      { label: "C", type: "Électronique", note: "Détail des composants embarqués", image: "/manus-storage/plaque_electronique_48d7d129.webp", alt: "Plaque électronique du drone", shape: "square" },
+    ],
+    gallery: [
+      { image: "/manus-storage/schema_des_exigences_e43b8abb.webp", alt: "Schéma des exigences du projet Drone", label: "Architecture des exigences" },
+      { image: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp", alt: "Rendu 3D du prototype de drone", label: "Prototype 3D" },
+      { image: "/manus-storage/Logo X + nom transparent_52158576.PNG", alt: "Logo SPEED X du projet Drone", label: "SPEED X" },
     ],
   },
 ];
@@ -141,20 +164,49 @@ function ProjectDocument({ document, accent, motif, index }: { document: Project
     <article className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={{ "--project-accent": accent } as React.CSSProperties}>
       <header className="project-document__head">
         <span>{document.label}</span>
-        <span>DOC. / TEMP.</span>
+        <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
       </header>
-      <div className="project-document__visual" aria-hidden="true">
-        <span className="project-document__disc" />
-        <span className="project-document__bar" />
-        <span className="project-document__line project-document__line--one" />
-        <span className="project-document__line project-document__line--two" />
-        <span className="project-document__grid" />
-      </div>
+      <figure className="project-document__visual">
+        <img src={document.image} alt={document.alt} loading="lazy" />
+      </figure>
       <footer>
         <strong>{document.type}</strong>
         <p>{document.note}</p>
       </footer>
     </article>
+  );
+}
+
+function ProjectGallery({ gallery }: { gallery: NonNullable<Project["gallery"]> }) {
+  return (
+    <div className={`project-gallery project-gallery--${gallery.length}`}>
+      {gallery.map((item) => (
+        <figure key={item.image} className="project-gallery__item">
+          <img src={item.image} alt={item.alt} loading="lazy" />
+          <figcaption>{item.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+function ProjectComparisons({ comparisons }: { comparisons: NonNullable<Project["comparisons"]> }) {
+  return (
+    <div className="project-comparisons">
+      <div className="project-comparisons__heading">
+        <span>Traitement couleur</span>
+        <p>Trois scènes, observées selon la même contrainte chromatique.</p>
+      </div>
+      {comparisons.map((item, itemIndex) => (
+        <article key={item.subject} className="project-comparison">
+          <header><strong>{item.subject}</strong><span>Étude 0{itemIndex + 1}</span></header>
+          <div className="project-comparison__images">
+            <figure><img src={item.treatment} alt={item.treatmentAlt} loading="lazy" /><figcaption>Traitement</figcaption></figure>
+            <figure><img src={item.original} alt={item.originalAlt} loading="lazy" /><figcaption>Prise</figcaption></figure>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -257,6 +309,8 @@ export default function ProjectPage() {
         <div className="project-documents">
           {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} />)}
         </div>
+        {project.gallery ? <ProjectGallery gallery={project.gallery} /> : null}
+        {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} /> : null}
       </section>
 
       <section className="project-closing">
