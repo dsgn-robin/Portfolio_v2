@@ -279,6 +279,8 @@ a { -webkit-tap-highlight-color: transparent; }
 
 .workshop__tooltip {
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 20;
   display: grid;
   min-width: 148px;

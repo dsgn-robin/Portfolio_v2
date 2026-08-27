@@ -103,3 +103,9 @@
 - [x] Vérifier la transmission du projet sélectionné entre le raycaster et l’interface React.
 - [x] Rendre le tooltip visible au-dessus du canvas avec une superposition stable.
 - [x] Confirmer l’apparition du nom et de la catégorie au survol de chaque prototype.
+
+## Diagnostic tooltip définitif
+
+- [x] Enregistrer les hits du raycaster et les changements de survol pour isoler la rupture.
+- [x] Réparer le chemin qui empêchait le texte projet de recevoir une position visible.
+- [x] Vérifier le chemin d’affichage du libellé au-dessus du canvas pour les quatre prototypes.
