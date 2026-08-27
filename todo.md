@@ -133,3 +133,11 @@
 - [x] Préparer des versions web légères sans rogner les documents importants.
 - [x] Remplacer les archives temporaires par les documents réels et enrichir les galeries.
 - [x] Vérifier les quatre dossiers sur desktop et mobile, puis enregistrer une version testée.
+
+## Médias interactifs des dossiers
+
+- [x] Relever les proportions des documents et préparer le rendu de chaque cadre selon son contenu.
+- [x] Extraire et publier la vidéo sous-titrée du Drone sans alourdir le code du projet.
+- [x] Préparer le GLB Essential Phone pour une visionneuse 3D autonome et manipulable.
+- [x] Adapter les modules d’archives, la vidéo et la visionneuse au langage éditorial des dossiers.
+- [x] Vérifier sur desktop et mobile le cadrage, la lecture vidéo et la manipulation 3D.

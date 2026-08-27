@@ -5,6 +5,7 @@
 import { ArrowDown, ArrowUpRight, CornerUpLeft, MoveUpRight } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useLocation } from "wouter";
+import EssentialPhoneViewer from "@/components/EssentialPhoneViewer";
 
 type Project = {
   slug: string;
@@ -25,6 +26,7 @@ type Project = {
   documents: { label: string; type: string; note: string; image: string; alt: string; shape: "tall" | "wide" | "square" }[];
   gallery?: { image: string; alt: string; label: string }[];
   comparisons?: { subject: string; treatment: string; original: string; treatmentAlt: string; originalAlt: string }[];
+  video?: { src: string; captions: string; poster: string; title: string; description: string };
 };
 
 const PROJECTS: Project[] = [
@@ -138,8 +140,15 @@ const PROJECTS: Project[] = [
     gallery: [
       { image: "/manus-storage/schema_des_exigences_e43b8abb.webp", alt: "Schéma des exigences du projet Drone", label: "Architecture des exigences" },
       { image: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp", alt: "Rendu 3D du prototype de drone", label: "Prototype 3D" },
-      { image: "/manus-storage/Logo X + nom transparent_52158576.PNG", alt: "Logo SPEED X du projet Drone", label: "SPEED X" },
+      { image: "/manus-storage/speedx-logo_ca6dcda9.png", alt: "Logo SPEED X du projet Drone", label: "SPEED X" },
     ],
+    video: {
+      src: "/manus-storage/Video_drone_seul_2fec9be4.mp4",
+      captions: "/manus-storage/speedx-fr_5f831d53.vtt",
+      poster: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp",
+      title: "SPEED X · Film de démonstration",
+      description: "Une courte séquence de présentation du prototype, avec les sous-titres français activables directement dans le lecteur.",
+    },
   },
 ];
 
@@ -167,7 +176,7 @@ function ProjectDocument({ document, accent, motif, index }: { document: Project
         <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
       </header>
       <figure className="project-document__visual">
-        <img src={document.image} alt={document.alt} loading="lazy" />
+        <img src={document.image} alt={document.alt} />
       </figure>
       <footer>
         <strong>{document.type}</strong>
@@ -182,7 +191,7 @@ function ProjectGallery({ gallery }: { gallery: NonNullable<Project["gallery"]> 
     <div className={`project-gallery project-gallery--${gallery.length}`}>
       {gallery.map((item) => (
         <figure key={item.image} className="project-gallery__item">
-          <img src={item.image} alt={item.alt} loading="lazy" />
+          <img src={item.image} alt={item.alt} />
           <figcaption>{item.label}</figcaption>
         </figure>
       ))}
@@ -201,12 +210,32 @@ function ProjectComparisons({ comparisons }: { comparisons: NonNullable<Project[
         <article key={item.subject} className="project-comparison">
           <header><strong>{item.subject}</strong><span>Étude 0{itemIndex + 1}</span></header>
           <div className="project-comparison__images">
-            <figure><img src={item.treatment} alt={item.treatmentAlt} loading="lazy" /><figcaption>Traitement</figcaption></figure>
-            <figure><img src={item.original} alt={item.originalAlt} loading="lazy" /><figcaption>Prise</figcaption></figure>
+            <figure><img src={item.treatment} alt={item.treatmentAlt} /><figcaption>Traitement</figcaption></figure>
+            <figure><img src={item.original} alt={item.originalAlt} /><figcaption>Prise</figcaption></figure>
           </div>
         </article>
       ))}
     </div>
+  );
+}
+
+function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
+  return (
+    <section className="project-video" aria-labelledby="project-video-title">
+      <div className="project-video__intro">
+        <div className="project-section-label"><span>04</span><i /> Film</div>
+        <h2 id="project-video-title">{video.title}</h2>
+        <p>{video.description}</p>
+      </div>
+      <figure className="project-video__frame">
+        <video controls playsInline preload="metadata" poster={video.poster}>
+          <source src={video.src} type="video/mp4" />
+          <track kind="captions" src={video.captions} srcLang="fr" label="Français" default />
+          Votre navigateur ne prend pas en charge la lecture vidéo.
+        </video>
+        <figcaption>Prototype Drone / SPEED X / 2025</figcaption>
+      </figure>
+    </section>
   );
 }
 
@@ -262,7 +291,7 @@ export default function ProjectPage() {
           <h1>{project.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
           <p className="project-hero__subtitle">{project.subtitle}</p>
           <a className="project-jump" href="#dossier">
-            Lire le dossier <ArrowDown size={18} strokeWidth={2.6} />
+            Ouvrir le dossier <ArrowDown size={18} strokeWidth={2.6} />
           </a>
         </div>
 
@@ -304,7 +333,7 @@ export default function ProjectPage() {
       <section className="project-archive">
         <div className="project-archive__heading">
           <div className="project-section-label"><span>03</span><i /> Archives</div>
-          <p>Une planche de dossier construite comme une archive : relevés, essais et indices de fabrication donnent un rythme visuel à chaque étape.</p>
+          <p>Classer les pièces du projet : relevés, essais et indices de fabrication composent une archive à examiner étape par étape.</p>
         </div>
         <div className="project-documents">
           {project.documents.map((document, documentIndex) => <ProjectDocument key={document.label} document={document} accent={`#${project.accent}`} motif={project.motif} index={documentIndex} />)}
@@ -312,6 +341,9 @@ export default function ProjectPage() {
         {project.gallery ? <ProjectGallery gallery={project.gallery} /> : null}
         {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} /> : null}
       </section>
+
+      {project.slug === "essential-phone" ? <EssentialPhoneViewer /> : null}
+      {project.video ? <ProjectVideo video={project.video} /> : null}
 
       <section className="project-closing">
         <div className="project-closing__learning">

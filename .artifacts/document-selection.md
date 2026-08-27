@@ -21,3 +21,13 @@ La série contient une grille de contact ainsi que trois paires avant/après pou
 Le dossier Essential Phone expose les URLs de documents attendues dans son contenu accessible et son défilement vertical atteint bien les sections de processus et d’archives. Les images sont chargées de manière différée afin de préserver la fluidité de la première lecture ; une vérification visuelle de leur zone de page est nécessaire après les avoir fait entrer dans le viewport.
 
 Le dossier Projet Photo expose la grille de sélection, les documents de sujets et les trois comparaisons de traitement. La structure permet de rapprocher les versions d’une même scène sans modifier les photographies originales.
+
+## Médias interactifs
+
+La visionneuse Essential Phone est bien créée avec un canvas accessible et les contrôles de manipulation annoncés. Le contrôleur de navigateur détecte la page comme plus longue que le viewport mais n’a pas pu forcer son défilement global dans cette session ; la structure de page reste cependant documentée avec les sections 3D et média attendues. L’audit du GLB a révélé un recentrage appliqué avant l’échelle ; il a été corrigé pour placer le modèle effectivement au centre de sa visionneuse. Le modèle bleu est à présent visible, correctement cadré et prêt à être manipulé dans le canvas.
+
+Le lecteur SPEED X est présent dans le dossier Drone, ses métadonnées sont chargées (durée détectée : 27,07 s) et une piste WebVTT française est associée comme sous-titrage par défaut. Le poster reprend le rendu de prototype fourni.
+
+La visionneuse est accessible depuis le dossier Essential Phone et le lecteur SPEED X est présenté dans une section dédiée au film du Drone. Les deux modules s’insèrent dans le rythme des dossiers, après les archives et avant les apprentissages.
+
+La zone de manipulation Essential Phone est dimensionnée à 577 × 556 px sur la vérification desktop. Un déplacement de pointeur a été émis dans son canvas de contrôle ; le module reste rendu et réactif sans erreur console, tandis que la manipulation manuelle directe demeure le comportement de référence.
