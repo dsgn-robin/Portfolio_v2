@@ -288,3 +288,9 @@
 - [x] Corriger le chargement de l’image de carte mère du Drone.
 - [x] Remplacer le repère Contact demandé par le lien Instagram fourni.
 - [x] Vérifier les corrections sur desktop et mobile, puis enregistrer la version.
+
+### Ajustement des repères Drone
+
+- [x] Retirer le cartouche « Test en cours » de la vidéo d’essai.
+- [x] Remplacer les libellés « Dossier / 04 » par « Projet / 04 » dans le dossier Drone.
+- [x] Vérifier et enregistrer l’ajustement.

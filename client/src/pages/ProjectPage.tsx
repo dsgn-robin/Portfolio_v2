@@ -501,7 +501,7 @@ export default function ProjectPage() {
         </div>
 
         <div className="project-hero__copy">
-          <p className="project-kicker">Dossier / {project.number}</p>
+          <p className="project-kicker">Projet / {project.number}</p>
           <h1>{project.title.split("\n").map((line) => <span key={line}>{line}</span>)}</h1>
           <p className="project-hero__subtitle">{project.subtitle}</p>
           <a className="project-jump" href="#dossier" onClick={handleSectionJump}>

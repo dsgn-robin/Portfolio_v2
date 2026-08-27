@@ -369,7 +369,6 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
 .project-archive-video__head { display: flex; justify-content: space-between; gap: 1rem; color: var(--ink); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.09em; }
 .project-archive-video__open { display: block; padding: 0; border: 0; background: transparent; color: inherit; cursor: zoom-in; text-align: inherit; }
 .project-archive-video__visual { position: relative; overflow: hidden; border: 1px solid var(--line); background: color-mix(in srgb, var(--project-accent) 12%, var(--paper)); }
-.project-archive-video__visual::after { position: absolute; right: 0.65rem; bottom: 0.65rem; padding: 0.3rem 0.42rem; border: 1px solid rgb(242 233 216 / 50%); background: rgb(23 22 18 / 78%); color: var(--paper); content: "TEST EN COURS"; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.09em; pointer-events: none; }
 .project-archive-video__visual video { display: block; width: 100%; aspect-ratio: 9 / 16; background: #101010; object-fit: cover; }
 .project-archive-video footer { min-height: 2.65rem; }
 .project-archive-video footer strong { display: block; margin-bottom: 0.25rem; font-family: "Archivo Black", sans-serif; font-size: 0.98rem; letter-spacing: -0.03em; line-height: 1; text-transform: uppercase; }
