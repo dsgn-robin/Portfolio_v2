@@ -66,6 +66,9 @@ html.project-document-open { scroll-behavior: smooth; }
 }
 
 .project-rail__home:hover { background: var(--atelier-orange); color: var(--paper); }
+.project-rail__home:hover .project-rail__monogram i:first-child { border-color: var(--paper); }
+.project-rail__home:hover .project-rail__monogram i:nth-child(2) { background: var(--paper); }
+.project-rail__home:hover .project-rail__monogram b { background: var(--ink); }
 .project-rail__home:active, .project-next a:active { transform: scale(0.97); }
 
 .project-rail__monogram { position: relative; display: block; width: 2.5rem; height: 2.5rem; overflow: hidden; }
@@ -75,6 +78,8 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-rail__monogram b { position: absolute; top: 0.29rem; bottom: 0.3rem; left: 0.33rem; width: 0.24rem; background: var(--ink); }
 
 .project-rail__label { margin: 0; padding: 1.5rem 0.35rem; color: var(--quiet-ink); font-size: 0.5rem; font-weight: 700; letter-spacing: 0.09em; line-height: 1.65; text-align: center; text-transform: uppercase; writing-mode: vertical-rl; transform: rotate(180deg); }
+.project-rail__legal { display: block; padding: 1rem 0.5rem 1.15rem; border-top: 1px solid var(--line); color: var(--quiet-ink); font-size: 0.48rem; font-weight: 700; letter-spacing: 0.08em; line-height: 1.35; text-align: center; text-transform: uppercase; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+.project-rail__legal:hover { background: var(--ink); color: var(--paper); }
 
 .project-hero,
 .project-intro,
@@ -342,8 +347,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
 .project-share-dialog__frame { position: relative; width: min(100%, 37rem); padding: clamp(1.2rem, 3vw, 2rem); overflow: hidden; border: 2px solid var(--ink); background: var(--paper); box-shadow: 0.85rem 0.85rem 0 var(--project-accent); }
 .project-share-dialog__frame::before { position: absolute; top: -8rem; right: -7rem; width: 18rem; height: 18rem; border: 2.25rem solid color-mix(in srgb, var(--project-accent) 24%, transparent); border-radius: 50%; content: ""; }
 .project-share-dialog__topline { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line); color: var(--quiet-ink); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-.project-share-dialog__number { position: absolute; z-index: 0; top: 3rem; right: 1.4rem; color: color-mix(in srgb, var(--project-accent) 74%, transparent); font-family: "Archivo Black", sans-serif; font-size: 10rem; line-height: 0.8; }
-.project-share-dialog h2 { position: relative; z-index: 1; max-width: 28rem; margin: clamp(3.1rem, 7vw, 5rem) 0 1.2rem; font-family: "Archivo Black", sans-serif; font-size: clamp(2.5rem, 6vw, 4.4rem); letter-spacing: -0.075em; line-height: 0.82; text-transform: uppercase; }
+.project-share-dialog h2 { position: relative; z-index: 1; max-width: 28rem; margin: clamp(2.4rem, 5vw, 3.6rem) 0 1.2rem; font-family: "Archivo Black", sans-serif; font-size: clamp(2.5rem, 6vw, 4.4rem); letter-spacing: -0.075em; line-height: 0.82; text-transform: uppercase; }
 .project-share-dialog h2 em { color: var(--project-accent-dark); font-style: normal; }
 .project-share-dialog p { position: relative; z-index: 1; max-width: 26rem; margin: 0 0 1.6rem; font-size: 0.96rem; font-weight: 500; line-height: 1.5; }
 .project-share-dialog__url { position: relative; z-index: 1; display: block; overflow: hidden; padding: 0.65rem 0.7rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--project-accent-soft) 45%, var(--paper)); color: var(--quiet-ink); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.35; overflow-wrap: anywhere; }
@@ -498,6 +502,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .project-rail__home { display: flex; height: 4.65rem; align-items: center; gap: 0.65rem; padding: 0 1.2rem; border-bottom: 0; border-right: 1px solid var(--line); }
   .project-rail__monogram { width: 2rem; height: 2rem; font-size: 1rem; }
   .project-rail__label { padding: 0 1rem; text-align: right; writing-mode: initial; transform: none; }
+  .project-rail__legal { margin-left: auto; padding: 0 1rem; border-top: 0; border-left: 1px solid var(--line); font-size: 0.52rem; }
   .project-rail::after { top: auto; right: 0; bottom: 0.3rem; left: 8rem; width: auto; height: 0.25rem; background: repeating-linear-gradient(90deg, var(--project-accent) 0 0.18rem, transparent 0.18rem 0.44rem); }
   .project-reading-progress { left: 0; }
   .project-quick-nav { top: auto; right: 1rem; bottom: 1rem; grid-auto-flow: column; transform: none; }
@@ -551,8 +556,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .project-share-dialog { padding: 1rem; }
   .project-share-dialog__frame { padding: 1rem; box-shadow: 0.45rem 0.45rem 0 var(--project-accent); }
   .project-share-dialog__topline { padding-right: 2.55rem; font-size: 0.5rem; }
-  .project-share-dialog__number { top: 3.6rem; right: 0.5rem; font-size: 7.3rem; }
-  .project-share-dialog h2 { margin-top: 3.5rem; font-size: clamp(2.5rem, 13vw, 3.5rem); }
+  .project-share-dialog h2 { margin-top: 2.8rem; font-size: clamp(2.5rem, 13vw, 3.5rem); }
   .project-share-dialog__actions { display: grid; grid-template-columns: 1fr; }
   .project-share-dialog__actions button, .project-share-dialog__actions a { justify-content: center; }
   .info-page__copy p { margin-bottom: 2.3rem; font-size: clamp(1.55rem, 8.5vw, 2.25rem); }

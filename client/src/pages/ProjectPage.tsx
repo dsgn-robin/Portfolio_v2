@@ -329,7 +329,6 @@ function ProjectShareDialog({ title, onClose }: { title: string; onClose: () => 
     <div className="project-share-dialog" role="dialog" aria-modal="true" aria-labelledby="project-share-title" onClick={onClose}>
       <section className="project-share-dialog__frame" onClick={(event) => event.stopPropagation()}>
         <div className="project-share-dialog__topline"><span>RC / PARTAGE</span><span>DOSSIER ACTIF</span></div>
-        <span className="project-share-dialog__number" aria-hidden="true">↗</span>
         <h2 id="project-share-title">Faire circuler<br /><em>la pièce.</em></h2>
         <p>Partagez le dossier « {title} » par lien direct ou préparez un message e-mail.</p>
         <output className="project-share-dialog__url">{window.location.href}</output>
@@ -425,6 +424,7 @@ export default function ProjectPage() {
           <span className="project-rail__monogram" aria-hidden="true"><i /><i /><b /></span>
         </Link>
         <p className="project-rail__label">Robin Courte<br />Portfolio / 2026</p>
+        <Link href="/mentions-legales" className="project-rail__legal">Mentions légales</Link>
       </aside>
 
       <section className="project-hero">
@@ -514,10 +514,9 @@ export default function ProjectPage() {
         <Link href="/" className="project-back"><CornerUpLeft size={18} /> Retour à l’atelier</Link>
       </nav>
       <nav className="project-quick-nav" aria-label="Repères rapides du dossier">
-        <a href="#dossier" onClick={handleSectionJump}><span>01</span> Ouvrir</a>
+        <a href="#dossier" onClick={handleSectionJump}><span>01</span> Contexte</a>
         <a href="#processus" onClick={handleSectionJump}><span>02</span> Processus</a>
-        <a href="#archives" onClick={handleSectionJump}><span>03</span> Examiner</a>
-        {project.slug === "essential-phone" ? <a href="#prototype" onClick={handleSectionJump}><span>04</span> Retourner</a> : null}
+        <a href="#archives" onClick={handleSectionJump}><span>03</span> Archives</a>
         <a href="#bilan" onClick={handleSectionJump}><span>04</span> Bilan</a>
       </nav>
       <div className="project-utility" aria-label="Outils de lecture">

@@ -163,6 +163,7 @@ export default function InfoPage({ kind }: InfoPageProps) {
       <aside className="project-rail" aria-label="Navigation principale">
         <Link href="/" className="project-rail__home" aria-label="Retourner à l’atelier"><span className="project-rail__monogram" aria-hidden="true"><i /><i /><b /></span></Link>
         <p className="project-rail__label">Robin Courte<br />Portfolio / 2026</p>
+        <Link href="/mentions-legales" className="project-rail__legal">Mentions légales</Link>
       </aside>
       <section className="project-hero info-page__hero">
         <div className="project-hero__topline"><p>{page.kicker}</p><p>Fiche / {page.number}</p></div>

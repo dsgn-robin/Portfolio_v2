@@ -238,3 +238,12 @@
 - [x] Réorienter et espacer les quatre supports de projets pour créer une lecture plus fluide.
 - [x] Regrouper À propos et Contact en une paire relationnelle cohérente dans la composition.
 - [x] Vérifier la scène sur desktop et mobile, puis enregistrer une version testée.
+
+## Lisibilité des repères et navigation
+
+- [x] Corriger le contraste du monogramme R au survol sur les pages de dossier.
+- [x] Condenser et clarifier l’index de l’accueil sans perdre ses accès rapides.
+- [x] Remplacer les libellés abrégés des repères de dossiers par Contexte, Processus, Archives et Bilan.
+- [x] Corriger le chevauchement de la fenêtre Partager et rendre Mentions légales plus accessible.
+- [x] Vérifier l’orientation et l’espacement de chaque support sur la scène d’accueil.
+- [x] Contrôler les corrections sur desktop et mobile, puis enregistrer une version testée.
