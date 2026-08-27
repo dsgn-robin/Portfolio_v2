@@ -38,7 +38,7 @@ const PAGE_CONTENT = {
     rows: [
       ["E-MAIL", "dgn.robin@gmail.com"],
       ["TÉLÉPHONE", "06 70 52 64 68"],
-      ["DISPONIBILITÉ", "Projets, apprentissages et collaborations."],
+      ["INSTAGRAM", "@la_fabrique_de_robin"],
     ],
     next: { href: "/", label: "Revenir à la scène", title: "PORTFOLIO" },
   },
@@ -186,10 +186,12 @@ export default function InfoPage({ kind }: InfoPageProps) {
           {page.rows.map(([label, value]) => {
             const isEmail = kind === "contact" && label === "E-MAIL";
             const isPhone = kind === "contact" && label === "TÉLÉPHONE";
+            const isInstagram = kind === "contact" && label === "INSTAGRAM";
             const Icon = isEmail ? Mail : isPhone ? Phone : MoveUpRight;
             const content = <><span>{label}</span><strong>{value}</strong><Icon size={19} /></>;
             return isEmail ? <a className="info-page__record" key={label} href={`mailto:${value}`}>{content}</a>
               : isPhone ? <a className="info-page__record" key={label} href="tel:+33670526468">{content}</a>
+                : isInstagram ? <a className="info-page__record" key={label} href="https://www.instagram.com/la_fabrique_de_robin?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==">{content}</a>
                 : <article className="info-page__record" key={label}>{content}</article>;
           })}
         </div>

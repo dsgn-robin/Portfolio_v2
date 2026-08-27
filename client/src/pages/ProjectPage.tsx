@@ -31,6 +31,10 @@ type Project = {
   video?: { src: string; captions: string; title: string; description: string };
 };
 
+type LightboxAsset =
+  | { kind: "image"; source: string; alt: string; label: string }
+  | { kind: "video"; source: string; label: string; note: string };
+
 const PROJECTS: Project[] = [
   {
     slug: "essential-phone",
@@ -140,7 +144,7 @@ const PROJECTS: Project[] = [
       { label: "", type: "Mise en plan", note: "Création des pièces et des mesures", image: "/manus-storage/mise_en_plan_8088ebb8.webp", alt: "Mise en plan du drone", shape: "wide" },
       { label: "", type: "Prototype 3D", note: "Organisation dans l’espace et préparation à l’impression 3D", image: "/manus-storage/Projet_scolaire-1_4b0ec8ec.webp", alt: "Rendu 3D du prototype de drone", shape: "wide" },
       { label: "", type: "SPEED X", note: "Logo du projet", image: "/manus-storage/speedx-logo_ca6dcda9.png", alt: "Logo SPEED X du projet Drone", shape: "square" },
-      { label: "", type: "Électronique", note: "Montage des composants", image: "/manus-storage/plaque_electronique_48dbce34.webp", alt: "Plaque électronique du drone", shape: "square" },
+      { label: "", type: "Électronique", note: "Montage des composants", image: "/manus-storage/plaque_electronique_48d7d129.webp", alt: "Plaque électronique du drone", shape: "square" },
     ],
     archiveVideo: { type: "Test", note: "Vidéo d’essai", src: "/manus-storage/drone-test-vertical_425e9a92.mp4" },
     video: {
@@ -168,7 +172,7 @@ function ProjectMark({ motif }: { motif: Project["motif"] }) {
   );
 }
 
-function ProjectDocument({ document, accent, motif, index, onOpen }: { document: Project["documents"][number]; accent: string; motif: Project["motif"]; index: number; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+function ProjectDocument({ document, accent, motif, index, onOpen }: { document: Project["documents"][number]; accent: string; motif: Project["motif"]; index: number; onOpen: (asset: LightboxAsset) => void }) {
   const [assetRatio, setAssetRatio] = useState(document.ratio ?? "1 / 1");
   const documentStyle = {
     "--project-accent": accent,
@@ -176,7 +180,7 @@ function ProjectDocument({ document, accent, motif, index, onOpen }: { document:
   } as React.CSSProperties;
 
   return (
-    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={documentStyle} type="button" onClick={() => onOpen({ image: resolvePortfolioMedia(document.image), alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
+    <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={documentStyle} type="button" onClick={() => onOpen({ kind: "image", source: document.image, alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
       <header className="project-document__head">
         <span>{document.label}</span>
         <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
@@ -195,7 +199,7 @@ function ProjectDocument({ document, accent, motif, index, onOpen }: { document:
   );
 }
 
-function ProjectGallery({ gallery, onOpen, accent, motif }: { gallery: NonNullable<Project["gallery"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void; accent: string; motif: Project["motif"] }) {
+function ProjectGallery({ gallery, onOpen, accent, motif }: { gallery: NonNullable<Project["gallery"]>; onOpen: (asset: LightboxAsset) => void; accent: string; motif: Project["motif"] }) {
   return (
     <div className={`project-gallery project-gallery--${gallery.length}`}>
       {gallery.map((item, itemIndex) => (
@@ -212,7 +216,7 @@ function ProjectGallery({ gallery, onOpen, accent, motif }: { gallery: NonNullab
   );
 }
 
-function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonNullable<Project["comparisons"]>[number]; index: number; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonNullable<Project["comparisons"]>[number]; index: number; onOpen: (asset: LightboxAsset) => void }) {
   const fallbackRatio = comparison.subject === "Moto" ? "4 / 5" : comparison.subject === "Poteau" ? "3 / 4" : "4 / 3";
   const [assetRatio, setAssetRatio] = useState(fallbackRatio);
   const pairStyle = { "--asset-ratio": assetRatio } as React.CSSProperties;
@@ -228,11 +232,11 @@ function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonN
         <span>AVANT · APRÈS</span>
       </header>
       <div className="project-comparison-pair__images">
-        <button type="button" onClick={() => onOpen({ image: comparison.original, alt: comparison.originalAlt, label: `${comparison.subject} / prise` })} aria-label={`Examiner ${comparison.subject} avant traitement`}>
+        <button type="button" onClick={() => onOpen({ kind: "image", source: comparison.original, alt: comparison.originalAlt, label: `${comparison.subject} / prise` })} aria-label={`Examiner ${comparison.subject} avant traitement`}>
           <img src={resolvePortfolioMedia(comparison.original)} alt={comparison.originalAlt} onLoad={updateRatio} />
           <span>PRISE</span>
         </button>
-        <button type="button" onClick={() => onOpen({ image: comparison.treatment, alt: comparison.treatmentAlt, label: `${comparison.subject} / traitement` })} aria-label={`Examiner ${comparison.subject} après traitement`}>
+        <button type="button" onClick={() => onOpen({ kind: "image", source: comparison.treatment, alt: comparison.treatmentAlt, label: `${comparison.subject} / traitement` })} aria-label={`Examiner ${comparison.subject} après traitement`}>
           <img src={resolvePortfolioMedia(comparison.treatment)} alt={comparison.treatmentAlt} onLoad={updateRatio} />
           <span>TRAITEMENT</span>
         </button>
@@ -242,7 +246,7 @@ function ProjectComparisonPair({ comparison, index, onOpen }: { comparison: NonN
   );
 }
 
-function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: { image: string; alt: string; label: string }) => void }) {
+function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<Project["comparisons"]>; onOpen: (asset: LightboxAsset) => void }) {
   return (
     <div className="project-comparisons">
       <div className="project-comparisons__heading">
@@ -256,7 +260,7 @@ function ProjectComparisons({ comparisons, onOpen }: { comparisons: NonNullable<
   );
 }
 
-function ProjectArchiveVideo({ archiveVideo }: { archiveVideo: NonNullable<Project["archiveVideo"]> }) {
+function ProjectArchiveVideo({ archiveVideo, onOpen }: { archiveVideo: NonNullable<Project["archiveVideo"]>; onOpen: (asset: LightboxAsset) => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const keepMuted = (video: HTMLVideoElement) => {
     video.muted = true;
@@ -289,11 +293,13 @@ function ProjectArchiveVideo({ archiveVideo }: { archiveVideo: NonNullable<Proje
         <span>DOC. / 07</span>
         <span>BOUCLE MUETTE</span>
       </header>
-      <div className="project-archive-video__visual">
-        <video ref={videoRef} autoPlay loop muted playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" onCanPlay={(event) => { keepMuted(event.currentTarget); void event.currentTarget.play().catch(() => undefined); }} onLoadedMetadata={(event) => keepMuted(event.currentTarget)} onVolumeChange={(event) => keepMuted(event.currentTarget)} aria-label="Vidéo verticale d’essai du Drone, diffusée sans son">
-          <source src={resolvePortfolioMedia(archiveVideo.src)} type="video/mp4" />
-        </video>
-      </div>
+      <button className="project-archive-video__open" type="button" onClick={() => onOpen({ kind: "video", source: archiveVideo.src, label: archiveVideo.type, note: archiveVideo.note })} aria-label="Agrandir la vidéo d’essai du Drone">
+        <div className="project-archive-video__visual">
+          <video ref={videoRef} autoPlay loop muted playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" onCanPlay={(event) => { keepMuted(event.currentTarget); void event.currentTarget.play().catch(() => undefined); }} onLoadedMetadata={(event) => keepMuted(event.currentTarget)} onVolumeChange={(event) => keepMuted(event.currentTarget)} aria-label="Vidéo verticale d’essai du Drone, diffusée sans son">
+            <source src={resolvePortfolioMedia(archiveVideo.src)} type="video/mp4" />
+          </video>
+        </div>
+      </button>
       <footer>
         <strong>{archiveVideo.type}</strong>
         <p>{archiveVideo.note}</p>
@@ -346,12 +352,28 @@ function ProjectVideo({ video }: { video: NonNullable<Project["video"]> }) {
   );
 }
 
-function ProjectLightbox({ asset, onClose }: { asset: { image: string; alt: string; label: string }; onClose: () => void }) {
+function ProjectLightbox({ asset, onClose }: { asset: LightboxAsset; onClose: () => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const enforceMutedPlayback = () => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.volume = 0;
+      void video.play().catch(() => undefined);
+    };
+    enforceMutedPlayback();
+    video.addEventListener("volumechange", enforceMutedPlayback);
+    return () => video.removeEventListener("volumechange", enforceMutedPlayback);
+  }, [asset]);
+
   return (
     <div className="project-lightbox" role="dialog" aria-modal="true" aria-label={`Examen du document ${asset.label}`} onClick={onClose}>
-      <div className="project-lightbox__frame" onClick={(event) => event.stopPropagation()}>
+      <div className={`project-lightbox__frame${asset.kind === "video" ? " project-lightbox__frame--video" : ""}`} onClick={(event) => event.stopPropagation()}>
         <div className="project-lightbox__topline"><span>Dossier / examen</span><span>{asset.label}</span></div>
-        <img src={resolvePortfolioMedia(asset.image)} alt={asset.alt} />
+        {asset.kind === "image" ? <img src={resolvePortfolioMedia(asset.source)} alt={asset.alt} /> : <video ref={videoRef} autoPlay loop muted playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" onVolumeChange={(event) => { event.currentTarget.muted = true; event.currentTarget.defaultMuted = true; event.currentTarget.volume = 0; }} aria-label={`Vidéo d’essai : ${asset.note}`}><source src={resolvePortfolioMedia(asset.source)} type="video/mp4" /></video>}
         <button type="button" className="project-lightbox__close" onClick={onClose} aria-label="Fermer l’examen"><X size={20} /></button>
       </div>
     </div>
@@ -392,7 +414,7 @@ export default function ProjectPage() {
   const project = getProject(location);
   const index = PROJECTS.findIndex((item) => item.slug === project.slug);
   const nextProject = PROJECTS[(index + 1) % PROJECTS.length];
-  const [activeAsset, setActiveAsset] = useState<{ image: string; alt: string; label: string } | null>(null);
+  const [activeAsset, setActiveAsset] = useState<LightboxAsset | null>(null);
   const [progress, setProgress] = useState(0);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
@@ -531,7 +553,7 @@ export default function ProjectPage() {
         </div>
         {project.gallery ? <ProjectGallery gallery={project.gallery} onOpen={setActiveAsset} accent={`#${project.accent}`} motif={project.motif} /> : null}
         {project.comparisons ? <ProjectComparisons comparisons={project.comparisons} onOpen={setActiveAsset} /> : null}
-        {project.archiveVideo ? <ProjectArchiveVideo archiveVideo={project.archiveVideo} /> : null}
+        {project.archiveVideo ? <ProjectArchiveVideo archiveVideo={project.archiveVideo} onOpen={setActiveAsset} /> : null}
       </section>
 
       {project.slug === "essential-phone" ? <EssentialPhoneViewer /> : null}

@@ -281,3 +281,10 @@
 - [x] Réduire sélectivement les documents du dossier Drone pour renforcer leur composition.
 - [x] Diminuer l’échelle des textes de contexte dans les dossiers projet.
 - [x] Vérifier les nouveaux équilibres sur desktop et mobile, puis enregistrer la version.
+
+### Correctifs Drone et Contact
+
+- [x] Uniformiser la fiche vidéo de test Drone avec les fiches d’archives et rendre son agrandissement possible.
+- [x] Corriger le chargement de l’image de carte mère du Drone.
+- [x] Remplacer le repère Contact demandé par le lien Instagram fourni.
+- [x] Vérifier les corrections sur desktop et mobile, puis enregistrer la version.
