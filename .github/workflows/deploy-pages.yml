@@ -33,6 +33,8 @@ jobs:
         run: GITHUB_PAGES=true pnpm build
       - name: Add portfolio media to Pages artifact
         run: node scripts/download-github-pages-media.mjs
+      - name: Compress portfolio 3D models
+        run: node scripts/compress-pages-glb.mjs
       - name: Add Pages route fallback
         run: |
           cp dist/public/index.html dist/public/404.html
