@@ -329,3 +329,8 @@
 - [x] Resserrer et réorganiser les archives Drone en conservant l’ordre fourni.
 - [x] Simplifier Contact en trois sections : Contacter, Canaux et Message, avec les textes exacts demandés.
 - [x] Harmoniser le niveau typographique des deux mentions Formspree, vérifier les pages et enregistrer la version.
+
+### Vérification Google Search Console
+
+- [x] Ajouter la balise google-site-verification dans le `<head>` de la page d’accueil.
+- [x] Vérifier sa présence dans le HTML et valider la compilation, puis enregistrer la version.
