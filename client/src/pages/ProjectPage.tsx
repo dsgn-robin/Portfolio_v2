@@ -182,7 +182,6 @@ function ProjectDocument({ document, accent, motif, index, onOpen }: { document:
   return (
     <button className={`project-document project-document--${document.shape} project-document--${motif} project-document--${index + 1}`} style={documentStyle} type="button" onClick={() => onOpen({ kind: "image", source: document.image, alt: document.alt, label: document.type })} aria-label={`Examiner le document ${document.type} : ${document.note}`}>
       <header className="project-document__head">
-        <span>{document.label}</span>
         <span>DOC. / {String(index + 1).padStart(2, "0")}</span>
       </header>
       <figure className="project-document__visual">
@@ -372,7 +371,7 @@ function ProjectLightbox({ asset, onClose }: { asset: LightboxAsset; onClose: ()
   return (
     <div className="project-lightbox" role="dialog" aria-modal="true" aria-label={`Examen du document ${asset.label}`} onClick={onClose}>
       <div className={`project-lightbox__frame${asset.kind === "video" ? " project-lightbox__frame--video" : ""}`} onClick={(event) => event.stopPropagation()}>
-        <div className="project-lightbox__topline"><span>Dossier / examen</span><span>{asset.label}</span></div>
+        <div className="project-lightbox__topline"><span>Projet / examen</span><span>{asset.label}</span></div>
         {asset.kind === "image" ? <img src={resolvePortfolioMedia(asset.source)} alt={asset.alt} /> : <video ref={videoRef} autoPlay loop muted playsInline disablePictureInPicture controlsList="nodownload nofullscreen noremoteplayback" onVolumeChange={(event) => { event.currentTarget.muted = true; event.currentTarget.defaultMuted = true; event.currentTarget.volume = 0; }} aria-label={`Vidéo d’essai : ${asset.note}`}><source src={resolvePortfolioMedia(asset.source)} type="video/mp4" /></video>}
         <button type="button" className="project-lightbox__close" onClick={onClose} aria-label="Fermer l’examen"><X size={20} /></button>
       </div>

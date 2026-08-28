@@ -32,9 +32,9 @@ const PAGE_CONTENT = {
     kicker: "Point de contact",
     title: ["PRENDRE", "CONTACT"],
     subtitle: "Une question, une collaboration ou une idée à mettre en mouvement.",
-    heading: "Un message peut devenir le premier essai d’un projet.",
-    text: "Choisissez le canal le plus simple ou écrivez directement ci-dessous. Le formulaire est traité par Formspree et permet de garder l’échange à l’intérieur du portfolio, sans passer par une page intermédiaire.",
-    intent: "Quelques lignes suffisent : contexte, idée, question ou contrainte. Robin répondra dès que possible.",
+    heading: "Choisissez le canal ci-dessous le plus simple ou écrivez directement en bas de page.",
+    text: "",
+    intent: "",
     rows: [
       ["E-MAIL", "dgn.robin@gmail.com"],
       ["TÉLÉPHONE", "06 70 52 64 68"],
@@ -121,7 +121,6 @@ function ContactForm() {
       <div className="contact-form__intro">
         <div className="project-section-label"><span>03</span><i /> Message</div>
         <h2 id="contact-form-title">Laisser une<br /><em>trace écrite.</em></h2>
-        <p>Les champs marqués d’un astérisque sont nécessaires pour répondre au message.</p>
       </div>
       <form action={FORM_ENDPOINT} method="POST" onSubmit={submitForm}>
         <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio Robin Courte" />
@@ -129,7 +128,10 @@ function ContactForm() {
         <label><span>02 / E-mail *</span><input type="email" name="email" autoComplete="email" required placeholder="vous@exemple.fr" /></label>
         <label className="contact-form__message"><span>03 / Message *</span><textarea name="message" required rows={6} placeholder="Décrivez votre idée, votre contexte ou votre question." /></label>
         <div className="contact-form__footer">
-          <p>En envoyant ce formulaire, vous acceptez le traitement de vos informations par Formspree pour répondre à votre demande. <Link href="/mentions-legales">Mentions légales</Link></p>
+          <div className="contact-form__notes">
+            <p>Les champs marqués d’un astérisque sont nécessaires pour répondre au message.</p>
+            <p>En envoyant ce formulaire, vous acceptez le traitement de vos informations par Formspree pour répondre à votre demande. <Link href="/mentions-legales">Mentions légales</Link></p>
+          </div>
           <button type="submit" disabled={status === "sending"}>{status === "sending" ? "Transmission…" : <><Send size={17} /> Envoyer le message</>}</button>
         </div>
         {status === "success" ? <p className="contact-form__status contact-form__status--success" role="status"><Check size={18} /> Message transmis. Merci pour votre prise de contact.</p> : null}
@@ -176,12 +178,12 @@ export default function InfoPage({ kind }: InfoPageProps) {
         <InfoPoster kind={kind} number={page.number} />
       </section>
       <section className="project-intro" id="dossier">
-        <div className="project-section-label"><span>01</span><i /> Intention</div>
-        <div className="project-intro__text"><p className="project-intro__statement">{page.heading}</p><div className="project-intro__objective"><span>CAP</span><p>{page.intent}</p></div></div>
+        <div className="project-section-label"><span>01</span><i /> {kind === "about" ? "Intention" : "Contacter"}</div>
+        <div className="project-intro__text"><p className="project-intro__statement">{page.heading}</p>{kind === "about" ? <div className="project-intro__objective"><span>CAP</span><p>{page.intent}</p></div> : null}</div>
       </section>
       <section className="info-page__body" id="details">
         <div className="project-section-label"><span>02</span><i /> {kind === "about" ? "Fondations" : "Canaux"}</div>
-        <div className="info-page__copy"><p>{page.text}</p></div>
+        {kind === "about" ? <div className="info-page__copy"><p>{page.text}</p></div> : null}
         <div className="info-page__records">
           {page.rows.map(([label, value]) => {
             const isEmail = kind === "contact" && label === "E-MAIL";
@@ -202,7 +204,7 @@ export default function InfoPage({ kind }: InfoPageProps) {
         <Link href="/" className="project-back"><CornerUpLeft size={18} /> Retour à l’atelier</Link>
       </nav>
       <nav className="project-quick-nav" aria-label="Repères rapides">
-        <a href="#dossier"><span>01</span> Intention</a><a href="#details"><span>02</span> {kind === "about" ? "Fondations" : "Contacter"}</a><a href={kind === "about" ? "#parcours" : "#formulaire"}><span>03</span> {kind === "about" ? "Parcours" : "Message"}</a>
+        <a href="#dossier"><span>01</span> {kind === "about" ? "Intention" : "Contacter"}</a><a href="#details"><span>02</span> {kind === "about" ? "Fondations" : "Canaux"}</a><a href={kind === "about" ? "#parcours" : "#formulaire"}><span>03</span> {kind === "about" ? "Parcours" : "Message"}</a>
       </nav>
     </main>
   );

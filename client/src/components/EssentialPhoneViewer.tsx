@@ -163,7 +163,6 @@ export default function EssentialPhoneViewer() {
   return (
     <section className="phone-viewer" id="prototype" aria-labelledby="phone-viewer-title">
       <div className="phone-viewer__intro">
-        <div className="project-section-label"><span>04</span><i /> Modèle 3D</div>
         <h2 id="phone-viewer-title">Observer<br />l’objet.</h2>
         <div className="phone-viewer__instructions" aria-label="Instructions de manipulation">
           <span><MousePointer2 size={15} /> Glisser pour tourner</span>

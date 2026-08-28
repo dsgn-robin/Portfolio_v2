@@ -178,7 +178,7 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-closing { padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 7vw, 7.75rem); }
 
 .project-section-label { display: flex; align-items: center; gap: 0.7rem; width: fit-content; color: var(--quiet-ink); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; }
-.project-section-label::before { display: grid; width: 1.42rem; height: 1.42rem; place-items: center; border: 1px solid currentColor; color: var(--ink); content: "RC"; font-family: "Archivo Black", sans-serif; font-size: 0.44rem; letter-spacing: -0.06em; line-height: 1; }
+.project-section-label::before { display: none; }
 .project-section-label span { color: var(--project-accent-dark); }
 .project-section-label i { display: block; width: 2.5rem; height: 1px; background: currentColor; }
 .project-section-label::after { display: block; width: 1.8rem; height: 0.28rem; background: repeating-linear-gradient(90deg, currentColor 0 0.12rem, transparent 0.12rem 0.32rem); content: ""; opacity: 0.66; }
@@ -206,7 +206,7 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-archive::before { position: absolute; z-index: 0; top: 0; left: 0; width: min(52vw, 48rem); height: 100%; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 7%, transparent) 0 1px, transparent 1px 2.25rem); content: ""; pointer-events: none; }
 .project-archive::after { position: absolute; right: -10rem; bottom: -13rem; width: 30rem; height: 30rem; border: 1.8rem solid color-mix(in srgb, var(--ink) 24%, transparent); border-radius: 50%; content: ""; }
 .project-archive__heading { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(11rem, 0.55fr) minmax(18rem, 0.9fr); gap: clamp(2rem, 7vw, 9rem); margin-bottom: clamp(2.8rem, 6vw, 6rem); }
-.project-archive__heading::after { align-self: end; justify-self: end; padding: 0.32rem 0.45rem; border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent); color: var(--quiet-ink); content: "RC / PIÈCES CLASSÉES"; font-size: 0.48rem; font-weight: 700; letter-spacing: 0.09em; line-height: 1; white-space: nowrap; }
+.project-archive__heading::after { display: none; }
 .project-archive__heading p { max-width: 32rem; margin: -0.4rem 0 0; font-size: 1rem; font-weight: 500; line-height: 1.55; }
 .project-documents { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.28fr 0.9fr; align-items: start; gap: clamp(1rem, 2.2vw, 2rem); }
 .project-documents::before { position: absolute; z-index: -1; top: 1.25rem; right: -0.35rem; left: -0.35rem; height: 1.5rem; border-top: 1px dashed color-mix(in srgb, var(--ink) 42%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--ink) 17%, transparent); content: ""; }
@@ -257,12 +257,13 @@ html.project-document-open { scroll-behavior: smooth; }
 .project-page--drone .project-archive::after { right: -6rem; bottom: -8rem; width: 26rem; height: 13rem; border-width: 1.35rem 0 0 1.35rem; border-radius: 0; transform: rotate(-31deg); }
 .project-page--drone .project-documents::before { border-top-style: solid; border-bottom-style: dashed; transform: skewX(-32deg); transform-origin: left center; }
 .project-page--drone .project-documents { grid-template-columns: minmax(10rem, 0.78fr) minmax(14rem, 1.08fr) minmax(8rem, 0.58fr); column-gap: clamp(1.25rem, 3.4vw, 3.5rem); }
-.project-page--drone .project-document:nth-child(1) { width: 84%; justify-self: start; }
-.project-page--drone .project-document:nth-child(2) { width: 90%; justify-self: center; }
-.project-page--drone .project-document:nth-child(3) { width: 76%; justify-self: end; }
-.project-page--drone .project-document:nth-child(4) { width: 78%; justify-self: start; }
-.project-page--drone .project-document:nth-child(5) { width: 68%; justify-self: center; }
-.project-page--drone .project-document:nth-child(6) { width: 76%; justify-self: end; }
+.project-page--drone .project-document:nth-child(1),
+.project-page--drone .project-document:nth-child(2),
+.project-page--drone .project-document:nth-child(3),
+.project-page--drone .project-document:nth-child(4),
+.project-page--drone .project-document:nth-child(5),
+.project-page--drone .project-document:nth-child(6) { width: 100%; }
+
 .project-page--drone .project-step__glyph { width: 12rem; height: 4.6rem; border-width: 0 0 1.6rem 1.6rem; border-radius: 0; transform: rotate(-36deg); }
 .project-page--drone .project-step:nth-child(3) .project-step__glyph { width: 8rem; height: 8rem; border-width: 1.5rem; border-radius: 0; transform: rotate(45deg); }
 
@@ -358,7 +359,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
 .project-video .project-section-label span { color: var(--ink); }
 .project-video__intro h2 { max-width: 23rem; margin-top: 2.4rem; font-size: clamp(2.25rem, 4vw, 4.25rem); }
 .project-video__frame { position: relative; margin: 0; overflow: hidden; border: 2px solid var(--ink); background: var(--ink); box-shadow: 0.75rem 0.75rem 0 var(--paper); }
-.project-video__frame::before { position: absolute; z-index: 1; top: 0.75rem; left: 0.75rem; padding: 0.32rem 0.45rem; border: 1px solid color-mix(in srgb, var(--paper) 65%, transparent); background: rgb(23 22 18 / 72%); color: var(--paper); content: "ARCHIVE FILM · VTT FR"; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.11em; pointer-events: none; }
+.project-video__frame::before { display: none; }
 .project-video__frame video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #101010; }
 .project-video__caption { position: absolute; z-index: 2; right: 7%; bottom: 3.8rem; left: 7%; margin: 0; color: var(--paper); font-size: clamp(0.74rem, 1.05vw, 1rem); font-weight: 700; letter-spacing: 0.03em; line-height: 1.3; text-align: center; text-shadow: 0 2px 8px rgb(0 0 0 / 85%); white-space: pre-line; pointer-events: none; }
 .project-video__frame figcaption { padding: 0.75rem 0.95rem; border-top: 2px solid var(--ink); background: var(--paper); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -447,7 +448,8 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
 .contact-form input:focus, .contact-form textarea:focus { border-color: var(--project-accent-soft); background: rgb(242 233 216 / 12%); }
 .contact-form__message, .contact-form__footer, .contact-form__status { grid-column: 1 / -1; }
 .contact-form__footer { display: flex; align-items: end; justify-content: space-between; gap: 1.4rem; margin-top: 0.25rem; padding-top: 1rem; border-top: 1px solid rgb(242 233 216 / 28%); }
-.contact-form__footer p { max-width: 26rem; margin: 0; color: color-mix(in srgb, var(--paper) 70%, transparent); font-size: 0.62rem; font-weight: 500; line-height: 1.45; }
+.contact-form__notes { display: grid; gap: 0.65rem; max-width: 26rem; }
+.contact-form__footer p { max-width: none; margin: 0; color: color-mix(in srgb, var(--paper) 70%, transparent); font-size: 0.62rem; font-weight: 500; line-height: 1.45; }
 .contact-form__footer p a { color: var(--project-accent-soft); text-decoration: underline; text-underline-offset: 0.18rem; }
 .contact-form button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 0.9rem; border: 1px solid var(--paper); background: var(--paper); color: var(--ink); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; cursor: pointer; transition: background 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
 .contact-form button:hover { background: var(--project-accent-soft); transform: translateY(-0.14rem); }
@@ -522,9 +524,12 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .project-page--identity .project-document--square { grid-column: 10 / span 3; margin-top: 1rem; }
   .project-page--identity .project-gallery--1 { width: 58%; margin-right: 9%; }
 
-  .project-page--drone .project-document--tall { grid-column: 1 / span 4; margin-top: 1rem; }
-  .project-page--drone .project-document--wide { grid-column: 5 / span 6; margin-top: 4rem; }
-  .project-page--drone .project-document--square { grid-column: 10 / span 3; margin-top: 0; }
+  .project-page--drone .project-document:nth-child(1) { grid-column: 1 / span 4; margin-top: 0; }
+  .project-page--drone .project-document:nth-child(2) { grid-column: 5 / span 4; margin-top: 1.1rem; }
+  .project-page--drone .project-document:nth-child(3) { grid-column: 9 / span 4; margin-top: 0.35rem; }
+  .project-page--drone .project-document:nth-child(4) { grid-column: 1 / span 4; margin-top: 1.15rem; }
+  .project-page--drone .project-document:nth-child(5) { grid-column: 5 / span 4; margin-top: 0.35rem; }
+  .project-page--drone .project-document:nth-child(6) { grid-column: 9 / span 4; margin-top: 1.15rem; }
   .project-page--drone .project-gallery { grid-template-columns: repeat(12, minmax(0, 1fr)); }
   .project-page--drone .project-gallery .project-document:nth-child(1) { grid-column: 1 / span 4; }
   .project-page--drone .project-gallery .project-document:nth-child(2) { grid-column: 5 / span 5; margin-top: 3rem; }
@@ -620,6 +625,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .journey-explorer__detail { min-height: 22rem; border-top: 1px solid rgb(242 233 216 / 36%); border-left: 0; }
   .contact-form form { grid-template-columns: 1fr; }
   .contact-form__footer { align-items: stretch; flex-direction: column; }
+  .contact-form__notes { display: grid; gap: 0.65rem; }
   .contact-form button { width: 100%; }
   .legal-page__hero { min-height: 31rem; padding-top: 2rem; }
   .legal-page__hero > span { margin-bottom: 6rem; }
@@ -629,7 +635,7 @@ a.info-page__record:hover span { color: var(--project-accent-soft); }
   .legal-page__register p { grid-column: 2; margin-top: 0.35rem; font-size: 0.84rem; }
   .legal-page__footer { display: grid; grid-template-columns: 1fr 1fr; padding: 1rem 1.25rem; }
   .legal-page__footer .project-back { grid-column: 1 / -1; }
-  .project-video__frame::before { top: 0.55rem; left: 0.55rem; font-size: 0.44rem; }
+  .project-video__frame::before { display: none; }
   .project-page [id] { scroll-margin-top: 5.25rem; }
 }
 
