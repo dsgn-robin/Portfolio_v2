@@ -334,3 +334,8 @@
 
 - [x] Ajouter la balise google-site-verification dans le `<head>` de la page d’accueil.
 - [x] Vérifier sa présence dans le HTML et valider la compilation, puis enregistrer la version.
+
+### Logo éditorial du site
+
+- [x] Remplacer la favicon et les références de logo par le monogramme affiché en haut à gauche des pages.
+- [x] Vérifier le rendu du logo et la compilation, puis enregistrer la version.

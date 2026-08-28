@@ -36,6 +36,7 @@ const GITHUB_PAGES_MEDIA: Record<string, string> = {
   "/manus-storage/Video_drone_seul_2fec9be4.mp4": "speedx-film.mp4",
   "/manus-storage/sous_titres_5f697c02.vtt": "speedx-fr.vtt",
   "/manus-storage/drone-test-vertical_425e9a92.mp4": "drone-test-vertical.mp4",
+  "/manus-storage/robin-monogram_4cea3f6f.svg": "robin-monogram.svg",
 };
 
 export function resolvePortfolioMedia(path: string) {

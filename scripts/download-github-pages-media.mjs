@@ -37,6 +37,7 @@ const assets = [
   ["speedx-film.mp4", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/stpBuoyiYCfWmKed.mp4"],
   ["speedx-fr.vtt", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/hJcwwXwQLOkcJyTD.vtt"],
   ["drone-test-vertical.mp4", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/oTuvqSUbAiAMzixH.mp4"],
+  ["robin-monogram.svg", "https://files.manuscdn.com/user_upload_by_module/session_file/310519663919012215/VmKAkwBHqmSYfDek.svg"],
 ];
 
 await mkdir(output, { recursive: true });
