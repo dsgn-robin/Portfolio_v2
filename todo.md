@@ -320,3 +320,12 @@
 - [x] Créer et intégrer un objet 3D original pour À propos.
 - [x] Créer et intégrer un objet 3D original pour Contact.
 - [x] Vérifier les interactions, les chargements et les rendus desktop/mobile, puis enregistrer la version.
+
+### Allègement des archives et pages Contact
+
+- [ ] Retirer « RC / pièces classées » et son encadré dans les Archives.
+- [ ] Supprimer « 04 — Modèle 3D » d’Essential Phone et « Archive film · VTT FR » de la vidéo Drone.
+- [ ] Retirer les carrés RC à gauche des titres sur les pages projet, À propos et Contact.
+- [ ] Resserrer et réorganiser les archives Drone en conservant l’ordre fourni.
+- [ ] Simplifier Contact en trois sections : Contacter, Canaux et Message, avec les textes exacts demandés.
+- [ ] Harmoniser le niveau typographique des deux mentions Formspree, vérifier les pages et enregistrer la version.
