@@ -36,10 +36,10 @@ type ProjectRuntime = {
 };
 
 const PROJECTS: ProjectSpec[] = [
-  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-3.36, -1.8], baseRotation: -0.26, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.68, shape: "rounded" },
-  { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [0.28, -1.01], baseRotation: 0.18, scale: 0.86, shape: "circle" },
-  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.23, 1.11], baseRotation: 0.34, scale: 0.76, shape: "rounded" },
-  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone-only_8f6c3309.glb", position: [-0.11, -4.16], baseRotation: -0.16, scale: 1.72, shape: "circle" },
+  { key: "phone", number: "01", title: "Essential Phone", category: "Objet numérique", collection: "Projets perso", color: 0x6c97c2, colorCss: "#6c97c2", path: "/manus-storage/Phone_bleu_b4045bcc.glb", position: [-3.36, -1.8], baseRotation: -0.26, presentationRotation: [0, Math.PI + 0.68, 0], scale: 0.48, shape: "rounded" },
+  { key: "photo", number: "02", title: "Projet Photo", category: "Image & regard", collection: "Projets perso", color: 0xe0a51d, colorCss: "#e0a51d", path: "/manus-storage/photo_2b003e1a.glb", position: [0.28, -1.01], baseRotation: 0.18, scale: 0.7, shape: "circle" },
+  { key: "identity", number: "03", title: "Identité visuelle", category: "Système graphique", collection: "Projets perso", color: 0x397c5d, colorCss: "#397c5d", path: "/manus-storage/identite_17dcad1d.glb", position: [-1.23, 1.11], baseRotation: 0.34, scale: 0.6, shape: "rounded" },
+  { key: "drone", number: "04", title: "Projet Drone", category: "Mobilité & ingénierie", collection: "Projets scolaires", color: 0xe95a2c, colorCss: "#e95a2c", path: "/manus-storage/drone-only_8f6c3309.glb", position: [-0.11, -4.16], baseRotation: -0.16, scale: 1.22, shape: "circle" },
   { key: "about", number: "05", title: "À propos", category: "Note personnelle", collection: "Repères", color: 0x397c5d, colorCss: "#397c5d", position: [2.92, -2.37], baseRotation: 0.28, shape: "rounded" },
   { key: "contact", number: "06", title: "Contact", category: "Point de contact", collection: "Repères", color: 0xe95a2c, colorCss: "#e95a2c", position: [-4.89, 1.37], baseRotation: -0.34, shape: "circle" },
 ];
@@ -107,6 +107,74 @@ function makePlatform(spec: ProjectSpec) {
 
   holder.add(makePlatformLabel(spec));
   return holder;
+}
+
+function makeProceduralModel(kind: "about" | "contact") {
+  const model = new THREE.Group();
+  const ink = new THREE.MeshStandardMaterial({ color: 0x171612, roughness: 0.42, metalness: 0.12 });
+  const paper = new THREE.MeshStandardMaterial({ color: 0xf2e9d8, roughness: 0.72 });
+  const accent = new THREE.MeshStandardMaterial({ color: kind === "about" ? 0x397c5d : 0xe95a2c, roughness: 0.52, metalness: 0.04 });
+  const mint = new THREE.MeshStandardMaterial({ color: 0xa8c7b0, roughness: 0.64 });
+
+  if (kind === "about") {
+    const folio = new THREE.Mesh(new RoundedBoxGeometry(0.8, 0.1, 0.62, 0.06, 4), paper);
+    folio.position.y = 0.12;
+    folio.castShadow = true;
+    folio.receiveShadow = true;
+    model.add(folio);
+
+    const spine = new THREE.Mesh(new RoundedBoxGeometry(0.1, 0.16, 0.7, 0.035, 3), ink);
+    spine.position.set(-0.27, 0.22, 0);
+    spine.rotation.z = -0.12;
+    spine.castShadow = true;
+    model.add(spine);
+
+    [-0.18, 0, 0.18].forEach((z, index) => {
+      const marker = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.035, 24), index === 1 ? accent : mint);
+      marker.position.set(0.12, 0.2, z);
+      marker.rotation.x = Math.PI / 2;
+      marker.castShadow = true;
+      model.add(marker);
+    });
+
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.035, 12, 32), accent);
+    ring.position.set(0.2, 0.25, 0.13);
+    ring.rotation.x = Math.PI / 2;
+    ring.castShadow = true;
+    model.add(ring);
+  } else {
+    const envelope = new THREE.Mesh(new RoundedBoxGeometry(0.86, 0.1, 0.56, 0.05, 4), paper);
+    envelope.position.y = 0.12;
+    envelope.castShadow = true;
+    envelope.receiveShadow = true;
+    model.add(envelope);
+
+    const flapShape = new THREE.Shape();
+    flapShape.moveTo(-0.38, 0.2);
+    flapShape.lineTo(0, -0.12);
+    flapShape.lineTo(0.38, 0.2);
+    flapShape.lineTo(-0.38, 0.2);
+    const flap = new THREE.Mesh(new THREE.ShapeGeometry(flapShape), ink);
+    flap.position.set(0, 0.19, 0);
+    flap.rotation.x = -Math.PI / 2;
+    flap.material = ink;
+    flap.castShadow = true;
+    model.add(flap);
+
+    const seal = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.045, 32), accent);
+    seal.position.set(0.22, 0.22, 0.06);
+    seal.rotation.x = Math.PI / 2;
+    seal.castShadow = true;
+    model.add(seal);
+
+    const signal = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.025, 10, 28, Math.PI), accent);
+    signal.position.set(-0.23, 0.24, 0.02);
+    signal.rotation.set(Math.PI / 2, 0, Math.PI / 2);
+    signal.castShadow = true;
+    model.add(signal);
+  }
+
+  return model;
 }
 
 function makeBackdrop(scene: THREE.Scene) {
@@ -328,7 +396,8 @@ export default function DossierHomeScene() {
     const loader = new GLTFLoader();
     PROJECTS.forEach((spec) => {
       if (!spec.path) {
-        registerRuntime(spec);
+        const proceduralModel = spec.key === "about" || spec.key === "contact" ? makeProceduralModel(spec.key) : undefined;
+        registerRuntime(spec, proceduralModel);
         return;
       }
       loader.load(resolvePortfolioMedia(spec.path), (gltf) => registerRuntime(spec, gltf.scene), undefined, () => setLoaded((count) => count + 1));

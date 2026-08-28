@@ -312,3 +312,11 @@
 - [x] Repositionner les six supports et leurs objets pour correspondre à la référence de composition.
 - [x] Préserver les interactions de déplacement, rotation et ouverture des projets.
 - [x] Vérifier l’équilibre desktop et mobile, puis enregistrer la version.
+
+### Amélioration des modèles 3D de l’accueil
+
+- [x] Auditer les transformations, dimensions et repères des six modèles de la scène d’accueil.
+- [x] Corriger les proportions visuelles des GLB sans recréer ni remplacer leurs matériaux réels.
+- [x] Créer et intégrer un objet 3D original pour À propos.
+- [x] Créer et intégrer un objet 3D original pour Contact.
+- [x] Vérifier les interactions, les chargements et les rendus desktop/mobile, puis enregistrer la version.
